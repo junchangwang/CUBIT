@@ -1,0 +1,9 @@
+# Changelog
+
+## [1.0.0] - 2017-04-05
+### Added
+- Initially available codebase.
+
+## [1.0.1] - 2017-07-21
+### Added
+- Missing file analysis.py.

@@ -1,0 +1,15 @@
+
+CUBIT is a scalable bitmap index that provides efficient reads and real-time updates.
+
+The code associated with our paper is in the src folder, which contains several parallelized updatable bitmap indexes including In-place (src/naive), UCB (src/ucb), UpBit (src/ub), and CUBIT (src/nbub).
+
+You can use 
+$ ./build.sh 
+to compile it. Note that C++17 is required.
+
+The major experiments (Figure 6) of the paper can be reproduced using the run_sz.py script. The directory figures-scripts contains dozens of other scripts to help you generate other experimental figures.
+
+For that to work python3 is required. Also the script needs to be edited to have the correct path at the top. By giving:
+$ python3 run_sz.py 
+the (lengthy) reproduction of the results of the paper will start taking place. This will need a few days so it is better to execute only the experiments that are of most interest each time.
+
