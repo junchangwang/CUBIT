@@ -14,15 +14,20 @@ The files src/nbub/table_lk.cpp and src/nbub/table_lf.cpp correspond to the algo
 
 First, please make sure that your environment supports c++17. Second, python3, the package liburcu(-dev), and Boost libraries are required.
 
-Then, You can use 
+Then, you can use the following command to compile entire project. 
 ```
 ./build.sh 
 ```
-compile entire project. 
 
-You can reproduce the main experiments (Figures 1, 6, 7, and 8) of the paper as follows:
-* run run_sz.py which performs the experiments and writes the results in a group of folders named graphs_x, where x is the ID of each trial.
-* use gen_graphs_normal.sh to analyze the results in graphs_x and automatically draw all of the figures.
+Now, you can reproduce the main experiments (Figures 1, 6, 7, and 8) of the paper by using the following commands:
+```
+python3 run_sz.py 
+```
+to perform the experiments and write the results in a group of folders named graphs_x, where x is the ID of each trial.
+```
+gen_graphs_normal.sh 
+```
+to analyze the results in graphs_x and automatically draw all of the figures.
 
 You can reproduce other experiments of the paper by using the corresponding scripts (with different suffixes) in the directory figures-scripts/ . For example, the evaluation on 1B entries can be performed by using the two scripts run_sz_1B.sh and gen_graphs_1B.sh.
 
