@@ -14,7 +14,11 @@ The files src/nbub/table_lk.cpp and src/nbub/table_lf.cpp correspond to the algo
 
 First, please make sure that your environment supports c++17. Second, python3, the package liburcu(-dev), and Boost libraries are required.
 
-Then, You can use ./build.sh compile entire project. 
+Then, You can use 
+```
+./build.sh 
+'''
+compile entire project. 
 
 You can reproduce the main experiments (Figures 1, 6, 7, and 8) of the paper as follows:
 * run run_sz.py which performs the experiments and writes the results in a group of folders named graphs_x, where x is the ID of each trial.
