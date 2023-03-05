@@ -177,23 +177,6 @@ def run():
     f.write('{} 14\n'.format(ret[4][1]))
     f.close()
 
-def gen_graph():
-    os.chdir("gnuplot-scripts")
-    #os.system("./check_dat_files.sh")
-    #os.system("./prepare_normalized.sh")
-    # os.system("rm -r ../graphs")
-    os.system("make make_dir_MT")
-    os.system("make figure_multiple_sz_MT")
-    os.system("make figure_multiple_sz_ub+nbub-lk+nbub-lf_MT")
-    # os.system("make figure_multiple_sz_ub+nbub-lk+nbub-lf_naive_MT")
-    os.chdir("../graphs_MT")
-    os.system('echo "Figures generated in \"`pwd`\""')
-    #os.system('ls -l')
-
-    # gen_cdf 
-    # os.chdir("../")
-    # os.system("python3 cdf_sz_MT.py > graphs_MT/cdf_output.txt") 
-
 def main():
     itr = 0
     cmd = 'mv graphs_MT graphs_MT_{}'
@@ -225,12 +208,7 @@ def main():
             shutil.rmtree(graphs)
         os.mkdir(graphs)
 
-        #gen_data()
-        #build()
-        #build_index()
-        # gen_data_and_index()
         run()
-        # gen_graph()
         os.system(cmd4)
         # os.system(cmd3)
         os.system(cmd2)       

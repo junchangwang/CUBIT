@@ -648,22 +648,6 @@ def cdf():
     os.system(cmd4)
     os.system(cmd5)
 
-def gen_data_and_index():
-    # generate index for core and ratio
-    help_gen_data_and_index(number_of_rows, cardinality, index_path)
-
-    # generate 100M_X   X = [16, 32, 64, 128, 256]
-    cardinality_array = [16, 32, 64, 128, 256]
-    for num in cardinality_array:
-        help_gen_data_and_index(ONE_HUNDRED_MILLION, num, "100M_{}".format(num))
-    
-    # # generate 1B_X   X = [16, 32, 64, 128, 256]
-    # cardinality_array = [16, 32, 64, 128, 256]
-    # for num in cardinality_array:
-    #     help_gen_data_and_index(ONE_BILLION, num, "1B_{}".format(num))    
-
-    
-
 def run():
     # #naive
     gen_figure_naive_throughput_core()
@@ -708,23 +692,6 @@ def run():
     #cdf
     #cdf()
 
-def gen_graph():
-    os.chdir("gnuplot-scripts")
-    #os.system("./check_dat_files.sh")
-    #os.system("./prepare_normalized.sh")
-    # os.system("rm -r ../graphs")
-    os.system("make make_dir_earth")
-    os.system("make figure_multiple_sz_earth")
-    os.system("make figure_multiple_sz_ub+nbub-lk+nbub-lf_earth")
-    # os.system("make figure_multiple_sz_ub+nbub-lk+nbub-lf_naive_earth")
-    os.chdir("../graphs_earth")
-    os.system('echo "Figures generated in \"`pwd`\""')
-    #os.system('ls -l')
-
-    # gen_cdf 
-    os.chdir("../")
-    os.system("python3 cdf_sz_earth.py > graphs_earth/cdf_output.txt") 
-
 def main():
     itr = 0
     cmd = 'mv graphs_earth graphs_earth_{}'
@@ -759,12 +726,7 @@ def main():
             shutil.rmtree(graphs)
         os.mkdir(graphs)
 
-        #gen_data()
-        #build()
-        #build_index()
-        #gen_data_and_index()
         run()
-        # gen_graph()
         os.system(cmd4)
         # os.system(cmd3)
         os.system(cmd2)

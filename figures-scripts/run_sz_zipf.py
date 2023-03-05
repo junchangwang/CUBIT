@@ -672,25 +672,6 @@ def run():
     gen_figure_nbub_lf_latency_core()
     # gen_figure_nbub_lf_latency_ratio()
     # gen_figure_nbub_lf_latency_cardinality()
-    #cdf
-    #cdf()
-
-def gen_graph():
-    os.chdir("gnuplot-scripts")
-    #os.system("./check_dat_files.sh")
-    #os.system("./prepare_normalized.sh")
-    # os.system("rm -r ../graphs")
-    os.system("make make_dir_zipf")
-    os.system("make figure_multiple_sz_zipf")
-    os.system("make figure_multiple_sz_ub+nbub-lk+nbub-lf_zipf")
-    # os.system("make figure_multiple_sz_ub+nbub-lk+nbub-lf_naive_zipf")
-    os.chdir("../graphs_zipf")
-    os.system('echo "Figures generated in \"`pwd`\""')
-    #os.system('ls -l')
-
-    # gen_cdf 
-    os.chdir("../")
-    os.system("python3 cdf_sz_zipf.py > graphs_zipf/cdf_output.txt") 
 
 def main():
     itr = 0
@@ -705,7 +686,7 @@ def main():
         if (os.path.isfile("zipf_15")):
             print("zipf_15 exists")
         else:
-            os.system("python gene_zipf.py")
+            os.system("python gen_zipf.py")
             os.system("./build/nicolas -m build -d zipf_15 -c 100 -n 100000000 -i 100M_zipf15")
 
         datdir = 'dat'
@@ -726,12 +707,7 @@ def main():
             shutil.rmtree(graphs)
         os.mkdir(graphs)
 
-        #gen_data()
-        #build()
-        #build_index()
-        # gen_data_and_index()
         run()
-        # gen_graph()
         os.system(cmd4)
         # os.system(cmd3)
         os.system(cmd2)       
