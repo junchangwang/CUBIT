@@ -711,23 +711,6 @@ def run():
     # figure1
     # os.system('python3 figure1.py')
 
-def gen_graph():
-    os.chdir("gnuplot-scripts")
-    #os.system("./check_dat_files.sh")
-    #os.system("./prepare_normalized.sh")
-    # os.system("rm -r ../graphs")
-    os.system("make make_dir")
-    os.system("make figure_multiple_sz")
-    os.system("make figure_multiple_sz_ub+nbub-lk+nbub-lf")
-    #os.system("make figure_multiple_sz_ub+nbub-lk+nbub-lf_naive")
-    os.chdir("../graphs")
-    os.system('echo "Figures generated in \"`pwd`\""')
-    #os.system('ls -l')
-
-    # gen_cdf 
-    os.chdir("../")
-    os.system("python3 cdf_sz.py > graphs/cdf_output.txt") 
-
 def main():
     itr = 0
     cmd = 'mv graphs graphs_{}'
@@ -756,7 +739,6 @@ def main():
         #build()
         gen_data_and_index()
         run()
-        # gen_graph()
         os.system(cmd4)
         os.system(cmd2)
         os.system(cmd.format(itr))
