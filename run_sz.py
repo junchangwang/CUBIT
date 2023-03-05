@@ -15,7 +15,7 @@ ROOT_PATH = os.getcwd()
 ossystem = os.system
 
 def build():
-    cmd = 'sh build.sh'
+    cmd = 'sh build-light.sh'
     os.system(cmd)
 
 ONE_HUNDRED_MILLION = 100000000
@@ -657,10 +657,10 @@ def gen_data_and_index():
     for num in cardinality_array:
         help_gen_data_and_index(ONE_HUNDRED_MILLION, num, "100M_{}".format(num))
     
-    # # generate 1B_X   X = [16, 32, 64, 128, 256]
-    # cardinality_array = [16, 32, 64, 128, 256]
-    # for num in cardinality_array:
-    #     help_gen_data_and_index(ONE_BILLION, num, "1B_{}".format(num))    
+    # generate 1B_X   X = [16, 32, 64, 128, 256]
+    cardinality_array = [100]
+    for num in cardinality_array:
+        help_gen_data_and_index(ONE_BILLION, num, "1B_{}".format(num))    
 
     
 
@@ -736,7 +736,7 @@ def main():
             shutil.rmtree(graphs)
         os.mkdir(graphs)
 
-        #build()
+        build()
         gen_data_and_index()
         run()
         os.system(cmd4)
