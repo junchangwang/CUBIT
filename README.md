@@ -3,11 +3,14 @@
 
 CUBIT is a scalable bitmap index that provides efficient reads and real-time updates.
 
-**How this project is organized?**
+**How is this project organized?**
 
-The code artifact of our paper is in the src/ folder, which contains several parallelized updatable bitmap indexes including In-place (src/naive), UCB (src/ucb), UpBit (src/ub), and our algorithm CUBIT (src/nbub). They are parallelized for modern multicore architectures by using different strategies (e.g., fine-grained reader-writer locks and MVCC). Please check the paper.
+The code artifact of our paper is in the src/ folder, which contains several parallelized updatable bitmap indexes including In-place (src/naive), UCB (src/ucb), UpBit (src/ub), and our algorithm CUBIT (src/nbub). They are parallelized for modern multicore architectures by using different strategies (e.g., fine-grained reader-writer locks and MVCC). Please check the paper for more details.
 
-The files src/nbub/table_lk.cpp and src/nbub/table_lf.cpp correspond to the algorithms CUBIT-lk and CUBIT-lf, respectively.
+The files src/nbub/table_lk.cpp and src/nbub/table_lf.cpp correspond to the algorithms CUBIT-lk and CUBIT-lf, respectively. Both of the files inherit src/nbub/table.cpp that contains several important common functions like Evaluate/Query.
+
+**Note that** the statements rcu_read_(un)lock, which we use in CUBIT's code, do not involve any locks/latches. It's a mechanism to tell other threads that "I'm still active, so please do not reclaim the nodes that I may have accessed, for safety." These two statements are extremely lightweight and in some circumstances, optimized out by the compiler. Please check the references in the paper or the following link for more details.
+https://www.kernel.org/doc/Documentation/RCU/Design/Requirements/Requirements.html
 
 
 **How to compile and run the code?**
@@ -25,7 +28,7 @@ python3 run_sz.py
 ```
 to perform the experiments and write the results in a group of folders named graphs_x, where x is the ID of each trial.
 ```
-gen_graphs_normal.sh 
+gen_graphs_normal.sh graphs_x
 ```
 to analyze the results in graphs_x and automatically draw all of the figures.
 
