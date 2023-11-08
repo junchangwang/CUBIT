@@ -1,0 +1,3 @@
+./build/nicolas -w 16 -a ub -m mix --number-of-queries 600 -r 400 -c 100 -i 100M_100/ -n 100000000 -v no --fence-pointer yes --fence-length 100000 > figure_ub_throughput_raw_w_16_ratio_0.4.dat
+./build/nicolas -w 16 -a nbub -m mix --number-of-queries 600 -r 400 -c 100 -i 100M_100/ -n 100000000 -v no --fence-pointer yes --fence-length 100000 > figure_nbub_throughput_raw_w_16_ratio_0.4.dat
+./build/nicolas -w 16 -a nbub-lf -m mix --number-of-queries 600 -r 400 -c 100 -i 100M_100/ -n 100000000 -v no --fence-pointer yes --fence-length 100000 > figure_nbub_throughput_raw_w_16_ratio_0.4.dat
