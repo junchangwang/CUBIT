@@ -19,7 +19,7 @@ We use the following command to compile the entire project.
 ./build.sh 
 ```
 
-Now, we can reproduce the main experiments (Figures 2, 10, 11, and 12) of the paper by using the following command, which performs the experiments and writes the results in a group of folders named graphs_x, where x is the ID of each trial.
+Now, we can reproduce the main experiments (Figures 2, 8, 9, and 10) of the paper by using the following command, which performs the experiments and writes the results in a group of folders named graphs_x, where x is the ID of each trial.
 
 ```
 python3 run.py 
