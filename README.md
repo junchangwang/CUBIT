@@ -1,7 +1,7 @@
 
 **What is CUBIT?**
 
-CUBIT is a scalable bitmap index that provides efficient reads and real-time updates, such that is serves as a drop-in replacement for general secondary indexes for DBMS systems.
+CUBIT is a scalable bitmap index that provides efficient reads and real-time updates, such that it serves as a drop-in replacement for general secondary indexes for both OLTP and OLAP DBMSs.
 
 **How is this project organized?**
 
