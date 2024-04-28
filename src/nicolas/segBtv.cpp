@@ -308,15 +308,36 @@ int SegBtv::Verify(Table_config *config, ibis::bitvector * const btv)
     return 0;
 }
 
+void SegBtv::_and_in_thread(SegBtv &rhs, int begin, int end)
+{
+    auto iter1 = seg_table.find(begin);
+    auto iter2 = seg_table.find(end);
+    for (; iter1 != iter2; iter1++) {
+        if(rhs.seg_table.count(iter1->first)) {
+            assert(rhs.seg_table.count(iter1->first));
+            ibis::bitvector *btv_1 = iter1->second.btv;
+            ibis::bitvector *btv_2 = rhs.seg_table[iter1->first].btv;
+            (*btv_1).operator&= (*btv_2);
+        }
+        else {
+            ibis::bitvector tmp_btv;
+            ibis::bitvector *btv_1 = iter1->second.btv;
+            (*btv_1) &= tmp_btv;
+        }
+    }
+
+    return;
+}
+
 void SegBtv::operator^=(SegBtv &rhs) 
 {
-    assert(this->encoded_word_len == rhs.encoded_word_len);
-    assert(this->n_rows == rhs.n_rows);
+    assert(this->encoded_word_len >= rhs.encoded_word_len);
+    assert(this->n_rows >= rhs.n_rows);
 
-    for (const auto & [id_t, seg_1] : seg_table) {
-        assert(rhs.seg_table.count(id_t));
-        ibis::bitvector *btv_1 = seg_1.btv;
-        ibis::bitvector *btv_2 = rhs.seg_table[id_t].btv;
+    for (const auto & [id_t, seg_1] : rhs.seg_table) {
+        assert(seg_table.count(id_t));
+        ibis::bitvector *btv_1 = seg_table[id_t].btv;
+        ibis::bitvector *btv_2 = seg_1.btv;
         (*btv_1).operator^= (*btv_2);
     }
 

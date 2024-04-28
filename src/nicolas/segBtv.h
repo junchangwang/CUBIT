@@ -52,6 +52,7 @@ class SegBtv {
         int buildIndex(uint64_t);
         int buildAllIndex();
 
+        void _and_in_thread(SegBtv&, int, int);
         ///Perform bitwise exclusive or (XOR).
         void operator^=(SegBtv &rhs);
 

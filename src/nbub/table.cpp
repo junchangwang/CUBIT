@@ -191,6 +191,56 @@ TransDesc * Nbub::trans_begin(int tid)
     return (TransDesc *)th->active_trans;
 }
 
+// for db_control
+TransDesc * Nbub::trans_begin(int tid, uint64_t db_timestamp_t)
+{
+    ThreadInfo *th = &g_ths_info[tid];
+
+    if (READ_ONCE(th->active_trans))
+        return (TransDesc *)th->active_trans;
+
+    TransDesc *trans = allocate_trans();
+    trans->l_end_trans = __atomic_load_n(&trans_queue->tail, MM_ACQUIRE);
+    trans->l_commit_ts = INV_TIMESTAMP;
+
+    if (!db_control) {
+        uint128_t data_t = __atomic_load_n((uint128_t *)&g_timestamp, MM_RELAXED);
+        trans->l_start_ts = (uint64_t)data_t;
+        trans->l_number_of_rows = (uint64_t)(data_t>>64);
+
+        // We need to retrieve a snapshot of the <trans_queue->tail, g_timestamp> pair.
+        // However, new trans may have been inserted into TRX_LOG between accessing trans_queue->tail and g_timestamp.
+        // We can use the following logic to detect and prevent this, 
+        // because CUBIT guarantees to update tail and then timestamp, in order.
+        while (trans->l_start_ts > READ_ONCE(trans->l_end_trans->l_commit_ts)) {
+            assert(READ_ONCE(trans->l_end_trans->next));
+            trans->l_end_trans = __atomic_load_n(&trans->l_end_trans->next, MM_ACQUIRE);
+        }
+    }
+    else {
+        // NOTE: 
+        // The original CC in CUBIT is light-weight; only transactions including updates increment timestamp.
+        // In contrast, the CC in DBMS (e.g., DBx1000) increases timestamp for both queries and updates.
+        // In the latter case, if (trans->l_start_ts > READ_ONCE(trans->l_end_trans->l_commit_ts)),
+        // we cannot distinguish whether some queries have been successfully committed or a new trans has been
+        // inserted into the list. So we simply assume no new trans has been inserted when CUBIT is controled by DBx1000.
+
+        trans->l_start_ts = db_timestamp_t;
+        trans->l_number_of_rows = db_number_of_rows;
+    }
+
+    if (trans->l_start_ts < READ_ONCE(trans->l_end_trans->l_commit_ts)) {
+        // New trans have completed
+        trans->l_start_ts = READ_ONCE(trans->l_end_trans->l_commit_ts);
+    }
+
+    trans->l_inc_rows = 0;
+    trans->next = NULL;
+    __atomic_store_n(&th->active_trans, trans, MM_RELEASE);
+
+    return (TransDesc *)th->active_trans;
+}
+
 /*************************************
  *         Buffer Management         *
  ************************************/
@@ -234,7 +284,8 @@ TransDesc * Nbub::get_rubs_on_btv(uint64_t tsp_begin, uint64_t tsp_end,
         } else if (READ_ONCE(trans->l_commit_ts) == tsp_begin) {
             ; // Skip the first trans
         } else {
-            assert(false);
+            assert(trans->l_commit_ts == trans->l_start_ts);
+            // assert(false);
         }
 
         trans_prev = trans;
@@ -408,6 +459,40 @@ int Nbub::append(int tid, int val)
     return 0;
 }
 
+int Nbub::append(int tid, int val, uint64_t row_id) 
+{
+    ThreadInfo *th = &g_ths_info[tid];
+    assert(val < num_bitmaps);
+
+    TransDesc *trans = (TransDesc *)__atomic_load_n(&th->active_trans, MM_ACQUIRE);
+
+    if (!trans)
+        trans = trans_begin(tid);
+
+    RLE_map pos_map{};
+    if (config->encoding == EE) {
+        pos_map[val] = 1;
+    } 
+    else if (config->encoding == RE) {
+        pos2RE(val, num_bitmaps-1, pos_map);
+    } 
+    else if (config->encoding == AE) {
+        pos2AE(val, num_bitmaps-1, pos_map);
+    }
+
+    // We temporarily set row_id values to prevent the rubs of a transactions' insert operations 
+    // from overwriting each other.
+    trans->rubs[row_id] = 
+                RUB{row_id, TYPE_INSERT, pos_map};
+    trans->l_inc_rows ++;
+
+    if (autoCommit) {
+        trans_commit(tid);
+    }
+
+    return 0;
+}
+
 int Nbub::update(int tid, uint64_t row_id, int to_val)
 {
     ThreadInfo *th = &g_ths_info[tid];
@@ -532,6 +617,120 @@ int Nbub::remove(int tid, uint64_t row_id)
 
     if (autoCommit) {
         trans_commit(tid);
+    }
+
+    return 0;
+}
+
+int Nbub::merge_request(int tid, uint32_t val)
+{
+    ThreadInfo *th = &g_ths_info[tid];
+    assert(val < num_bitmaps);
+
+    rcu_read_lock();
+
+    TransDesc *trans = (TransDesc *)__atomic_load_n(&th->active_trans, MM_ACQUIRE);
+    bool reuse_bitmap = true;
+
+    if (!trans)
+        trans = trans_begin(tid);
+
+    auto t1 = std::chrono::high_resolution_clock::now();
+
+    Bitmap *bitmap_old = __atomic_load_n(&bitmaps[val], MM_ACQUIRE);
+
+    /* Need to check RUBs in between (tsp_begin, tsp_end]. */
+    uint64_t tsp_begin = READ_ONCE(bitmap_old->l_commit_ts);
+    uint64_t tsp_end = READ_ONCE(trans->l_start_ts);
+    while (tsp_begin > tsp_end) {
+        bitmap_old = __atomic_load_n(&bitmap_old->next, MM_ACQUIRE);
+        tsp_begin = READ_ONCE(bitmap_old->l_commit_ts); 
+        reuse_bitmap = false;
+    }
+
+    map<uint64_t, RUB> rubs{};
+    if (tsp_begin < tsp_end) {
+        get_rubs_on_btv(tsp_begin, tsp_end, READ_ONCE(bitmap_old->l_start_trans), val, rubs);
+    }
+
+    auto t2 = std::chrono::high_resolution_clock::now();
+
+    uint64_t cnt = 0UL;
+    ibis::bitvector *old_btv = READ_ONCE(bitmap_old->btv);
+    SegBtv *old_seg_btv = READ_ONCE(bitmap_old->seg_btv);
+    
+    if ((rubs.size() < merge_threshold) || !reuse_bitmap) 
+    {   // will not merge
+    }
+    else { // To merge
+        auto t3 = t2;
+        SegBtv *new_seg_btv = nullptr;
+        ibis::bitvector *new_btv = nullptr; 
+        if (config->segmented_btv) {
+            uint64_t max_rows = 0;
+            for (auto const & [row_id_t, rub_t] : rubs) {
+                if(max_rows < row_id_t) {
+                    max_rows = row_id_t;
+                }
+            }
+            new_seg_btv = new SegBtv(*old_seg_btv);
+            new_seg_btv->deepCopy(*old_seg_btv);
+            new_seg_btv->adjustSize(0, max_rows + 1);
+
+            for (auto const & [row_id_t, rub_t] : rubs) {
+                assert(rub_t.pos.count(val));
+                //new_seg_btv->setBit(row_id_t, !new_seg_btv->getBit(row_id_t, config), config);
+                new_seg_btv->setBit(row_id_t, 1, config);
+            }
+
+            t3 = std::chrono::high_resolution_clock::now();
+
+        }
+        else {
+            new_btv = new ibis::bitvector{};
+            new_btv->copy(*old_btv);
+
+            for (auto const & [row_id_t, rub_t] : rubs) {
+                assert(rub_t.pos.count(val));
+                // new_btv->setBit(row_id_t, !new_btv->getBit(row_id_t, config), config);
+                new_btv->setBit(row_id_t, 1, config);
+            }
+
+            t3 = std::chrono::high_resolution_clock::now();
+        }
+
+        auto t4 = std::chrono::high_resolution_clock::now();
+
+        struct Bitmap *bitmap_new = new Bitmap{};
+        __atomic_store_n(&bitmap_new->btv, new_btv, MM_RELEASE);
+        __atomic_store_n(&bitmap_new->seg_btv, new_seg_btv, MM_RELEASE);
+
+        map<uint64_t, RUB> *rubs_t = new map<uint64_t, RUB>(rubs);
+        struct merge_req *req = new merge_req{tid, val, trans, bitmap_old, bitmap_new, rubs_t};
+
+        // FIXME: In case that academically wait-free is acquired,
+        //        Michael's wait-free SPSC queue can be used.
+        lock_guard<mutex> lock(lk_merge_req_queues[tid]);
+        merge_req_queues[tid].push(req);
+
+        auto t5 = std::chrono::high_resolution_clock::now();
+
+        // cout << "[Evaluate(ms)] [Non-Curve] [Merge]" <<
+        //     "    Total: " << to_string(std::chrono::duration_cast<std::chrono::microseconds>(t5-t1).count()) <<
+        //     "    Get btvs: " << to_string(std::chrono::duration_cast<std::chrono::microseconds>(t2-t1).count()) <<
+        //     "    XOR: " << to_string(std::chrono::duration_cast<std::chrono::microseconds>(t3-t2).count()) <<
+        //     "    Count: " << to_string(std::chrono::duration_cast<std::chrono::microseconds>(t4-t3).count()) <<
+        //     "    RegMerge: " << to_string(std::chrono::duration_cast<std::chrono::microseconds>(t5-t4).count()) << endl;
+    }
+
+    // This barrier can be moved forward.
+    // However, performance improvement is negligibal since
+    // the memory reclamation has been delegated to background threads.
+    // We leave it here to make the code easy to understand.
+    rcu_read_unlock();
+
+    if (autoCommit) {
+        assert(trans_commit(tid) == -ENOENT);
     }
 
     return 0;
@@ -855,6 +1054,7 @@ int Nbub::evaluate_common(int tid, uint32_t val)
         }
         else {
             new_btv = new ibis::bitvector{};
+            *new_btv ^= *bitmap_old->btv;
 
             for (auto const & [row_id_t, rub_t] : rubs) {
                 assert(rub_t.pos.count(val));
@@ -862,7 +1062,7 @@ int Nbub::evaluate_common(int tid, uint32_t val)
                 new_btv->setBit(row_id_t, 1, config);
             }
 
-            *new_btv ^= *bitmap_old->btv;
+            // *new_btv ^= *bitmap_old->btv;
 
             t3 = std::chrono::high_resolution_clock::now();
 
