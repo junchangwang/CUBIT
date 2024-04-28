@@ -23,7 +23,6 @@ private:
 public:
     NbubLK(Table_config *config);
 
-    int trans_commit(int tid) override;
     int trans_commit(int tid, uint64_t db_timestamp_t, uint64_t db_row_nums) override;
 
     int merge_bitmap(int tid, uint32_t val, TransDesc *trans, Bitmap *bitmap_old, Bitmap *bitmap_new, map<uint64_t, RUB> *rubs) override;

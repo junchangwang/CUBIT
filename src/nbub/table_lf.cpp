@@ -62,7 +62,7 @@ int NbubLF::help_insert_trans(TransDesc *tail, TransDesc *trans)
  *       Transaction Semantics       *
  ************************************/
 
-int NbubLF::trans_commit(int tid) 
+int NbubLF::trans_commit(int tid, uint64_t db_timestamp_t, uint64_t db_row_nums) 
 {
     ThreadInfo *th = &g_ths_info[tid];
     TransDesc *trans = (TransDesc *)__atomic_load_n(&th->active_trans, MM_ACQUIRE);

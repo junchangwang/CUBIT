@@ -141,18 +141,14 @@ public:
 
     Nbub(Table_config *);
 
-    int append(int, int);
-    int append(int, int, uint64_t);
+    int append(int, int, uint64_t row_id = UINT64_MAX);
     int remove(int, uint64_t);
     int update(int, uint64_t, int);
     int evaluate(int, uint32_t);
-    int merge_request(int, uint32_t);
     void _read_btv(int, int, TransDesc*, Table_config*);
 
-    TransDesc * trans_begin(int);
-    TransDesc * trans_begin(int, uint64_t);
-    virtual int trans_commit(int) { assert(0); return -1; };
-    virtual int trans_commit(int, uint64_t, uint64_t) { assert(0); return -1; };
+    TransDesc * trans_begin(int, uint64_t db_timestamp_t = UINT64_MAX);
+    virtual int trans_commit(int, uint64_t db_timestamp_t = UINT64_MAX, uint64_t db_row_nums = UINT64_MAX) { assert(0); return -1; };
     virtual int merge_bitmap(int, uint32_t, TransDesc *, Bitmap *, Bitmap *, map<uint64_t, RUB> *) { assert(0); return -1; };
 
     void printMemory();
