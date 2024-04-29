@@ -1,0 +1,3 @@
+[submodule "DuckDB"]
+	path = DuckDB
+	url = https://github.com/junchangwang/DuckDB-CUBIT
