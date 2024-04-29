@@ -35,3 +35,13 @@ We can analyze the results in graphs_x and automatically draw all of the figures
 You can reproduce other experiments of the paper by using the corresponding scripts (with different suffixes) in the directory figures-scripts/ . For example, the evaluation of 1B entries can be performed by using the two scripts run_sz_1B.sh and gen_graphs_1B.sh.
 
 Note that it may take dozens of hours to run the whole experimentation for the first time because it involves generating datasets, which is time-consuming. Therefore, it is better to execute only the experiments that are of most interest each time.
+
+**How to run the DBx1000 and DuckDB experiments?**
+
+You can download the contents of both CUBIT-powered DBx1000 and DuckDB explicitly by using the command:
+
+```
+git submodule update --init --recursive
+```
+
+and then follow the instructions in the subdirectories.
