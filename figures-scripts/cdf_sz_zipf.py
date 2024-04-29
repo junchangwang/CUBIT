@@ -56,11 +56,11 @@ file_map = {
 
 # name_map
 nm_map = {
-    'latency_output_naive'   :   'In-place',
+    'latency_output_naive'   :   'In-place$^{+}$',
     'latency_output_nbub-lk'    :   'CUBIT',
-    'latency_output_nbub-lf'    :   'CUBIT-lf',
-    'latency_output_ub'      :   'UpBit',
-    'latency_output_ucb'     :   'UCB'
+    'latency_output_nbub-lf'    :   'CUBIT-lf$^{+}$',
+    'latency_output_ub'      :   'UpBit$^{+}$',
+    'latency_output_ucb'     :   'UCB$^{+}$'
 }
 
 # linestyle_map
@@ -122,10 +122,10 @@ def figure_Q():
 
     #plt.xlim(left=0,right=400000)
     plt.ylim(0, 1)
-    plt.xlabel("Query Response Time (ms)", fontsize='20')
-    plt.ylabel("CDF",fontsize='20')
-    legend = ax.legend(loc='lower right', shadow=True, fontsize='20')
-    plt.tick_params(labelsize=18)
+    plt.xlabel("Query Response Time (ms)", fontsize='25')
+    plt.ylabel("CDF",fontsize='25')
+    legend = ax.legend(loc='lower right', shadow=True, fontsize='25')
+    plt.tick_params(labelsize=25)
     plt.tight_layout()
     fig = 1
 
@@ -160,15 +160,17 @@ def figure_UID():
         yvals=np.arange(len(sorted_data))/float(len(sorted_data)-1)
         sorted_data = np.divide(sorted_data,1000000)
         ax.plot(sorted_data, yvals, label=nm_map[file_name], ls=ls_map[file_name], color=co_map[file_name], lw = '3')
-
+    
+    plt.subplots_adjust(top = 0.97,bottom = 0.185,right = 0.965,left = 0.18) 
     plt.xlim(left=0,right=3100)
     plt.ylim(0, 1)
     plt.xlabel("UDI latency (ms)", fontsize='28')
     plt.ylabel("CDF", fontsize='28')
+    plt.text(2500,0.88,'(a)', fontsize=28,fontweight = 'bold')
     legend = ax.legend(loc='lower right', shadow=True, fontsize='24')
     plt.tick_params(labelsize=28)
     fig = 1
-    plt.tight_layout()
+    #plt.tight_layout()
     if fig == 0:
         plt.show()
     else:

@@ -156,7 +156,7 @@ def figure():
     #    check(exp_name)
         
     plt.figure(figsize =(10,3.1))
-    plt.subplots_adjust(top = 0.96,bottom = 0.215,right = 0.99,left = 0.095, wspace = 0.3, hspace = 0)
+    plt.subplots_adjust(top = 0.96,bottom = 0.215,right = 0.99,left = 0.095, wspace = 0.25, hspace = 0)
     plt.margins(0, 0)
 
     # plt.tick_params(labelsize=16)
@@ -175,10 +175,10 @@ def figure():
     # ax2.set_xticks([0,1,2,4,8,16,32],['0','1','2','4','8','16','32'])
     #ax1.set_xlim(0,37)
     ax1.set_ylim(0,1)
-    ax1.set_xlabel("(b) Update latency (ms)",fontsize = '20')
+    ax1.set_xlabel("Update latency (ms)",fontsize = '20')
     ax1.set_ylabel("CDF",fontsize = '20')
     legend = ax1.legend(loc='lower right', shadow=True, fontsize='15',frameon = False)   
-    
+    ax1.text(4800,0.88,'(b)', fontsize=20,fontweight = 'bold')
     for file_name in experiments_2:
         Throughput = []
         Noc = []
@@ -198,8 +198,9 @@ def figure():
     #plt.xlim(left=0,right=35)
     ax2.set_xticks([1,4,8,16,24,32])
     ax2.set_ylim(0,2000)
-    ax2.set_xlabel("(a) Number of cores",fontsize = '20')
+    ax2.set_xlabel("Number of cores",fontsize = '20')
     ax2.set_ylabel("Throughput (op/s)",fontsize = '20')
+    ax2.text(28,2000*0.88,'(a)', fontsize=20,fontweight = 'bold')
     legend = ax2.legend(loc='upper left', shadow=True, fontsize='15',frameon = False)
    
    
