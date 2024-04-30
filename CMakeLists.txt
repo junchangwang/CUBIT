@@ -11,10 +11,13 @@ include_directories(${CMAKE_SOURCE_DIR}/src)
 
 IF(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     # Linux
-    set(CMAKE_CXX_FLAGS "-g -O3 -std=gnu++17")
+    set(CMAKE_CXX_FLAGS "-g -O3 -std=gnu++17 -fPIC")
     set(FASTBIF_LIBRARY "~/usr/local/lib/libfastbit.so")
+    include_directories("~/usr/include/x86_64-linux-gnu")
     include_directories("~/usr/local/include")
-
+    set(BOOST_LIBRARYDIR /usr/lib/x86_64-linux-gnu)
+    set(BOOST_INCLUDEDIR /usr/include)
+    set(Boost_NO_SYSTEM_PATHS on)
     find_package(Boost COMPONENTS filesystem program_options system REQUIRED)
 
     ADD_DEFINITIONS( "-DLINUX" )
@@ -23,6 +26,7 @@ ENDIF(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 find_library(URCU_LIBRARIES 
 		NAMES urcu
 		HINTS "/usr/lib/x86_64-linux-gnu;/usr/local/lib")
+#MESSAGE( FATAL_ERROR "${Boost_LIBRARIES}     dic: ${Boost_LIBRARY_DIRS}  ${Boost_INCLUDE_DIRS} ${URCU_LIBRARIES}")
 
 # protobuf
 #include(FindProtobuf)
@@ -45,6 +49,7 @@ set(UB_SOURCE_FILES src/ub/table.h src/ub/table.cpp)
 set(NBUB_SOURCE_FILES src/nbub/table.h src/nbub/table.cpp src/nbub/table_lk.h src/nbub/table_lk.cpp src/nbub/table_lf.h src/nbub/table_lf.cpp src/nbub/test.cpp)
 set(BASE_FILES src/nicolas/base_table.h src/nicolas/base_table.cpp src/nicolas/tablex.cpp src/nicolas/tablex.h src/nicolas/util.h src/nicolas/util.cpp src/nicolas/segBtv.h src/nicolas/segBtv.cpp src/nicolas/perf.h src/nicolas/perf.cpp)
 add_library(bitmap STATIC ${BASE_FILES} ${FASTBIT_FILES} ${NAIVE_SOURCE_FILES} ${UCB_SOURCE_FILES} ${UB_SOURCE_FILES} ${NBUB_SOURCE_FILES})
+target_link_libraries(bitmap pthread atomic ${Boost_LIBRARIES} ${URCU_LIBRARIES})
 	  
 # nicolas
 set(NICOLAS_SOURCE_FILES src/nicolas/nicolas.cpp)
