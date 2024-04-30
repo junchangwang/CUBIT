@@ -12,7 +12,7 @@ using namespace nbub_lk;
 
 NbubLK::NbubLK(Table_config *config) : Nbub(config)
 {
-    trans_queue = new queue_t{};
+    trans_queue = new nbub::queue_t{};
     __atomic_store_n(&trans_queue->head, bitmaps[0]->l_start_trans, MM_RELAXED);
     __atomic_store_n(&trans_queue->tail, bitmaps[0]->l_start_trans, MM_RELAXED);
 }
@@ -117,7 +117,7 @@ int NbubLK::trans_commit(int tid, uint64_t db_timestamp_t, uint64_t db_row_nums)
 }
 
 int NbubLK::merge_bitmap(int tid, uint32_t val, TransDesc *trans,
-        Bitmap *bitmap_old, Bitmap *bitmap_new, map<uint64_t, RUB> *rubs)
+        nbub::Bitmap *bitmap_old, nbub::Bitmap *bitmap_new, map<uint64_t, RUB> *rubs)
 {
     /* Prepare trans_merge */
     struct TransDesc *trans_merge = allocate_trans();

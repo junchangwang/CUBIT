@@ -31,7 +31,7 @@ namespace ucb {
 
     protected:
         // Global read-write lock to protect the whole bitmap index (esp. EB).
-        shared_mutex g_lock;
+        std::shared_mutex g_lock;
 
         uint32_t TBC;
         std::vector<uint32_t> append_rowids;

@@ -13,12 +13,12 @@
 #include "nicolas/base_table.h"
 #include "nicolas/segBtv.h"
 
-using namespace std;
+// using namespace std;
 
 extern uint64_t db_timestamp __attribute__((aligned(128)));
 extern uint64_t db_number_of_rows;
 
-typedef map<uint16_t, uint16_t> RLE_map;    // Run-Length Encoding
+typedef std::map<uint16_t, uint16_t> RLE_map;    // Run-Length Encoding
 
 struct RUB {
     uint64_t row_id;
@@ -36,7 +36,7 @@ struct TransDesc
     uint64_t l_start_ts;
     uint64_t l_commit_ts;
 
-    map<uint64_t, RUB> rubs;
+    std::map<uint64_t, RUB> rubs;
 
     TransDesc *l_end_trans;
 
@@ -114,7 +114,7 @@ protected:
 
     void _get_value(uint64_t, int, int, uint64_t, bool *, int *, struct RUB *, uint64_t *);
     TransDesc * get_rub_on_row(uint64_t, uint64_t, TransDesc *, uint64_t, RUB &, uint64_t &);
-    TransDesc * get_rubs_on_btv(uint64_t, uint64_t, TransDesc *, uint32_t, map<uint64_t, RUB> &);
+    TransDesc * get_rubs_on_btv(uint64_t, uint64_t, TransDesc *, uint32_t, std::map<uint64_t, RUB> &);
 
     TransDesc * allocate_trans();
     int delete_trans(int, TransDesc *);
@@ -149,7 +149,7 @@ public:
 
     TransDesc * trans_begin(int, uint64_t db_timestamp_t = UINT64_MAX);
     virtual int trans_commit(int, uint64_t db_timestamp_t = UINT64_MAX, uint64_t db_row_nums = UINT64_MAX) { assert(0); return -1; };
-    virtual int merge_bitmap(int, uint32_t, TransDesc *, Bitmap *, Bitmap *, map<uint64_t, RUB> *) { assert(0); return -1; };
+    virtual int merge_bitmap(int, uint32_t, TransDesc *, Bitmap *, Bitmap *, std::map<uint64_t, RUB> *) { assert(0); return -1; };
 
     void printMemory();
     void printUncompMemory();
@@ -170,15 +170,15 @@ public:
         TransDesc *trans; 
         Bitmap *btm_old; 
         Bitmap *btm_new; 
-        map<uint64_t, RUB> * rubs;
+        std::map<uint64_t, RUB> * rubs;
     };
 
     int __init_append(int tid, int rowID, int val);
 
     // An array of message queues, each of which connect a worker thread and the merge daemon thread.
     // The message is a pointer to struct merge_req.
-    queue<struct merge_req *> * merge_req_queues;
-    mutex * lk_merge_req_queues;
+    std::queue<struct merge_req *> * merge_req_queues;
+    std::mutex * lk_merge_req_queues;
 };
 
 };

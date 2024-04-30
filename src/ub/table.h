@@ -8,7 +8,7 @@
 
 #include "nicolas/base_table.h"
 
-using namespace std;
+// using namespace std;
 
 namespace ub {
 
@@ -30,14 +30,14 @@ namespace ub {
 
     protected:
         // Per-<vb, ub>-pair reader-writer lock.
-        vector<shared_mutex *>  lk_bitmaps;
-        vector<ibis::bitvector *> bitmaps;
-        vector<ibis::bitvector *> update_bitmaps;
+        std::vector<std::shared_mutex *>  lk_bitmaps;
+        std::vector<ibis::bitvector *> bitmaps;
+        std::vector<ibis::bitvector *> update_bitmaps;
         int num_bitmaps;
 
         // Mutex lock to protect the shared variable number_of_rows.
         // Append operations must first grab this lock.
-        shared_mutex lk_append;
+        std::shared_mutex lk_append;
         uint64_t number_of_rows;
 
         uint64_t total_rows;

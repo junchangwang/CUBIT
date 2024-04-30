@@ -335,12 +335,12 @@ template <> struct less< const char* > {
     }
 };
 
-// specialization of equal_to<> on const char* (case sensitive comparison)
-template <> struct equal_to< const char* > {
-    bool operator()(const char* x, const char* y) const {
-        return std::strcmp(x, y) == 0;
-    }
-};
+// // specialization of equal_to<> on const char* (case sensitive comparison)
+// template <> struct equal_to< const char* > {
+//     bool operator()(const char* x, const char* y) const {
+//         return std::strcmp(x, y) == 0;
+//     }
+// };
 
 template <> struct less< ibis::rid_t > {
     bool operator()(const ibis::rid_t& x, const ibis::rid_t& y) const {

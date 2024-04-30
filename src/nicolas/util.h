@@ -8,7 +8,7 @@
 #include <boost/program_options.hpp>
 #include <vector>
 
-using namespace std;
+// using namespace std;
 
 // #define VERIFY_RESULTS 1
 
@@ -74,8 +74,8 @@ class Table_config {
     public:
         int32_t g_cardinality;
         Index_encoding encoding;
-        string DATA_PATH;
-        string INDEX_PATH;
+        std::string DATA_PATH;
+        std::string INDEX_PATH;
         uint32_t n_workers;
         uint32_t n_udis;
         uint32_t n_queries;
@@ -85,11 +85,11 @@ class Table_config {
         bool enable_parallel_cnt;
         bool show_memory;
         bool on_disk;
-        string approach;
+        std::string approach;
         unsigned int nThreads_for_getval;
         unsigned int time_out;
         uint32_t n_range;
-        string range_algo;
+        std::string range_algo;
         bool showEB;
         bool decode;
         bool autoCommit;
@@ -101,9 +101,9 @@ class Table_config {
         int AE_left_margin;
         int AE_right_margin;
         int AE_interval;
-        map<int, int> AE_margins;
-        map<int, int> AE_anchors;
-        map<int, int> AE_curves;
+        std::map<int, int> AE_margins;
+        std::map<int, int> AE_anchors;
+        std::map<int, int> AE_curves;
 
         // For SegBtv only.
         bool segmented_btv;

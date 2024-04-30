@@ -30,7 +30,7 @@ namespace naive {
 
     protected:
 	    // Global read-write lock to protect the whole bitmap index.
-        shared_mutex g_lock;
+        std::shared_mutex g_lock;
 
         void _get_value(uint64_t rowid, int begin, int range, bool *flag, int *result);
 

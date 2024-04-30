@@ -13,6 +13,8 @@
 #define N_MAX_WORKERS (256)
 #define HZ (2.0) //FIXME: only for the SkyLake server with Intel(R) Xeon(R) Gold 5117 CPU @ 2.00GHz.
 
+using namespace std;
+
 struct ThreadInfo g_ths_info[N_MAX_WORKERS];
 
 // Export this variable to bitvector. This is a shortcut fix. 

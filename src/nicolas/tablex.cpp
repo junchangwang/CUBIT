@@ -10,6 +10,8 @@
 #include "tablex.h"
 #include "util.h"
 
+using namespace std;
+
 TableX::TableX(int32_t cardinality) : cardinality(cardinality), number_of_rows(0) {
     for (int i = 0; i < cardinality; ++i) {
         bitmaps.push_back(new ibis::bitvector());

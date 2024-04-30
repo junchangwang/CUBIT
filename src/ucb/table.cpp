@@ -19,7 +19,7 @@ Table::Table(Table_config *config) : BaseTable(config), number_of_rows(config->n
     else if (config->encoding == RE) 
         num_bitmaps = config->g_cardinality - 1;
     else {
-        cout << "Bitmap UCB only spports the EE and RE encoding schemes" << endl;
+        std::cout << "Bitmap UCB only spports the EE and RE encoding schemes" << std::endl;
         assert(0);
     }
     bitmaps.reserve(num_bitmaps);
@@ -31,18 +31,18 @@ Table::Table(Table_config *config) : BaseTable(config), number_of_rows(config->n
     int n_threads = (config->nThreads_for_getval > num_bitmaps) ? num_bitmaps : config->nThreads_for_getval;
     int n_btv_per_thread = num_bitmaps / n_threads;
     int n_left = num_bitmaps % n_threads;
-    thread* threads = new thread[n_threads];
+    std::thread* threads = new std::thread[n_threads];
 
     assert(n_btv_per_thread >= 1);
 
-    vector<int>begin(n_threads + 1, 0);
+    std::vector<int>begin(n_threads + 1, 0);
     for (int i = 1; i <= n_left; i++)
         begin[i] = begin[i - 1] + n_btv_per_thread + 1;
     for (int i = n_left + 1; i <= n_threads; i++)
         begin[i] = begin[i - 1] + n_btv_per_thread;
 
     for (int i = 0; i < n_threads; i++) {
-        threads[i] = thread(&Table::_read_btv, this, begin[i], begin[i + 1]);
+        threads[i] = std::thread(&Table::_read_btv, this, begin[i], begin[i + 1]);
     }
     for (int t = 0; t < n_threads; t++) {
         threads[t].join();
@@ -68,7 +68,7 @@ void Table::_read_btv(int begin, int end) {
 
 int Table::append(int tid, int val) 
 {
-    lock_guard<shared_mutex> guard(g_lock);
+    std::lock_guard<std::shared_mutex> guard(g_lock);
 
     if (config->encoding == EE) {
         bitmaps[val]->setBit(number_of_rows, 1, config);
@@ -99,7 +99,7 @@ int Table::append(int tid, int val)
 
 int Table::update(int tid, uint64_t rowid, int to_val) 
 {
-    lock_guard<shared_mutex> guard(g_lock);
+    std::lock_guard<std::shared_mutex> guard(g_lock);
 
     existence_bitmap.setBit(rowid, 0, config);
     if (config->encoding == EE) {
@@ -131,7 +131,7 @@ int Table::update(int tid, uint64_t rowid, int to_val)
 
 int Table::remove(int tid, uint64_t rowid) {
 
-    lock_guard<shared_mutex> guard(g_lock);
+    std::lock_guard<std::shared_mutex> guard(g_lock);
     
     existence_bitmap.setBit(rowid, 0, config);
 
@@ -141,7 +141,7 @@ int Table::remove(int tid, uint64_t rowid) {
 int Table::evaluate(int tid, uint32_t val) {
     ibis::bitvector res;
     {
-        shared_lock<shared_mutex> guard(g_lock);
+        std::shared_lock<std::shared_mutex> guard(g_lock);
 
         if (existence_bitmap.all1s()) {
             res.copy(*bitmaps[val]);
@@ -195,7 +195,7 @@ void Table::printUncompMemory()
 // FIXME: 
 void Table::appendBitmap(int to_val)
 {
-    string name = getBitmapName(to_val);
+    std::string name = getBitmapName(to_val);
 
     uint32_t *buffer = new uint32_t[2];
     FILE *file = fopen(name.c_str(), "rb+");

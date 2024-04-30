@@ -5,7 +5,7 @@
 
 #include "fastbit/bitvector.h"
 
-using namespace std;
+// using namespace std;
 
 struct btv_seg {
     int id;
@@ -32,7 +32,7 @@ class SegBtv {
         int Verify(Table_config *, ibis::bitvector * const);
 
     public:
-        map<uint32_t, btv_seg> seg_table{};
+        std::map<uint32_t, btv_seg> seg_table{};
 
         SegBtv(Table_config *, ibis::bitvector *);
         SegBtv(const SegBtv &rhs);
@@ -59,7 +59,7 @@ class SegBtv {
         ///Perform bitwise XOR and return the result as a new bitvector.
         SegBtv *operator^(SegBtv &rhs);
 
-        vector<uint32_t> decode(vector<uint32_t> &append_rowids, Table_config *config);
+        std::vector<uint32_t> decode(std::vector<uint32_t> &append_rowids, Table_config *config);
 };
 
 #endif
