@@ -1,9 +1,9 @@
 
 **Brief history of CUBIT**
 
-The project CUBIT stemmed from an effort to parallelize UpBit [1], the state-of-the-art updatable bitmap index that runs queries and UDIs sequentially, on multicore architectures. We refer to this version as CUBIT v1, with the major contribution being the first concurrent updatable bitmap index. Based on CUBIT v1, we submitted a research paper to a top DB conference. 
+The project CUBIT stemmed from an effort to parallelize UpBit [1], the state-of-the-art updatable bitmap index that runs queries and UDIs sequentially, on multicore architectures. We refer to this version as CUBIT v1, with the major contribution being the first concurrent updatable bitmap index. Based on CUBIT v1, we submitted a research paper to a top DB conference.
 
-Unfortunately, our submission was rejected. Based on the invaluable feedback from the reviewers, we pushed CUBIT forward and made heavy updates. The latest version is CUBIT v2, in which we develop a more lightweight snapshotting mechanism for (wait-free) queries and a consolidation-aware helping mechanism for (latch-free) UDIs to accelerate CUBIT operations to meet the time constraints for indexing. Meanwhile, we thoroughly evaluate CUBIT v2 by using OLAP, HTAP, and OLTP workloads. The experimental results show that CUBIT enables bitmap indexing for a variety of use cases and outperforms state-of-the-art tree-based indexes and scans for selective queries.
+Unfortunately, our submission was rejected. Based on the constructive feedback from the reviewers, we pushed CUBIT forward and made heavy updates. The latest version is CUBIT v2, in which we develop a more lightweight snapshotting mechanism for (wait-free) queries and a consolidation-aware helping mechanism for (latch-free) UDIs. CUBIT v2 is more effective and can meet the time constraints for indexing in DBMSs. More importantly, we adapt CUBIT v2 to various use cases with OLAP, HTAP, and OLTP workloads. Our thorough evaluation shows that it is a promising indexing candidate for selective queries for any workload with updates.
 
 [1] Manos Athanassoulis, Zheng Yan, and Stratos Idreos. UpBit: Scalable In-Memory Updatable Bitmap Indexing. In SIGMOD'16.
 
