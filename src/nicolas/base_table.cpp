@@ -8,8 +8,6 @@
 
 using namespace std;
 
-extern shared_mutex bitmap_mutex;
-
 bool run_merge_func = false;
 
 void merge_func(BaseTable *table, int begin, int range, Table_config *config)
@@ -23,7 +21,6 @@ void merge_func(BaseTable *table, int begin, int range, Table_config *config)
     while (READ_ONCE(run_merge_func)) {
         int n_merges = 0;
         {
-            lock_guard<shared_mutex> guard(bitmap_mutex);
             for (int q = begin; q < begin + range; q++) 
             {
                 lock_guard<mutex> lock(table2->lk_merge_req_queues[q]);
