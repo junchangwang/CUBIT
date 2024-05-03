@@ -1,21 +1,21 @@
 
 **Brief history of CUBIT**
 
-The project CUBIT stemmed from an effort to parallelize UpBit [1], the state-of-the-art updatable bitmap index that runs queries and UDIs sequentially, on multicore architectures. We refer to this version as CUBIT v1, with the major contribution being the first concurrent updatable bitmap index. Based on CUBIT v1, we submitted a research paper to a top DB conference.
+The CUBIT project stemmed from an effort to parallelize UpBit [1], the state-of-the-art updatable bitmap index that runs queries and UDIs sequentially even on multicore architectures. We refer to this preliminary version as **CUBIT v1**, with the major contribution **being the first concurrent updatable bitmap index**. Based on CUBIT v1, we submitted a research paper to a top DB conference.
 
-Unfortunately, our submission was rejected. Based on the constructive feedback from the reviewers, we pushed CUBIT forward and made heavy updates. The latest version is CUBIT v2, in which we develop a more lightweight snapshotting mechanism for (wait-free) queries and a consolidation-aware helping mechanism for (latch-free) UDIs. CUBIT v2 is more effective and can meet the time constraints for indexing in DBMSs. More importantly, we adapt CUBIT v2 to various use cases with OLAP, HTAP, and OLTP workloads. Our thorough evaluation shows that it is a promising indexing candidate for selective queries for any workload with updates.
+Unfortunately, our submission was rejected. Based on the constructive feedback from the reviewers, we pushed CUBIT forward and made heavy updates. The latest version is CUBIT v2, in which we develop a more lightweight snapshotting mechanism for (wait-free) queries and a consolidation-aware helping mechanism for (latch-free) UDIs. CUBIT v2 is more effective and can meet the time constraints for indexing in DBMSs. More importantly, we adapt it to various use cases with OLAP, HTAP, and OLTP workloads. Our thorough evaluation shows that **CUBIT v2 is a promising indexing candidate for selective queries on any workload with updates**.
 
 [1] Manos Athanassoulis, Zheng Yan, and Stratos Idreos. UpBit: Scalable In-Memory Updatable Bitmap Indexing. In SIGMOD'16.
 
 **How is this project organized?**
 
-The core code resides in the src/ folder, which contains several parallelized updatable bitmap indexes, including In-place (src/naive), UCB (src/ucb), UpBit (src/ub), and our algorithm CUBIT v2 (src/nbub). They are parallelized for modern multicore architectures by using different strategies like fine-grained read-write latching or MVCC (Please find the details in our paper).
+The core code resides in the src/ folder, which contains the parallelized updatable bitmap indexes, including In-place+ (src/naive), UCB+ (src/ucb), UpBit+ (src/ub), and our algorithm CUBIT v2 (src/nbub). They are parallelized for modern multicore architectures by using different strategies including fine-grained read-write latching and MVCC.
 
 The files src/nbub/table_lk.cpp and src/nbub/table_lf.cpp contain the code of our algorithms CUBIT-lk and CUBIT-lf, respectively. Both files inherit from src/nbub/table.cpp, which contains several important common functions like Evaluate/Query.
 
 **How to compile and run the code?**
 
-CUBIT relies on c++17, python3, liburcu(-dev), and the Boost library. 
+CUBIT v2 relies on c++17, python3, liburcu(-dev), and the Boost library. 
 
 We use the following command to compile the entire project. 
 
