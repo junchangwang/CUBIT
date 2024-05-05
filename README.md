@@ -16,7 +16,7 @@ The core code resides in the src/ folder, which contains the parallelized updata
 The files src/nbub/table_lk.cpp and src/nbub/table_lf.cpp contain the code of our algorithms CUBIT-lk and CUBIT-lf, respectively. Both files inherit from src/nbub/table.cpp, which contains several important common functions like Evaluate/Query.
 
 
-How run CUBIT and replicate key experiments?
+How to run CUBIT and replicate key experiments?
 --------------------------------
 
 CUBIT v2 relies on c++17, python3, liburcu(-dev), and the Boost library. 
