@@ -8,10 +8,10 @@
 #include "nicolas/base_table.h"
 #include "table.h"
 
-using namespace nbub;
+using namespace cubit;
 using namespace std;
 
-bool Nbub::init_sequential_test()
+bool Cubit::init_sequential_test()
 {
     int old_val = -1;
     int cnt0, cnt1, cnt2;

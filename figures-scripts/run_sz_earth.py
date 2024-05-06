@@ -59,7 +59,7 @@ def gen_cmd_naive(w, a, v, total, ratio, index_path):
     cmd = './build/nicolas -w {} -a {} -m {} --number-of-queries {} -r {} -c {} -i {} -n {} -v {} --fence-pointer no > dat_tmp_earth/figure_{}_{}_raw_w_{}_ratio_{}.dat'.format(w, a, mode,int(total * (1 - ratio)), int(total * ratio), cardinality, index_path, number_of_rows, v, a, 'latency' if (v == 'yes') else 'throughput',w, ratio )
     return cmd
     
-def gen_cmd_nbub(w, a, v, total, ratio, index_path):
+def gen_cmd_cubit(w, a, v, total, ratio, index_path):
     cmd = './build/nicolas -w {} -a {} -m {} --number-of-queries {} -r {} -c {} -i {} -n {} -v {} --fence-pointer yes --fence-length 100000 --merge-threshold {} --rows-per-seg {} --num-embarr-parallel {} --parallel-cnt {} > dat_tmp_earth/figure_{}_{}_raw_w_{}_ratio_{}.dat'.format(w, a, mode, int(total * (1 - ratio)), int(total * ratio), cardinality, index_path, number_of_rows, v, MERGE_THRESHOLD_NBUB, ROWS_PER_SEG, NUM_EMBARR_PARALLEL, PARALLEL_CNT, a, 'latency' if (v == 'yes') else 'throughput',w, ratio )
     return cmd
 
@@ -72,7 +72,7 @@ def gen_cmd_naive_cardinality(w, a, v, total, ratio, index_path, c, n):
     cmd = './build/nicolas -w {} -a {} -m {} --number-of-queries {} -r {} -c {} -i {} -n {} -v {} --fence-pointer no > dat_tmp_earth/figure_{}_{}_raw_w_{}_ratio_{}_c_{}.dat'.format(w, a, mode,int(total * (1 - ratio)), int(total * ratio), c, index_path, n, v, a, 'latency' if (v == 'yes') else 'throughput',w, ratio ,c)
     return cmd
     
-def gen_cmd_nbub_cardinality(w, a, v, total, ratio, index_path, c, n):
+def gen_cmd_cubit_cardinality(w, a, v, total, ratio, index_path, c, n):
     cmd = './build/nicolas -w {} -a {} -m {} --number-of-queries {} -r {} -c {} -i {} -n {} -v {} --fence-pointer yes --fence-length 100000 --merge-threshold {} --rows-per-seg {} --num-embarr-parallel {} --parallel-cnt {} > dat_tmp_earth/figure_{}_{}_raw_w_{}_ratio_{}_c_{}.dat'.format(w, a, mode, int(total * (1 - ratio)), int(total * ratio), c, index_path, n, v, MERGE_THRESHOLD_NBUB, ROWS_PER_SEG, NUM_EMBARR_PARALLEL, PARALLEL_CNT, a, 'latency' if (v == 'yes') else 'throughput',w, ratio ,c)
     return cmd
 
@@ -450,100 +450,100 @@ def gen_figure_ub_latency_cardinality():
     f.close()
 
 ############################################## NBUB-lk ##########################################################
-def gen_figure_nbub_lk_throughput_core(): 
-    print ('Figure nbub-lk_throughput_core')
+def gen_figure_cubit_lk_throughput_core(): 
+    print ('Figure cubit-lk_throughput_core')
     print ('-' * 10)
     core_number = [1, 2, 4, 8, 16, 24, 32]
-    f = open('dat/figure_nbub-lk_throughput_core.dat','w')
+    f = open('dat/figure_cubit-lk_throughput_core.dat','w')
     for num in core_number:
-        cmd = gen_cmd_nbub(num, 'nbub-lk', 'no', 1000, ratio_percentage, index_path)
+        cmd = gen_cmd_cubit(num, 'cubit-lk', 'no', 1000, ratio_percentage, index_path)
         print(cmd)
         os.system(cmd)
-        ret = throughput_analysis('dat_tmp_earth/figure_nbub-lk_throughput_raw_w_{}_ratio_{}.dat'.format(num, ratio_percentage))
+        ret = throughput_analysis('dat_tmp_earth/figure_cubit-lk_throughput_raw_w_{}_ratio_{}.dat'.format(num, ratio_percentage))
         print(ret)
         print('\n')
         f.write('{} {} \n'.format(num, ret))
     f.close()
 
-#nbub-lk throughput, ratio
-def gen_figure_nbub_lk_throughput_ratio():
-    print ('Figure nbub-lk_throughput_ratio')
+#cubit-lk throughput, ratio
+def gen_figure_cubit_lk_throughput_ratio():
+    print ('Figure cubit-lk_throughput_ratio')
     print ('-' * 10)
     ratio_number = [0.01, 0.02, 0.05, 0.1, 0.2]
-    f = open('dat/figure_nbub-lk_throughput_ratio.dat','w')
+    f = open('dat/figure_cubit-lk_throughput_ratio.dat','w')
     for num in ratio_number:
-        cmd = gen_cmd_nbub(16, 'nbub-lk', 'no', 1000, num, index_path)
+        cmd = gen_cmd_cubit(16, 'cubit-lk', 'no', 1000, num, index_path)
         print(cmd)
         os.system(cmd)
-        ret = throughput_analysis('dat_tmp_earth/figure_nbub-lk_throughput_raw_w_{}_ratio_{}.dat'.format(16, num))
+        ret = throughput_analysis('dat_tmp_earth/figure_cubit-lk_throughput_raw_w_{}_ratio_{}.dat'.format(16, num))
         print(ret)
         print('\n')
         f.write('{} {} \n'.format(num, ret))
     f.close()    
 
-# nbub-lk throughput, cardinality
-def gen_figure_nbub_lk_throughput_cardinality(): 
-    print ('Figure nbub-lk_throughput_cardinality')
+# cubit-lk throughput, cardinality
+def gen_figure_cubit_lk_throughput_cardinality(): 
+    print ('Figure cubit-lk_throughput_cardinality')
     print ('-' * 10)
     cardinality_number = [16, 32, 64, 128, 256]
-    f = open('dat/figure_nbub-lk_throughput_cardinality.dat','w')
+    f = open('dat/figure_cubit-lk_throughput_cardinality.dat','w')
     for num in cardinality_number:
         index_path = "100M_{}".format(num)
-        cmd = gen_cmd_nbub_cardinality(core_for_cardinality, 'nbub-lk', 'no', 1000, ratio_percentage, index_path, num, ONE_HUNDRED_MILLION)
+        cmd = gen_cmd_cubit_cardinality(core_for_cardinality, 'cubit-lk', 'no', 1000, ratio_percentage, index_path, num, ONE_HUNDRED_MILLION)
         print(cmd)
         os.system(cmd)
-        ret = throughput_analysis('dat_tmp_earth/figure_nbub-lk_throughput_raw_w_{}_ratio_{}_c_{}.dat'.format(core_for_cardinality, ratio_percentage, num))
+        ret = throughput_analysis('dat_tmp_earth/figure_cubit-lk_throughput_raw_w_{}_ratio_{}_c_{}.dat'.format(core_for_cardinality, ratio_percentage, num))
         print(ret)
         print('\n')
         f.write('{} {} \n'.format(num, ret))
     f.close()
 
-#nbub-lk latency, core
-def gen_figure_nbub_lk_latency_core(): # latency
-    print ('Figure nbub-lk_latency_core')
+#cubit-lk latency, core
+def gen_figure_cubit_lk_latency_core(): # latency
+    print ('Figure cubit-lk_latency_core')
     print ('-' * 10)
     core_number = [1, 2, 4, 8, 16, 24, 32]
-    f = open('dat/figure_nbub-lk_latency_core.dat','w')
+    f = open('dat/figure_cubit-lk_latency_core.dat','w')
     for num in core_number:
-        cmd = gen_cmd_nbub(num, 'nbub-lk', 'yes', 1000, ratio_percentage, index_path)
+        cmd = gen_cmd_cubit(num, 'cubit-lk', 'yes', 1000, ratio_percentage, index_path)
         print(cmd)
         os.system(cmd)
-        ret = latency_analysis('dat_tmp_earth/figure_nbub-lk_latency_raw_w_{}_ratio_{}.dat'.format(num, ratio_percentage))
+        ret = latency_analysis('dat_tmp_earth/figure_cubit-lk_latency_raw_w_{}_ratio_{}.dat'.format(num, ratio_percentage))
         print(ret)
         print('\n')
         for i in range(0,len(ret)):
             f.write('{} {} \n'.format(num, ret[i]))
     f.close()
 
-#nbub-lk latency, ratio
-def gen_figure_nbub_lk_latency_ratio():
-    print ('Figure nbub-lk_latency_ratio')
+#cubit-lk latency, ratio
+def gen_figure_cubit_lk_latency_ratio():
+    print ('Figure cubit-lk_latency_ratio')
     print ('-' * 10)
     ratio_number = [0.01, 0.02, 0.05, 0.1, 0.2]
-    f = open('dat/figure_nbub-lk_latency_ratio.dat','w')
+    f = open('dat/figure_cubit-lk_latency_ratio.dat','w')
     for num in ratio_number:
-        cmd = gen_cmd_nbub(16, 'nbub-lk', 'yes', 1000, num, index_path)
+        cmd = gen_cmd_cubit(16, 'cubit-lk', 'yes', 1000, num, index_path)
         print(cmd)
         os.system(cmd)
-        ret = latency_analysis('dat_tmp_earth/figure_nbub-lk_latency_raw_w_{}_ratio_{}.dat'.format(16, num))
+        ret = latency_analysis('dat_tmp_earth/figure_cubit-lk_latency_raw_w_{}_ratio_{}.dat'.format(16, num))
         print(ret)
         print('\n')
         for i in range(0,len(ret)):
             f.write('{} {} \n'.format(num, ret[i]))
     f.close()
 
-# nbub-lk latency, cardinality
-def gen_figure_nbub_lk_latency_cardinality(): 
-    print ('Figure nbub-lk_latency_cardinality')
+# cubit-lk latency, cardinality
+def gen_figure_cubit_lk_latency_cardinality(): 
+    print ('Figure cubit-lk_latency_cardinality')
     print ('-' * 10)
     cardinality_number = [16, 32, 64, 128, 256]
-    f = open('dat/figure_nbub-lk_latency_cardinality.dat','w')
+    f = open('dat/figure_cubit-lk_latency_cardinality.dat','w')
     for num in cardinality_number:
         index_path = "100M_{}".format(num)
-        cmd = gen_cmd_nbub_cardinality(core_for_cardinality, 'nbub-lk', 'yes', 1000, ratio_percentage, index_path, num, ONE_HUNDRED_MILLION)
+        cmd = gen_cmd_cubit_cardinality(core_for_cardinality, 'cubit-lk', 'yes', 1000, ratio_percentage, index_path, num, ONE_HUNDRED_MILLION)
         print(cmd)
         os.system(cmd)
-        ret = latency_analysis('dat_tmp_earth/figure_nbub-lk_latency_raw_w_{}_ratio_{}_c_{}.dat'.format(core_for_cardinality, ratio_percentage, num))
+        ret = latency_analysis('dat_tmp_earth/figure_cubit-lk_latency_raw_w_{}_ratio_{}_c_{}.dat'.format(core_for_cardinality, ratio_percentage, num))
         print(ret)
         print('\n')
         for i in range(0,len(ret)):
@@ -551,100 +551,100 @@ def gen_figure_nbub_lk_latency_cardinality():
     f.close()
 
 ############################################## NBUB_LF ##########################################################
-def gen_figure_nbub_lf_throughput_core(): 
-    print ('Figure nbub-lf_throughput_core')
+def gen_figure_cubit_lf_throughput_core(): 
+    print ('Figure cubit-lf_throughput_core')
     print ('-' * 10)
     core_number = [1, 2, 4, 8, 16, 24, 32]
-    f = open('dat/figure_nbub-lf_throughput_core.dat','w')
+    f = open('dat/figure_cubit-lf_throughput_core.dat','w')
     for num in core_number:
-        cmd = gen_cmd_nbub(num, 'nbub-lf', 'no', 1000, ratio_percentage, index_path)
+        cmd = gen_cmd_cubit(num, 'cubit-lf', 'no', 1000, ratio_percentage, index_path)
         print(cmd)
         os.system(cmd)
-        ret = throughput_analysis('dat_tmp_earth/figure_nbub-lf_throughput_raw_w_{}_ratio_{}.dat'.format(num, ratio_percentage))
+        ret = throughput_analysis('dat_tmp_earth/figure_cubit-lf_throughput_raw_w_{}_ratio_{}.dat'.format(num, ratio_percentage))
         print(ret)
         print('\n')
         f.write('{} {} \n'.format(num, ret))
     f.close()
 
-#nbub_lf throughput, ratio
-def gen_figure_nbub_lf_throughput_ratio():
-    print ('Figure nbub-lf_throughput_ratio')
+#cubit_lf throughput, ratio
+def gen_figure_cubit_lf_throughput_ratio():
+    print ('Figure cubit-lf_throughput_ratio')
     print ('-' * 10)
     ratio_number = [0.01, 0.02, 0.05, 0.1, 0.2]
-    f = open('dat/figure_nbub-lf_throughput_ratio.dat','w')
+    f = open('dat/figure_cubit-lf_throughput_ratio.dat','w')
     for num in ratio_number:
-        cmd = gen_cmd_nbub(16, 'nbub-lf', 'no', 1000, num, index_path)
+        cmd = gen_cmd_cubit(16, 'cubit-lf', 'no', 1000, num, index_path)
         print(cmd)
         os.system(cmd)
-        ret = throughput_analysis('dat_tmp_earth/figure_nbub-lf_throughput_raw_w_{}_ratio_{}.dat'.format(16, num))
+        ret = throughput_analysis('dat_tmp_earth/figure_cubit-lf_throughput_raw_w_{}_ratio_{}.dat'.format(16, num))
         print(ret)
         print('\n')
         f.write('{} {} \n'.format(num, ret))
     f.close()    
 
-# nbub-lf throughput, cardinality
-def gen_figure_nbub_lf_throughput_cardinality(): 
-    print ('Figure nbub-lf_throughput_cardinality')
+# cubit-lf throughput, cardinality
+def gen_figure_cubit_lf_throughput_cardinality(): 
+    print ('Figure cubit-lf_throughput_cardinality')
     print ('-' * 10)
     cardinality_number = [16, 32, 64, 128, 256]
-    f = open('dat/figure_nbub-lf_throughput_cardinality.dat','w')
+    f = open('dat/figure_cubit-lf_throughput_cardinality.dat','w')
     for num in cardinality_number:
         index_path = "100M_{}".format(num)
-        cmd = gen_cmd_nbub_cardinality(core_for_cardinality, 'nbub-lf', 'no', 1000, ratio_percentage, index_path, num, ONE_HUNDRED_MILLION)
+        cmd = gen_cmd_cubit_cardinality(core_for_cardinality, 'cubit-lf', 'no', 1000, ratio_percentage, index_path, num, ONE_HUNDRED_MILLION)
         print(cmd)
         os.system(cmd)
-        ret = throughput_analysis('dat_tmp_earth/figure_nbub-lf_throughput_raw_w_{}_ratio_{}_c_{}.dat'.format(core_for_cardinality, ratio_percentage, num))
+        ret = throughput_analysis('dat_tmp_earth/figure_cubit-lf_throughput_raw_w_{}_ratio_{}_c_{}.dat'.format(core_for_cardinality, ratio_percentage, num))
         print(ret)
         print('\n')
         f.write('{} {} \n'.format(num, ret))
     f.close()
 
-#nbub_lf latency, core
-def gen_figure_nbub_lf_latency_core(): # latency
-    print ('Figure nbub-lf_latency_core')
+#cubit_lf latency, core
+def gen_figure_cubit_lf_latency_core(): # latency
+    print ('Figure cubit-lf_latency_core')
     print ('-' * 10)
     core_number = [1, 2, 4, 8, 16, 24, 32]
-    f = open('dat/figure_nbub-lf_latency_core.dat','w')
+    f = open('dat/figure_cubit-lf_latency_core.dat','w')
     for num in core_number:
-        cmd = gen_cmd_nbub(num, 'nbub-lf', 'yes', 1000, ratio_percentage, index_path)
+        cmd = gen_cmd_cubit(num, 'cubit-lf', 'yes', 1000, ratio_percentage, index_path)
         print(cmd)
         os.system(cmd)
-        ret = latency_analysis('dat_tmp_earth/figure_nbub-lf_latency_raw_w_{}_ratio_{}.dat'.format(num, ratio_percentage))
+        ret = latency_analysis('dat_tmp_earth/figure_cubit-lf_latency_raw_w_{}_ratio_{}.dat'.format(num, ratio_percentage))
         print(ret)
         print('\n')
         for i in range(0,len(ret)):
             f.write('{} {} \n'.format(num, ret[i]))
     f.close()
 
-#nbub_lf latency, ratio
-def gen_figure_nbub_lf_latency_ratio():
-    print ('Figure nbub-lf_latency_ratio')
+#cubit_lf latency, ratio
+def gen_figure_cubit_lf_latency_ratio():
+    print ('Figure cubit-lf_latency_ratio')
     print ('-' * 10)
     ratio_number = [0.01, 0.02, 0.05, 0.1, 0.2]
-    f = open('dat/figure_nbub-lf_latency_ratio.dat','w')
+    f = open('dat/figure_cubit-lf_latency_ratio.dat','w')
     for num in ratio_number:
-        cmd = gen_cmd_nbub(16, 'nbub-lf', 'yes', 1000, num, index_path)
+        cmd = gen_cmd_cubit(16, 'cubit-lf', 'yes', 1000, num, index_path)
         print(cmd)
         os.system(cmd)
-        ret = latency_analysis('dat_tmp_earth/figure_nbub-lf_latency_raw_w_{}_ratio_{}.dat'.format(16, num))
+        ret = latency_analysis('dat_tmp_earth/figure_cubit-lf_latency_raw_w_{}_ratio_{}.dat'.format(16, num))
         print(ret)
         print('\n')
         for i in range(0,len(ret)):
             f.write('{} {} \n'.format(num, ret[i]))
     f.close()
 
-# nbub-lf latency, cardinality
-def gen_figure_nbub_lf_latency_cardinality(): 
-    print ('Figure nbub-lf_latency_cardinality')
+# cubit-lf latency, cardinality
+def gen_figure_cubit_lf_latency_cardinality(): 
+    print ('Figure cubit-lf_latency_cardinality')
     print ('-' * 10)
     cardinality_number = [16, 32, 64, 128, 256]
-    f = open('dat/figure_nbub-lf_latency_cardinality.dat','w')
+    f = open('dat/figure_cubit-lf_latency_cardinality.dat','w')
     for num in cardinality_number:
         index_path = "100M_{}".format(num)
-        cmd = gen_cmd_nbub_cardinality(core_for_cardinality, 'nbub-lf', 'yes', 1000, ratio_percentage, index_path, num, ONE_HUNDRED_MILLION)
+        cmd = gen_cmd_cubit_cardinality(core_for_cardinality, 'cubit-lf', 'yes', 1000, ratio_percentage, index_path, num, ONE_HUNDRED_MILLION)
         print(cmd)
         os.system(cmd)
-        ret = latency_analysis('dat_tmp_earth/figure_nbub-lf_latency_raw_w_{}_ratio_{}_c_{}.dat'.format(core_for_cardinality, ratio_percentage, num))
+        ret = latency_analysis('dat_tmp_earth/figure_cubit-lf_latency_raw_w_{}_ratio_{}_c_{}.dat'.format(core_for_cardinality, ratio_percentage, num))
         print(ret)
         print('\n')
         for i in range(0,len(ret)):
@@ -654,8 +654,8 @@ def gen_figure_nbub_lf_latency_cardinality():
 
 def cdf():
     cmd = "./build/nicolas -w 16 -a naive -m mix --number-of-queries 970 -r 30 -c 32 -i 100M_32/ -n 100000000 -v yes --fence-pointer no > dat_tmp_earth/figure_naive_latency_raw_w_32_ratio_0.03_c_32.dat"
-    cmd2 = "./build/nicolas -w 16 -a nbub-lk -m mix --number-of-queries 970 -r 30 -c 32 -i 100M_32/ -n 100000000 -v yes --fence-pointer yes --fence-length 100000 > dat_tmp_earth/figure_nbub-lk_latency_raw_w_32_ratio_0.03_c_32.dat"
-    cmd3 = "./build/nicolas -w 16 -a nbub-lf -m mix --number-of-queries 970 -r 30 -c 32 -i 100M_32/ -n 100000000 -v yes --fence-pointer yes --fence-length 100000 > dat_tmp_earth/figure_nbub-lf_latency_raw_w_32_ratio_0.03_c_32.dat"
+    cmd2 = "./build/nicolas -w 16 -a cubit-lk -m mix --number-of-queries 970 -r 30 -c 32 -i 100M_32/ -n 100000000 -v yes --fence-pointer yes --fence-length 100000 > dat_tmp_earth/figure_cubit-lk_latency_raw_w_32_ratio_0.03_c_32.dat"
+    cmd3 = "./build/nicolas -w 16 -a cubit-lf -m mix --number-of-queries 970 -r 30 -c 32 -i 100M_32/ -n 100000000 -v yes --fence-pointer yes --fence-length 100000 > dat_tmp_earth/figure_cubit-lf_latency_raw_w_32_ratio_0.03_c_32.dat"
     cmd4 = "./build/nicolas -w 16 -a ub -m mix --number-of-queries 970 -r 30 -c 32 -i 100M_32/ -n 100000000 -v yes --fence-pointer yes --fence-length 100000 > dat_tmp_earth/figure_ub_latency_raw_w_32_ratio_0.03_c_32.dat"
     cmd5 = "./build/nicolas -w 16 -a ucb -m mix --number-of-queries 970 -r 30 -c 32 -i 100M_32/ -n 100000000 -v yes --fence-pointer yes --fence-length 100000 > dat_tmp_earth/figure_ucb_latency_raw_w_32_ratio_0.03_c_32.dat"
     os.system(cmd)
@@ -689,21 +689,21 @@ def run():
     # gen_figure_ub_latency_ratio()
     # gen_figure_ub_latency_cardinality()
 
-    # #nbub-lk
-    gen_figure_nbub_lk_throughput_core()
-    # gen_figure_nbub_lk_throughput_ratio()
-    # gen_figure_nbub_lk_throughput_cardinality()
-#    gen_figure_nbub_lk_latency_core()
-    # gen_figure_nbub_lk_latency_ratio()
-    # gen_figure_nbub_lk_latency_cardinality()
+    # #cubit-lk
+    gen_figure_cubit_lk_throughput_core()
+    # gen_figure_cubit_lk_throughput_ratio()
+    # gen_figure_cubit_lk_throughput_cardinality()
+#    gen_figure_cubit_lk_latency_core()
+    # gen_figure_cubit_lk_latency_ratio()
+    # gen_figure_cubit_lk_latency_cardinality()
 
-    # #nbub_lf
-    gen_figure_nbub_lf_throughput_core()
-    # gen_figure_nbub_lf_throughput_ratio()
-    # gen_figure_nbub_lf_throughput_cardinality()
-#    gen_figure_nbub_lf_latency_core()
-    # gen_figure_nbub_lf_latency_ratio()
-    # gen_figure_nbub_lf_latency_cardinality()
+    # #cubit_lf
+    gen_figure_cubit_lf_throughput_core()
+    # gen_figure_cubit_lf_throughput_ratio()
+    # gen_figure_cubit_lf_throughput_cardinality()
+#    gen_figure_cubit_lf_latency_core()
+    # gen_figure_cubit_lf_latency_ratio()
+    # gen_figure_cubit_lf_latency_cardinality()
 
     #cdf
     #cdf()

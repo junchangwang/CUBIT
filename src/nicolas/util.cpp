@@ -7,8 +7,8 @@
 #include "ub/table.h"
 #include "ucb/table.h"
 #include "naive/table.h"
-#include "nbub/table_lf.h"
-#include "nbub/table_lk.h"
+#include "cubit/table_lf.h"
+#include "cubit/table_lk.h"
 
 #define N_MAX_WORKERS (256)
 #define HZ (2.0) //FIXME: only for the SkyLake server with Intel(R) Xeon(R) Gold 5117 CPU @ 2.00GHz.
@@ -59,7 +59,7 @@ po::variables_map get_options(const int argc, const char *argv[]) {
     boost::program_options::options_description desc("Allowed options");
     desc.add_options()
             /* Algorithm Configuration */
-            ("approach,a", po::value<string>()->default_value(std::string("ub")), "naive, ucb, ub, nbub-lk, nbub-lf")
+            ("approach,a", po::value<string>()->default_value(std::string("ub")), "naive, ucb, ub, cubit-lk, cubit-lf")
             ("mode,m", po::value<string>(), "build / query / test")
             ("encoding-scheme,e", po::value<string>()->default_value("EE"), "EE / RE / AE / IE")
             ("data-path,d", po::value<string>(), "data file path")
@@ -153,7 +153,7 @@ void init_config(Table_config *config, po::variables_map options) {
 
     // For segmented bitvectors
     config->encoded_word_len = 31;
-    if (options.count("rows-per-seg") && (config->approach == "nbub-lk" || config->approach == "nbub-lf"))
+    if (options.count("rows-per-seg") && (config->approach == "cubit-lk" || config->approach == "cubit-lf"))
         config->segmented_btv = true;
     else
         config->segmented_btv = false;

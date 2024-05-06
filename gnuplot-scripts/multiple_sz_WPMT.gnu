@@ -44,5 +44,5 @@ set ytics ("0" 0, "8" 8, "16" 16 ,"24" 24)
 
 set key top
 
-plot '../dat/figure_nbub-lf_latency_WPMT.dat' every 2    using ($2):($1) t "Query" with boxes fs solid 1.0 border rgb "black" lc rgb "black", \
-     '../dat/figure_nbub-lf_latency_WPMT.dat' every 2::1 using ($2):($1) t "UDI" with boxes fill pattern 7 border rgb "black" lc rgb "black" axes x1y2
+plot '../dat/figure_cubit-lf_latency_WPMT.dat' every 2    using ($2):($1) t "Query" with boxes fs solid 1.0 border rgb "black" lc rgb "black", \
+     '../dat/figure_cubit-lf_latency_WPMT.dat' every 2::1 using ($2):($1) t "UDI" with boxes fill pattern 7 border rgb "black" lc rgb "black" axes x1y2

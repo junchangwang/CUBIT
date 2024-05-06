@@ -52,7 +52,7 @@ def help_gen_data_and_index(N, C, index_path): # N for number_of_rows; C for car
 
 
 ###################################### cmd for Para #########################################
-def gen_cmd_nbub_Para(w, a, v, total, ratio, index_path, parallel):
+def gen_cmd_cubit_Para(w, a, v, total, ratio, index_path, parallel):
     cmd = './build/nicolas -w {} -a {} -m {} --number-of-queries {} -r {} -c {} -i {} -n {} -v {} --fence-pointer yes --fence-length 100000 --rows-per-seg {} --num-embarr-parallel {} --parallel-cnt {} > dat_tmp_Para/figure_{}_{}_raw_w_{}_ratio_{}_Para_{}.dat'.format(w, a, mode, int(total * (1 - ratio)), int(total * ratio), cardinality, index_path, number_of_rows, v, ROWS_PER_SEG, parallel, PARALLEL_CNT, a, 'latency' if (v == 'yes') else 'throughput',w, ratio, parallel)
     return cmd
 
@@ -105,18 +105,18 @@ def latency_analysis(filename):
     return ret
 
 
-def gen_figure_nbub_lf_latency_Para():
-    print ('Figure nbub-lf_latency_Para')
+def gen_figure_cubit_lf_latency_Para():
+    print ('Figure cubit-lf_latency_Para')
     print ('-' * 10)    
     ret = [[]]
     ret.clear()
     for num in parallel_num:
         temp_list = []
         temp_list.clear()
-        cmd = gen_cmd_nbub_Para(CORES, 'nbub-lk', 'yes', 1000, ratio_percentage, index_path, num)
+        cmd = gen_cmd_cubit_Para(CORES, 'cubit-lk', 'yes', 1000, ratio_percentage, index_path, num)
         print(cmd)
         os.system(cmd) 
-        res = latency_analysis('dat_tmp_Para/figure_nbub-lk_latency_raw_w_{}_ratio_{}_Para_{}.dat'.format(CORES, ratio_percentage, num))  
+        res = latency_analysis('dat_tmp_Para/figure_cubit-lk_latency_raw_w_{}_ratio_{}_Para_{}.dat'.format(CORES, ratio_percentage, num))  
         print(res)     
         print('\n')
         temp_list.append(res[0])
@@ -127,9 +127,9 @@ def gen_figure_nbub_lf_latency_Para():
 
 def run():
 
-    # #nbub_lf
-    f = open('dat/figure_nbub-lk_latency_Para.dat','w')
-    ret = gen_figure_nbub_lf_latency_Para()
+    # #cubit_lf
+    f = open('dat/figure_cubit-lk_latency_Para.dat','w')
+    ret = gen_figure_cubit_lf_latency_Para()
     f.write('{} 1\n'.format(ret[0][0]))
     f.write('{} 2\n'.format(ret[0][1]))
     f.write('{} 4\n'.format(ret[1][0]))

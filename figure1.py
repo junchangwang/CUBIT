@@ -40,14 +40,14 @@ def check(exp_name):
 #####################
 
 experiments_lookup_1= [ 
-                      'latency_output_nbub-lk',
+                      'latency_output_cubit-lk',
                       'latency_output_ub',
                       'latency_output_naive',
                       'latency_output_ucb'
                       ]
 
 experiments_lookup_2 = [ 
-                      'throughputput_nbub-lk',
+                      'throughputput_cubit-lk',
                       'throughputput_ub',
                       'throughputput_naive',
                       'throughputput_ucb'
@@ -56,20 +56,20 @@ experiments_lookup_2 = [
 # file_map
 # file_map_1 = {
 #     'latency_output_naive'   :   'dat_tmp/figure_naive_latency_raw_w_32_ratio_0.1_c_32.dat',
-#     'latency_output_nbub-lk'    :   'dat_tmp/figure_nbub-lk_latency_raw_w_32_ratio_0.1_c_32.dat',
+#     'latency_output_cubit-lk'    :   'dat_tmp/figure_cubit-lk_latency_raw_w_32_ratio_0.1_c_32.dat',
 #     'latency_output_ub'      :   'dat_tmp/figure_ub_latency_raw_w_32_ratio_0.1_c_32.dat',
 #     'latency_output_ucb'     :   'dat_tmp/figure_ucb_latency_raw_w_32_ratio_0.1_c_32.dat'
 # }
 file_map_1 = {
      'latency_output_naive'   :   'dat_tmp/figure_naive_latency_raw_w_16_ratio_0.1_c_32.dat',
-     'latency_output_nbub-lk'    :   'dat_tmp/figure_nbub-lk_latency_raw_w_16_ratio_0.1_c_32.dat',
+     'latency_output_cubit-lk'    :   'dat_tmp/figure_cubit-lk_latency_raw_w_16_ratio_0.1_c_32.dat',
      'latency_output_ub'      :   'dat_tmp/figure_ub_latency_raw_w_16_ratio_0.1_c_32.dat',
      'latency_output_ucb'     :   'dat_tmp/figure_ucb_latency_raw_w_16_ratio_0.1_c_32.dat'
 }
 
 file_map_2 = {
-    # 'throughput_nbub-lf'         :    'dat/figure_nbub-lf_throughput_core.dat',
-     'throughputput_nbub-lk'     :    'dat/figure_nbub-lk_throughput_core.dat',
+    # 'throughput_cubit-lf'         :    'dat/figure_cubit-lf_throughput_core.dat',
+     'throughputput_cubit-lk'     :    'dat/figure_cubit-lk_throughput_core.dat',
      'throughputput_ub'              :    'dat/figure_ub_throughput_core.dat',
      'throughputput_ucb'            :    'dat/figure_ucb_throughput_core.dat',
      'throughputput_naive'         :    'dat/figure_naive_throughput_core.dat'
@@ -78,13 +78,13 @@ file_map_2 = {
 # name_map
 nm_map_1 = {
     'latency_output_naive'   :   'In-place',
-    'latency_output_nbub-lk'    :   'Our approach',
+    'latency_output_cubit-lk'    :   'Our approach',
     'latency_output_ub'      :   'UpBit',
     'latency_output_ucb'     :   'UCB'
 }
 
 nm_map_2 = {
-    'throughputput_nbub-lk'     :    'Our approach',
+    'throughputput_cubit-lk'     :    'Our approach',
     'throughputput_ub'              :    'UpBit',
     'throughputput_ucb'            :    'UCB',
     'throughputput_naive'         :    'In-place'
@@ -94,14 +94,14 @@ nm_map_2 = {
 # linestyle_map
 ls_map_1 = {
     'latency_output_naive'   :   (0, (3, 1, 1, 1, 1, 1)),
-    'latency_output_nbub-lk'   :   '-',
+    'latency_output_cubit-lk'   :   '-',
     'latency_output_ub'        :   '-.',
     'latency_output_ucb'         :   'dashed',  
 }
 
 ls_map_2 ={
     'throughputput_naive'         :    (0, (3, 1, 1, 1, 1, 1)),
-    'throughputput_nbub-lk'     :    '-',
+    'throughputput_cubit-lk'     :    '-',
     'throughputput_ub'              :    '-.',
     'throughputput_ucb'         :   'dashed',  
 }
@@ -109,20 +109,20 @@ ls_map_2 ={
 # color map
 co_map_1 = {
     'latency_output_naive'   :   'black',
-    'latency_output_nbub-lk'   :   'b',
+    'latency_output_cubit-lk'   :   'b',
     'latency_output_ub'        :   'g',
     'latency_output_ucb'         :   'brown',  
 }
 
 co_map_2 = {
-    'throughputput_nbub-lk'     :    'blue',
+    'throughputput_cubit-lk'     :    'blue',
     'throughputput_ub'              :    'green',
     'throughputput_ucb'            :    'brown', 
     'throughputput_naive'         :    'black',
 }
 
 line_marker = {
-    'throughputput_nbub-lk'     :    'o',
+    'throughputput_cubit-lk'     :    'o',
     'throughputput_ub'          :    'v',
     'throughputput_ucb'         :    '^',
     'throughputput_naive'       :    'd',

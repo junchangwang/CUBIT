@@ -7,13 +7,13 @@
 #include "nicolas/util.h"
 #include "nicolas/segBtv.h"
 
-using namespace nbub;
+using namespace cubit;
 using namespace std;
 
 // NOTE: DBx1000 selects 1 as the starting value of timestamp, so we stick to this.
 #define TIMESTAMP_INIT_VAL (1UL)
 
-Nbub::Nbub(Table_config *config) : 
+Cubit::Cubit(Table_config *config) : 
     BaseTable(config), g_timestamp(TIMESTAMP_INIT_VAL), g_number_of_rows(config->n_rows)
 {
     autoCommit = config->autoCommit;
@@ -64,7 +64,7 @@ Nbub::Nbub(Table_config *config) :
 
     
     for (int i = 0; i < n_threads; i++) {
-        threads[i] = thread(&Nbub::_read_btv, this, begin[i], begin[i + 1], trans_dummy, config);        
+        threads[i] = thread(&Cubit::_read_btv, this, begin[i], begin[i + 1], trans_dummy, config);        
     } 
     for (int t = 0; t < n_threads; t++) {
         threads[t].join();
@@ -100,7 +100,7 @@ Nbub::Nbub(Table_config *config) :
         << " ==="<< endl;
 }
 
-void Nbub::_read_btv(int begin, int end, TransDesc* trans_dummy, Table_config *config) 
+void Cubit::_read_btv(int begin, int end, TransDesc* trans_dummy, Table_config *config) 
 {
     for (int i = begin; i < end; i++) {
         bitmaps[i] = new Bitmap{};
@@ -142,7 +142,7 @@ void Nbub::_read_btv(int begin, int end, TransDesc* trans_dummy, Table_config *c
  *       Transaction Semantics       *
  ************************************/
 
-TransDesc * Nbub::trans_begin(int tid, uint64_t db_timestamp_t)
+TransDesc * Cubit::trans_begin(int tid, uint64_t db_timestamp_t)
 {
     ThreadInfo *th = &g_ths_info[tid];
 
@@ -200,7 +200,7 @@ TransDesc * Nbub::trans_begin(int tid, uint64_t db_timestamp_t)
  *         Buffer Management         *
  ************************************/
 
-TransDesc * Nbub::allocate_trans() 
+TransDesc * Cubit::allocate_trans() 
 {
     uint64_t pos = __atomic_fetch_add(&cnt_trans_used, 1, MM_CST);
     assert(pos < n_trans_pool);
@@ -208,7 +208,7 @@ TransDesc * Nbub::allocate_trans()
     return &trans_pool[pos];
 }
 
-int Nbub::delete_trans(int tid, TransDesc *trans) 
+int Cubit::delete_trans(int tid, TransDesc *trans) 
 {
     // FIXME: No recycle yet
     //
@@ -216,7 +216,7 @@ int Nbub::delete_trans(int tid, TransDesc *trans)
 }
 
 /* Get RUBs in between (tsp_begin, tsp_end] */
-TransDesc * Nbub::get_rubs_on_btv(uint64_t tsp_begin, uint64_t tsp_end, 
+TransDesc * Cubit::get_rubs_on_btv(uint64_t tsp_begin, uint64_t tsp_end, 
                         TransDesc *trans, uint32_t val, map<uint64_t, RUB> &rubs)
 {
     assert(tsp_begin < tsp_end);
@@ -251,7 +251,7 @@ TransDesc * Nbub::get_rubs_on_btv(uint64_t tsp_begin, uint64_t tsp_end,
 }
 
 /* Get the last RUB in between (tsp_begin, tsp_end] of the specified row. */
-TransDesc * Nbub::get_rub_on_row(uint64_t tsp_begin, uint64_t tsp_end, 
+TransDesc * Cubit::get_rub_on_row(uint64_t tsp_begin, uint64_t tsp_end, 
                         TransDesc *trans, uint64_t row_id, RUB &rub, uint64_t &rub_tsp)
 {
     assert(tsp_begin < tsp_end);
@@ -288,7 +288,7 @@ TransDesc * Nbub::get_rub_on_row(uint64_t tsp_begin, uint64_t tsp_end,
 // Side effect: Assign tail to trans->l_end_trans if there is no conflict,
 //          such that the next invocation of this function on the same trans can be accelerated.
 //          No concurrency issue because this function is invoked sequentially.
-int Nbub::check_conflicts(TransDesc *trans, TransDesc *tail)
+int Cubit::check_conflicts(TransDesc *trans, TransDesc *tail)
 {
     TransDesc *end_trans_t = __atomic_load_n(&trans->l_end_trans, MM_ACQUIRE);
     TransDesc *end_trans_t_2 = __atomic_load_n(&end_trans_t->next, MM_ACQUIRE);
@@ -318,7 +318,7 @@ int Nbub::check_conflicts(TransDesc *trans, TransDesc *tail)
     return 0;
 }
 
-int Nbub::pos2RE(int start, int end, RLE_map &pos_re)
+int Cubit::pos2RE(int start, int end, RLE_map &pos_re)
 {
     for (int i = start; i <= end; i++)
         pos_re[i] = 1;
@@ -326,7 +326,7 @@ int Nbub::pos2RE(int start, int end, RLE_map &pos_re)
     return 0;
 }
 
-int Nbub::pos2AE(int start, int end, RLE_map &pos_AE)
+int Cubit::pos2AE(int start, int end, RLE_map &pos_AE)
 {
     RLE_map pos_RE{};
     RLE_map pos_Anchors{};
@@ -380,7 +380,7 @@ int Nbub::pos2AE(int start, int end, RLE_map &pos_AE)
  *       Index manipulation          *
  ************************************/
 
-int Nbub::append(int tid, int val, uint64_t row_id) 
+int Cubit::append(int tid, int val, uint64_t row_id) 
 {
     ThreadInfo *th = &g_ths_info[tid];
     assert(val < num_bitmaps);
@@ -420,7 +420,7 @@ int Nbub::append(int tid, int val, uint64_t row_id)
     return 0;
 }
 
-int Nbub::update(int tid, uint64_t row_id, int to_val)
+int Cubit::update(int tid, uint64_t row_id, int to_val)
 {
     ThreadInfo *th = &g_ths_info[tid];
     assert(to_val < num_bitmaps);
@@ -494,7 +494,7 @@ int Nbub::update(int tid, uint64_t row_id, int to_val)
     return 0;
 }
 
-int Nbub::remove(int tid, uint64_t row_id)
+int Cubit::remove(int tid, uint64_t row_id)
 {
     struct ThreadInfo *th = &g_ths_info[tid];
     assert(row_id < g_number_of_rows);
@@ -549,7 +549,7 @@ int Nbub::remove(int tid, uint64_t row_id)
     return 0;
 }
 
-int Nbub::evaluate_Curve(int tid, uint32_t val)
+int Cubit::evaluate_Curve(int tid, uint32_t val)
 {
     ThreadInfo *th = &g_ths_info[tid];
     assert(val < num_bitmaps);
@@ -740,7 +740,7 @@ int Nbub::evaluate_Curve(int tid, uint32_t val)
     return cnt;
 }
 
-int Nbub::evaluate_common(int tid, uint32_t val)
+int Cubit::evaluate_common(int tid, uint32_t val)
 {   
     ThreadInfo *th = &g_ths_info[tid];
     assert(val < num_bitmaps);
@@ -925,7 +925,7 @@ int Nbub::evaluate_common(int tid, uint32_t val)
     return cnt;
 }
 
-int Nbub::evaluate(int tid, uint32_t val)
+int Cubit::evaluate(int tid, uint32_t val)
 {
     if (config->encoding == EE || config->encoding == RE) 
     {
@@ -944,7 +944,7 @@ int Nbub::evaluate(int tid, uint32_t val)
     }
 }
 
-void Nbub::_get_value(uint64_t row_id, int begin, int range, uint64_t l_timestamp,
+void Cubit::_get_value(uint64_t row_id, int begin, int range, uint64_t l_timestamp,
         bool *flag, int *result, RUB *rub, uint64_t *rub_tsp)
 {
     int ret = -1;
@@ -1068,7 +1068,7 @@ out:
     __atomic_store_n(result, ret, MM_RELEASE);
 }
 
-int Nbub::get_value_rcu(uint64_t row_id, uint64_t l_timestamp, RUB &last_rub) 
+int Cubit::get_value_rcu(uint64_t row_id, uint64_t l_timestamp, RUB &last_rub) 
 {
     bool flag = false;
     int n_threads = (config->nThreads_for_getval > num_bitmaps) ? num_bitmaps : config->nThreads_for_getval;
@@ -1090,7 +1090,7 @@ int Nbub::get_value_rcu(uint64_t row_id, uint64_t l_timestamp, RUB &last_rub)
         if ((i == (n_threads-1)) && (num_bitmaps > n_threads))
             range += (num_bitmaps % n_threads);
 
-        getval_threads[i] = thread(&Nbub::_get_value, this, row_id, begin, range, l_timestamp,
+        getval_threads[i] = thread(&Cubit::_get_value, this, row_id, begin, range, l_timestamp,
                                 &flag, &local_results[i], &last_rub_t[i], &last_rub_tsp_t[i]);
     }
 
@@ -1133,7 +1133,7 @@ int Nbub::get_value_rcu(uint64_t row_id, uint64_t l_timestamp, RUB &last_rub)
     return ret;
 }
 
-void Nbub::printMemory() {
+void Cubit::printMemory() {
     uint64_t bitmap = 0, updateable_bitmap = 0, fence_pointers = 0;
     for (int i = 0; i < num_bitmaps; ++i) {
         bitmap += bitmaps[i]->btv->getSerialSize();
@@ -1143,7 +1143,7 @@ void Nbub::printMemory() {
     std::cout << "M BM " << bitmap << std::endl;
 }
 
-void Nbub::printMemorySeg() {
+void Cubit::printMemorySeg() {
     uint64_t bitmap = 0, updateable_bitmap = 0, fence_pointers = 0;
     for (int i = 0; i < num_bitmaps; ++i) {
         for (const auto & [id_t, seg_t] : bitmaps[i]->seg_btv->seg_table) {
@@ -1155,7 +1155,7 @@ void Nbub::printMemorySeg() {
     std::cout << "Seg M BM " << bitmap << std::endl;
 }
 
-void Nbub::printUncompMemory() {
+void Cubit::printUncompMemory() {
     uint64_t bitmap = 0, fence_pointers = 0;
     for (int i = 0; i < num_bitmaps; ++i) {
         bitmaps[i]->btv->appendActive();
@@ -1168,7 +1168,7 @@ void Nbub::printUncompMemory() {
     std::cout << "UncM BM " << bitmap << std::endl;
 }
 
-void Nbub::printUncompMemorySeg() {
+void Cubit::printUncompMemorySeg() {
     uint64_t bitmap = 0, fence_pointers = 0;
     for (int i = 0; i < num_bitmaps; ++i) {
         for (const auto & [id_t, seg_t] : bitmaps[i]->seg_btv->seg_table) {
@@ -1183,7 +1183,7 @@ void Nbub::printUncompMemorySeg() {
     std::cout << "Seg UncM BM " << bitmap << std::endl;
 }
 
-int Nbub::range(uint32_t start, uint32_t range) {
+int Cubit::range(uint32_t start, uint32_t range) {
     ibis::bitvector res;
     res.set(0, total_rows);
     /*
@@ -1267,7 +1267,7 @@ int Nbub::range(uint32_t start, uint32_t range) {
 // This is a helper function
 // which allows external applications (e.g., DBx1000 and MonetDB) to initialize the bitmap index.
 // This function shouldn't be used as usual.
-int Nbub::__init_append(int tid, int rowID, int val) 
+int Cubit::__init_append(int tid, int rowID, int val) 
 {
     static mutex g_lock;
 
@@ -1301,7 +1301,7 @@ int Nbub::__init_append(int tid, int rowID, int val)
 } 
 
 
-// int Nbub::evaluate_common(int tid, uint32_t val)
+// int Cubit::evaluate_common(int tid, uint32_t val)
 // {   
 //     ThreadInfo *th = &g_ths_info[tid];
 //     assert(val < cardinality);

@@ -32,5 +32,5 @@ set ytics nomirror
 
 set key reverse Left top
 
-plot '../dat/figure_nbub-lf_latency_WPMT.dat' every 2    using ($2):($1) t "Read" with boxes fs solid 1.0 border rgb "black" lc rgb "black", \
-     '../dat/figure_nbub-lf_latency_WPMT.dat' every 2::1 using ($2):($1) t "Update" with boxes fill pattern 7 border rgb "black" lc rgb "black" axes x1y2
+plot '../dat/figure_cubit-lf_latency_WPMT.dat' every 2    using ($2):($1) t "Read" with boxes fs solid 1.0 border rgb "black" lc rgb "black", \
+     '../dat/figure_cubit-lf_latency_WPMT.dat' every 2::1 using ($2):($1) t "Update" with boxes fill pattern 7 border rgb "black" lc rgb "black" axes x1y2

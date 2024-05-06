@@ -54,7 +54,7 @@ def help_gen_data_and_index(N, C, index_path): # N for number_of_rows; C for car
 
 
 ###################################### cmd for Seg #########################################
-def gen_cmd_nbub_Seg(w, a, v, total, ratio, index_path, segs):
+def gen_cmd_cubit_Seg(w, a, v, total, ratio, index_path, segs):
     if segs == 1:
         cmd = './build/nicolas -w {} -a {} -m {} --number-of-queries {} -r {} -c {} -i {} -n {} -v {} --fence-pointer yes --fence-length 100000 --rows-per-seg {} --num-embarr-parallel {} --parallel-cnt {} > dat_tmp_Seg/figure_{}_{}_raw_w_{}_ratio_{}_Segs_{}.dat'.format(w, a, mode, int(total * (1 - ratio)), int(total * ratio), cardinality, index_path, number_of_rows, v, int(number_of_rows * 0.95), NUM_EMBARR_PARALLEL, PARALLEL_CNT, a, 'latency' if (v == 'yes') else 'throughput',w, ratio, segs)
         return cmd
@@ -113,33 +113,33 @@ def latency_analysis(filename):
 
 ############################################## NBUB-lk ##########################################################
 #MT
-# def gen_figure_nbub_lk_latency_MT():
-#     print ('Figure nbub-lk_latency_MT')
+# def gen_figure_cubit_lk_latency_MT():
+#     print ('Figure cubit-lk_latency_MT')
 #     print ('-' * 10)    
-#     f = open('dat/figure_nbub-lk_latency_MT.dat','w')
+#     f = open('dat/figure_cubit-lk_latency_MT.dat','w')
 #     for num in merge_threshold_num:
-#         cmd = gen_cmd_others_MT(core_for_MT, 'nbub-lk', 'yes', 1000, ratio_percentage, index_path, num)
+#         cmd = gen_cmd_others_MT(core_for_MT, 'cubit-lk', 'yes', 1000, ratio_percentage, index_path, num)
 #         print(cmd)
 #         os.system(cmd) 
-#         ret = latency_analysis('dat_tmp_MT/figure_nbub-lk_latency_raw_w_{}_ratio_{}_MT_{}.dat'.format(core_for_MT, ratio_percentage, num))  
+#         ret = latency_analysis('dat_tmp_MT/figure_cubit-lk_latency_raw_w_{}_ratio_{}_MT_{}.dat'.format(core_for_MT, ratio_percentage, num))  
 #         print(ret)     
 #         print('\n')
 #         # output for gnuplot
 #     f.close()
 ############################################## NBUB_LF ##########################################################
 #MT
-def gen_figure_nbub_lf_latency_Seg():
-    print ('Figure nbub-lf_latency_Seg')
+def gen_figure_cubit_lf_latency_Seg():
+    print ('Figure cubit-lf_latency_Seg')
     print ('-' * 10)    
     ret = [[]]
     ret.clear()
     for num in seg_num:
         temp_list = []
         temp_list.clear()
-        cmd = gen_cmd_nbub_Seg(core_for_Seg, 'nbub-lk', 'yes', 1000, ratio_percentage, index_path, num)
+        cmd = gen_cmd_cubit_Seg(core_for_Seg, 'cubit-lk', 'yes', 1000, ratio_percentage, index_path, num)
         print(cmd)
         os.system(cmd) 
-        res = latency_analysis('dat_tmp_Seg/figure_nbub-lk_latency_raw_w_{}_ratio_{}_Segs_{}.dat'.format(core_for_Seg, ratio_percentage, num))  
+        res = latency_analysis('dat_tmp_Seg/figure_cubit-lk_latency_raw_w_{}_ratio_{}_Segs_{}.dat'.format(core_for_Seg, ratio_percentage, num))  
         print(res)     
         print('\n')
         temp_list.append(res[0])
@@ -150,9 +150,9 @@ def gen_figure_nbub_lf_latency_Seg():
 
 def run():
 
-    # #nbub_lf
-    f = open('dat/figure_nbub-lk_latency_Seg.dat','w')
-    ret = gen_figure_nbub_lf_latency_Seg()
+    # #cubit_lf
+    f = open('dat/figure_cubit-lk_latency_Seg.dat','w')
+    ret = gen_figure_cubit_lf_latency_Seg()
     f.write('{} 1\n'.format(ret[0][0]))
     f.write('{} 2\n'.format(ret[0][1]))
     f.write('{} 4\n'.format(ret[1][0]))

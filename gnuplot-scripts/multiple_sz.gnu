@@ -13,7 +13,7 @@ set terminal png font 'Linux Libertine O,15' size 500, 600
 set output "../graphs/multiple/Figure_multiple_throughput_core.png"
 set key font ",25" reverse Left top left
 
-plot  "../dat/figure_nbub-lk_throughput_core.dat" title "CUBIT" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+plot  "../dat/figure_cubit-lk_throughput_core.dat" title "CUBIT" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
       "../dat/figure_ub_throughput_core.dat" title "UpBit^{+}" lc rgb "sea-green" lw 8 ps 1.5 pt 10 dt 9 with linespoints,\
       "../dat/figure_naive_throughput_core.dat" title "In-place^{+}" lc rgb "black" lw 8 ps 1.5 pt 12 dt 5 with linespoints,\
       "../dat/figure_ucb_throughput_core.dat" title "UCB^{+}" lc rgb "brown" lw 8 ps 1.5 pt 8 dt "-" with linespoints
@@ -40,7 +40,7 @@ set key horizontal font ",25" reverse Left top
 set xtics offset 0,0.2,0 font ',29' ("0" 0, "" 0.01, "2%%" 0.02, "5%%" 0.05, "10%%" 0.1, "20%%" 0.2) 
 set ytics offset 0.5,0,0 font ',29' ("0" 0, "500" 500, "1000" 1000, "1500" 1500, "2000" 2000) 
 
-plot "../dat/figure_nbub-lk_throughput_ratio.dat" title "CUBIT" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+plot "../dat/figure_cubit-lk_throughput_ratio.dat" title "CUBIT" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
     "../dat/figure_ub_throughput_ratio.dat" title "UpBit^{+}" lc rgb "sea-green" lw 8 ps 1.5 pt 10 dt 9 with linespoints,\
     "../dat/figure_naive_throughput_ratio.dat" title "In-place^{+}" lc rgb "black" lw 8 ps 1.5 pt 12 dt 5 with linespoints,\
     "../dat/figure_ucb_throughput_ratio.dat" title "UCB^{+}" lc rgb "brown" lw 8 ps 1.5 pt 8 dt "-" with linespoints
@@ -70,7 +70,7 @@ set key font ",25" reverse Left top left
 set xtics offset 0,0.2,0 font ',29' #("1" 1, "2" 2 1, "4" 4, "8" 8, "16" 16, "24" 24, "32" 32) 
 set ytics offset 0.5,0,0 font ',29' ("0" 0,"50" 50, "100" 100, "150" 150, "200" 200, "250" 250) 
 
-plot  "../dat/figure_nbub-lk_latency_core.dat" every 5::0::30 title "CUBIT" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+plot  "../dat/figure_cubit-lk_latency_core.dat" every 5::0::30 title "CUBIT" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
       "../dat/figure_ub_latency_core.dat" every 5::0::30 title "UpBit^{+}" lc rgb "sea-green" lw 8 ps 1.5 pt 10 dt 9 with linespoints,\
       "../dat/figure_naive_latency_core.dat" every 5::0::30 title "In-place^{+}" lc rgb "black" lw 8 ps 1.5 pt 12 dt 5 with linespoints,\
       "../dat/figure_ucb_latency_core.dat" every 5::0::30 title "UCB^{+}" lc rgb "brown" lw 8 ps 1.5 pt 8 dt "-" with linespoints
@@ -100,7 +100,7 @@ set xtics offset 0,0.2,0 font ',29' #("1" 1, "2" 2 1, "4" 4, "8" 8, "16" 16, "24
 set ytics offset 0.5,0,0 font ',29' #("0" 0,"500" 500, "1000" 1000, "1500" 1500) 
 
 
-plot  "../dat/figure_nbub-lk_latency_core.dat" every 5::1::31 title "CUBIT" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+plot  "../dat/figure_cubit-lk_latency_core.dat" every 5::1::31 title "CUBIT" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
       "../dat/figure_ub_latency_core.dat" every 5::1::31 title "UpBit^{+}" lc rgb "sea-green" lw 8 ps 1.5 pt 10 dt 9 with linespoints,\
       "../dat/figure_naive_latency_core.dat" every 5::1::31 title "In-place^{+}" lc rgb "black" lw 8 ps 1.5 pt 12 dt 5 with linespoints,\
       "../dat/figure_ucb_latency_core.dat" every 5::1::31 title "UCB^{+}" lc rgb "brown" lw 8 ps 1.5 pt 8 dt "-" with linespoints
@@ -131,7 +131,7 @@ set xtics offset 0,0.2,0 font ',29' #("1" 1, "2" 2 1, "4" 4, "8" 8, "16" 16, "24
 set ytics offset 0.5,0,0 font ',29'  
 
 
-plot  "../dat/figure_nbub-lk_latency_core.dat" every 5::2::32 title "CUBIT" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+plot  "../dat/figure_cubit-lk_latency_core.dat" every 5::2::32 title "CUBIT" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
       "../dat/figure_ub_latency_core.dat" every 5::2::32 title "UpBit^{+}" lc rgb "sea-green" lw 8 ps 1.5 pt 10 dt 9 with linespoints,\
       "../dat/figure_naive_latency_core.dat" every 5::2::32 title "In-place^{+}" lc rgb "black" lw 8 ps 1.5 pt 12 dt 5 with linespoints,\
       "../dat/figure_ucb_latency_core.dat" every 5::2::32 title "UCB^{+}" lc rgb "brown" lw 8 ps 1.5 pt 8 dt "-" with linespoints
@@ -159,7 +159,7 @@ set xtics offset 0,0.2,0 font ',29' #("1" 1, "2" 2 1, "4" 4, "8" 8, "16" 16, "24
 set ytics offset 0.5,0,0 font ',29' ("0" 0, "500" 500, "1000" 1000, "1500" 1500)
 
 
-plot  "../dat/figure_nbub-lk_latency_core.dat" every 5::3::33 title "CUBIT" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+plot  "../dat/figure_cubit-lk_latency_core.dat" every 5::3::33 title "CUBIT" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
       "../dat/figure_ub_latency_core.dat" every 5::3::33 title "UpBit^{+}" lc rgb "sea-green" lw 8 ps 1.5 pt 10 dt 9 with linespoints,\
       "../dat/figure_naive_latency_core.dat" every 5::3::33 title "In-place^{+}" lc rgb "black" lw 8 ps 1.5 pt 12 dt 5 with linespoints,\
       "../dat/figure_ucb_latency_core.dat" every 5::3::33 title "UCB^{+}" lc rgb "brown" lw 8 ps 1.5 pt 8 dt "-" with linespoints
@@ -184,7 +184,7 @@ set xtics offset 0,0.2,0 font ',29' #("1" 1, "2" 2 1, "4" 4, "8" 8, "16" 16, "24
 set ytics offset 0.5,0,0 font ',29' ("0" 0, "500" 500, "1000" 1000, "1500" 1500) 
 
 
-plot  "../dat/figure_nbub-lk_latency_core.dat" every 5::4::34 title "CUBIT" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+plot  "../dat/figure_cubit-lk_latency_core.dat" every 5::4::34 title "CUBIT" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
       "../dat/figure_ub_latency_core.dat" every 5::4::34 title "UpBit^{+}" lc rgb "sea-green" lw 8 ps 1.5 pt 10 dt 9 with linespoints,\
       "../dat/figure_naive_latency_core.dat" every 5::4::34 title "In-place^{+}" lc rgb "black" lw 8 ps 1.5 pt 12 dt 5 with linespoints,\
       "../dat/figure_ucb_latency_core.dat" every 5::4::34 title "UCB^{+}" lc rgb "brown" lw 8 ps 1.5 pt 8 dt "-" with linespoints
@@ -209,7 +209,7 @@ set xtics offset 0,0.2,0 font ',29' ("0" 0, "" 0.01, "2%%" 0.02, "5%%" 0.05, "10
 set ytics offset 0.5,0,0 font ',29' ("0" 0,"50" 50, "100" 100, "150" 150, "200" 200, "250" 250) 
 
 
-plot  "../dat/figure_nbub-lk_latency_ratio.dat" every 5::0::30 title "CUBIT" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+plot  "../dat/figure_cubit-lk_latency_ratio.dat" every 5::0::30 title "CUBIT" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
       "../dat/figure_ub_latency_ratio.dat" every 5::0::30 title "UpBit^{+}" lc rgb "sea-green" lw 8 ps 1.5 pt 10 dt 9 with linespoints,\
       "../dat/figure_naive_latency_ratio.dat" every 5::0::30 title "In-place^{+}" lc rgb "black" lw 8 ps 1.5 pt 12 dt 5 with linespoints,\
       "../dat/figure_ucb_latency_ratio.dat" every 5::0::30 title "UCB^{+}" lc rgb "brown" lw 8 ps 1.5 pt 8 dt "-" with linespoints
@@ -238,7 +238,7 @@ set xtics offset 0,0.2,0 font ',29' ("0" 0, "0.05" 0.05, "0.1" 0.1, "0.15" 0.15,
 set ytics offset 0.5,0,0 font ',29' ("0" 0,"800" 800, "1600" 1600, "2400" 2400) 
 
 
-plot  "../dat/figure_nbub-lk_latency_ratio.dat" every 5::1::31 title "CUBIT" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+plot  "../dat/figure_cubit-lk_latency_ratio.dat" every 5::1::31 title "CUBIT" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
       "../dat/figure_ub_latency_ratio.dat" every 5::1::31 title "UpBit^{+}" lc rgb "sea-green" lw 8 ps 1.5 pt 10 dt 9 with linespoints,\
       "../dat/figure_naive_latency_ratio.dat" every 5::1::31 title "In-place^{+}" lc rgb "black" lw 8 ps 1.5 pt 12 dt 5 with linespoints,\
       "../dat/figure_ucb_latency_ratio.dat" every 5::1::31 title "UCB^{+}" lc rgb "brown" lw 8 ps 1.5 pt 8 dt "-" with linespoints
@@ -262,7 +262,7 @@ set xtics offset 0,0.2,0 font ',29' ("0" 0, "0.05" 0.05, "0.1" 0.1, "0.15" 0.15,
 set ytics offset 0.5,0,0 font ',29' #("0" 0,"200" 200, "400" 400, "600" 600) 
 
 
-plot  "../dat/figure_nbub-lk_latency_ratio.dat" every 5::2::32 title "CUBIT" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+plot  "../dat/figure_cubit-lk_latency_ratio.dat" every 5::2::32 title "CUBIT" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
       "../dat/figure_ub_latency_ratio.dat" every 5::2::32 title "UpBit^{+}" lc rgb "sea-green" lw 8 ps 1.5 pt 10 dt 9 with linespoints,\
       "../dat/figure_naive_latency_ratio.dat" every 5::2::32 title "In-place^{+}" lc rgb "black" lw 8 ps 1.5 pt 12 dt 5 with linespoints,\
       "../dat/figure_ucb_latency_ratio.dat" every 5::2::32 title "UCB^{+}" lc rgb "brown" lw 8 ps 1.5 pt 8 dt "-" with linespoints
@@ -286,7 +286,7 @@ set xtics offset 0,0.2,0 font ',29' ("0" 0, "0.05" 0.05, "0.1" 0.1, "0.15" 0.15,
 set ytics offset 0.5,0,0 font ',29' #("0" 0,"200" 200, "400" 400, "600" 600)  
 
 
-plot  "../dat/figure_nbub-lk_latency_ratio.dat" every 5::3::33 title "CUBIT" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+plot  "../dat/figure_cubit-lk_latency_ratio.dat" every 5::3::33 title "CUBIT" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
       "../dat/figure_ub_latency_ratio.dat" every 5::3::33 title "UpBit^{+}" lc rgb "sea-green" lw 8 ps 1.5 pt 10 dt 9 with linespoints,\
       "../dat/figure_naive_latency_ratio.dat" every 5::3::33 title "In-place^{+}" lc rgb "black" lw 8 ps 1.5 pt 12 dt 5 with linespoints,\
       "../dat/figure_ucb_latency_ratio.dat" every 5::3::33 title "UCB^{+}" lc rgb "brown" lw 8 ps 1.5 pt 8 dt "-" with linespoints
@@ -310,7 +310,7 @@ set xtics offset 0,0.2,0 font ',29' ("0" 0, "0.05" 0.05, "0.1" 0.1, "0.15" 0.15,
 set ytics offset 0.5,0,0 font ',29' #("0" 0,"200" 200, "400" 400, "600" 600) 
 
 
-plot  "../dat/figure_nbub-lk_latency_ratio.dat" every 5::4::34 title "CUBIT" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+plot  "../dat/figure_cubit-lk_latency_ratio.dat" every 5::4::34 title "CUBIT" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
       "../dat/figure_ub_latency_ratio.dat" every 5::4::34 title "UpBit^{+}" lc rgb "sea-green" lw 8 ps 1.5 pt 10 dt 9 with linespoints,\
       "../dat/figure_naive_latency_ratio.dat" every 5::4::34 title "In-place^{+}" lc rgb "black" lw 8 ps 1.5 pt 12 dt 5 with linespoints,\
       "../dat/figure_ucb_latency_ratio.dat" every 5::4::34 title "UCB^{+}" lc rgb "brown" lw 8 ps 1.5 pt 8 dt "-" with linespoints
@@ -340,7 +340,7 @@ set ytics offset 0.5,0,0 font ',29' ("0" 0, "2000" 2000, "4000" 4000, "6000" 600
 
 set label 2 "{/:Bold (a)}" at 472, 7500 font 'Linux Libertine O,29'
 
-plot  "../dat/figure_nbub-lk_throughput_cardinality.dat" title "CUBIT" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+plot  "../dat/figure_cubit-lk_throughput_cardinality.dat" title "CUBIT" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
       "../dat/figure_ub_throughput_cardinality.dat" title "UpBit^{+}" lc rgb "sea-green" lw 8 ps 1.5 pt 10 dt 9 with linespoints,\
       "../dat/figure_naive_throughput_cardinality.dat" title "In-place^{+}" lc rgb "black" lw 8 ps 1.5 pt 12 dt 5 with linespoints,\
       "../dat/figure_ucb_throughput_cardinality.dat" title "UCB^{+}" lc rgb "brown" lw 8 ps 1.5 pt 8 dt "-" with linespoints
@@ -369,7 +369,7 @@ set ytics offset 0.5,0,0 font ',29' ("0" 0, "100" 100, "200" 200, "300" 300)
 
 set label 2 "{/:Bold (b)}" at 118, 270 font 'Linux Libertine O,29'
 
-plot  "../dat/figure_nbub-lk_latency_cardinality.dat" every 5::0::30 title "CUBIT" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+plot  "../dat/figure_cubit-lk_latency_cardinality.dat" every 5::0::30 title "CUBIT" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
       "../dat/figure_ub_latency_cardinality.dat" every 5::0::30 title "UpBit^{+}" lc rgb "sea-green" lw 8 ps 1.5 pt 10 dt 9 with linespoints,\
       "../dat/figure_naive_latency_cardinality.dat" every 5::0::30 title "In-place^{+}" lc rgb "black" lw 8 ps 1.5 pt 12 dt 5 with linespoints,\
       "../dat/figure_ucb_latency_cardinality.dat" every 5::0::30 title "UCB^{+}" lc rgb "brown" lw 8 ps 1.5 pt 8 dt "-" with linespoints
@@ -397,7 +397,7 @@ set xtics offset 0,0.2,0 font ',29' #("1" 1, "2" 2 1, "4" 4, "8" 8, "16" 16, "24
 set ytics offset 0.5,0,0 font ',29' #("250" 250, "500" 500, "750" 750) 
 
 
-plot  "../dat/figure_nbub-lk_latency_cardinality.dat" every 5::1::31 title "CUBIT" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+plot  "../dat/figure_cubit-lk_latency_cardinality.dat" every 5::1::31 title "CUBIT" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
       "../dat/figure_ub_latency_cardinality.dat" every 5::1::31 title "UpBit^{+}" lc rgb "sea-green" lw 8 ps 1.5 pt 10 dt 9 with linespoints,\
       "../dat/figure_naive_latency_cardinality.dat" every 5::1::31 title "In-place^{+}" lc rgb "black" lw 8 ps 1.5 pt 12 dt 5 with linespoints,\
       "../dat/figure_ucb_latency_cardinality.dat" every 5::1::31 title "UCB^{+}" lc rgb "brown" lw 8 ps 1.5 pt 8 dt "-" with linespoints
@@ -422,7 +422,7 @@ set xtics offset 0,0.2,0 font ',29' #("1" 1, "2" 2 1, "4" 4, "8" 8, "16" 16, "24
 set ytics offset 0.5,0,0 font ',29' ("0" 0, "1000" 1000, "2000" 2000, "3000" 3000) 
 
 
-plot  "../dat/figure_nbub-lk_latency_cardinality.dat" every 5::2::32 title "CUBIT" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+plot  "../dat/figure_cubit-lk_latency_cardinality.dat" every 5::2::32 title "CUBIT" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
       "../dat/figure_ub_latency_cardinality.dat" every 5::2::32 title "UpBit^{+}" lc rgb "sea-green" lw 8 ps 1.5 pt 10 dt 9 with linespoints,\
       "../dat/figure_naive_latency_cardinality.dat" every 5::2::32 title "In-place^{+}" lc rgb "black" lw 8 ps 1.5 pt 12 dt 5 with linespoints,\
       "../dat/figure_ucb_latency_cardinality.dat" every 5::2::32 title "UCB^{+}" lc rgb "brown" lw 8 ps 1.5 pt 8 dt "-" with linespoints
@@ -447,7 +447,7 @@ set xtics offset 0,0.2,0 font ',29' #("1" 1, "2" 2 1, "4" 4, "8" 8, "16" 16, "24
 set ytics offset 0.5,0,0 font ',29' ("0" 0, "1000" 1000, "2000" 2000, "3000" 3000) 
 
 
-plot  "../dat/figure_nbub-lk_latency_cardinality.dat" every 5::3::33 title "CUBIT" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+plot  "../dat/figure_cubit-lk_latency_cardinality.dat" every 5::3::33 title "CUBIT" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
       "../dat/figure_ub_latency_cardinality.dat" every 5::3::33 title "UpBit^{+}" lc rgb "sea-green" lw 8 ps 1.5 pt 10 dt 9 with linespoints,\
       "../dat/figure_naive_latency_cardinality.dat" every 5::3::33 title "In-place^{+}" lc rgb "black" lw 8 ps 1.5 pt 12 dt 5 with linespoints,\
       "../dat/figure_ucb_latency_cardinality.dat" every 5::3::33 title "UCB^{+}" lc rgb "brown" lw 8 ps 1.5 pt 8 dt "-" with linespoints
@@ -472,7 +472,7 @@ set xtics offset 0,0.2,0 font ',29' #("1" 1, "2" 2 1, "4" 4, "8" 8, "16" 16, "24
 set ytics offset 0.5,0,0 font ',29' ("0" 0, "1000" 1000, "2000" 2000, "3000" 3000) 
 
 
-plot  "../dat/figure_nbub-lk_latency_cardinality.dat" every 5::4::34 title "CUBIT" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+plot  "../dat/figure_cubit-lk_latency_cardinality.dat" every 5::4::34 title "CUBIT" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
       "../dat/figure_ub_latency_cardinality.dat" every 5::4::34 title "UpBit^{+}" lc rgb "sea-green" lw 8 ps 1.5 pt 10 dt 9 with linespoints,\
       "../dat/figure_naive_latency_cardinality.dat" every 5::4::34 title "In-place^{+}" lc rgb "black" lw 8 ps 1.5 pt 12 dt 5 with linespoints,\
       "../dat/figure_ucb_latency_cardinality.dat" every 5::4::34 title "UCB^{+}" lc rgb "brown" lw 8 ps 1.5 pt 8 dt "-" with linespoints

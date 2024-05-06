@@ -289,65 +289,65 @@ def gen_figure_ub_latency_ratio():
     f.close()
 
 ############################################## NBUB ##########################################################
-def gen_figure_nbub_throughput_core(): 
-    print ('Figure nbub_throughput_core')
+def gen_figure_cubit_throughput_core(): 
+    print ('Figure cubit_throughput_core')
     print ('-' * 10)
     core_number = [1, 2, 4, 8, 16]
-    f = open('dat/figure_nbub_throughput_core.dat','w')
+    f = open('dat/figure_cubit_throughput_core.dat','w')
     for num in core_number:
-        cmd = gen_cmd_others(num, 'nbub', 'no', 1000, 0.1)
+        cmd = gen_cmd_others(num, 'cubit', 'no', 1000, 0.1)
         print(cmd)
         os.system(cmd)
-        res = throughput_analysis('figure_nbub_throughput_raw_w_{}_ratio_{}.dat'.format(num, 0.1), num)
+        res = throughput_analysis('figure_cubit_throughput_raw_w_{}_ratio_{}.dat'.format(num, 0.1), num)
         print(res)
         print('\n')
         f.write('{} {} \n'.format(num, res))
     f.close()
 
-#nbub throughput, ratio
-def gen_figure_nbub_throughput_ratio():
-    print ('Figure nbub_throughput_ratio')
+#cubit throughput, ratio
+def gen_figure_cubit_throughput_ratio():
+    print ('Figure cubit_throughput_ratio')
     print ('-' * 10)
     ratio_number = [0.01, 0.05, 0.1, 0.2, 0.4]
-    f = open('dat/figure_nbub_throughput_ratio.dat','w')
+    f = open('dat/figure_cubit_throughput_ratio.dat','w')
     for num in ratio_number:
-        cmd = gen_cmd_others(16, 'nbub', 'no', 1000, num)
+        cmd = gen_cmd_others(16, 'cubit', 'no', 1000, num)
         print(cmd)
         os.system(cmd)
-        res = throughput_analysis('figure_nbub_throughput_raw_w_{}_ratio_{}.dat'.format(16, num), 16)
+        res = throughput_analysis('figure_cubit_throughput_raw_w_{}_ratio_{}.dat'.format(16, num), 16)
         print(res)
         print('\n')
         f.write('{} {} \n'.format(num, res))
     f.close()    
 
-#nbub latency, core
-def gen_figure_nbub_latency_core(): # latency
-    print ('Figure nbub_latency_core')
+#cubit latency, core
+def gen_figure_cubit_latency_core(): # latency
+    print ('Figure cubit_latency_core')
     print ('-' * 10)
     core_number = [1, 2, 4, 8, 16]
-    f = open('dat/figure_nbub_latency_core.dat','w')
+    f = open('dat/figure_cubit_latency_core.dat','w')
     for num in core_number:
-        cmd = gen_cmd_others(num, 'nbub', 'yes', 1000, 0.1)
+        cmd = gen_cmd_others(num, 'cubit', 'yes', 1000, 0.1)
         print(cmd)
         os.system(cmd)
-        res = latency_analysis('figure_nbub_latency_raw_w_{}_ratio_{}.dat'.format(num, 0.1))
+        res = latency_analysis('figure_cubit_latency_raw_w_{}_ratio_{}.dat'.format(num, 0.1))
         print(res)
         print('\n')
         for i in range(0,len(core_number)):
             f.write('{} {} \n'.format(num, res[i]))
     f.close()
 
-#nbub latency, ratio
-def gen_figure_nbub_latency_ratio():
-    print ('Figure nbub_latency_ratio')
+#cubit latency, ratio
+def gen_figure_cubit_latency_ratio():
+    print ('Figure cubit_latency_ratio')
     print ('-' * 10)
     ratio_number = [0.01, 0.05, 0.1, 0.2, 0.4]
-    f = open('dat/figure_nbub_latency_ratio.dat','w')
+    f = open('dat/figure_cubit_latency_ratio.dat','w')
     for num in ratio_number:
-        cmd = gen_cmd_others(16, 'nbub', 'yes', 1000, num)
+        cmd = gen_cmd_others(16, 'cubit', 'yes', 1000, num)
         print(cmd)
         os.system(cmd)
-        res = latency_analysis('figure_nbub_latency_raw_w_{}_ratio_{}.dat'.format(16, num))
+        res = latency_analysis('figure_cubit_latency_raw_w_{}_ratio_{}.dat'.format(16, num))
         print(res)
         print('\n')
         for i in range(0,len(ratio_number)):
@@ -355,65 +355,65 @@ def gen_figure_nbub_latency_ratio():
     f.close()
 
 ############################################## NBUB_LF ##########################################################
-def gen_figure_nbub_lf_throughput_core(): 
-    print ('Figure nbub-lf_throughput_core')
+def gen_figure_cubit_lf_throughput_core(): 
+    print ('Figure cubit-lf_throughput_core')
     print ('-' * 10)
     core_number = [1, 2, 4, 8, 16]
-    f = open('dat/figure_nbub-lf_throughput_core.dat','w')
+    f = open('dat/figure_cubit-lf_throughput_core.dat','w')
     for num in core_number:
-        cmd = gen_cmd_others(num, 'nbub-lf', 'no', 1000, 0.1)
+        cmd = gen_cmd_others(num, 'cubit-lf', 'no', 1000, 0.1)
         print(cmd)
         os.system(cmd)
-        res = throughput_analysis('figure_nbub-lf_throughput_raw_w_{}_ratio_{}.dat'.format(num, 0.1), num)
+        res = throughput_analysis('figure_cubit-lf_throughput_raw_w_{}_ratio_{}.dat'.format(num, 0.1), num)
         print(res)
         print('\n')
         f.write('{} {} \n'.format(num, res))
     f.close()
 
-#nbub_lf throughput, ratio
-def gen_figure_nbub_lf_throughput_ratio():
-    print ('Figure nbub-lf_throughput_ratio')
+#cubit_lf throughput, ratio
+def gen_figure_cubit_lf_throughput_ratio():
+    print ('Figure cubit-lf_throughput_ratio')
     print ('-' * 10)
     ratio_number = [0.01, 0.05, 0.1, 0.2, 0.4]
-    f = open('dat/figure_nbub-lf_throughput_ratio.dat','w')
+    f = open('dat/figure_cubit-lf_throughput_ratio.dat','w')
     for num in ratio_number:
-        cmd = gen_cmd_others(16, 'nbub-lf', 'no', 1000, num)
+        cmd = gen_cmd_others(16, 'cubit-lf', 'no', 1000, num)
         print(cmd)
         os.system(cmd)
-        res = throughput_analysis('figure_nbub-lf_throughput_raw_w_{}_ratio_{}.dat'.format(16, num), 16)
+        res = throughput_analysis('figure_cubit-lf_throughput_raw_w_{}_ratio_{}.dat'.format(16, num), 16)
         print(res)
         print('\n')
         f.write('{} {} \n'.format(num, res))
     f.close()    
 
-#nbub_lf latency, core
-def gen_figure_nbub_lf_latency_core(): # latency
-    print ('Figure nbub-lf_latency_core')
+#cubit_lf latency, core
+def gen_figure_cubit_lf_latency_core(): # latency
+    print ('Figure cubit-lf_latency_core')
     print ('-' * 10)
     core_number = [1, 2, 4, 8, 16]
-    f = open('dat/figure_nbub-lf_latency_core.dat','w')
+    f = open('dat/figure_cubit-lf_latency_core.dat','w')
     for num in core_number:
-        cmd = gen_cmd_others(num, 'nbub-lf', 'yes', 1000, 0.1)
+        cmd = gen_cmd_others(num, 'cubit-lf', 'yes', 1000, 0.1)
         print(cmd)
         os.system(cmd)
-        res = latency_analysis('figure_nbub-lf_latency_raw_w_{}_ratio_{}.dat'.format(num, 0.1))
+        res = latency_analysis('figure_cubit-lf_latency_raw_w_{}_ratio_{}.dat'.format(num, 0.1))
         print(res)
         print('\n')
         for i in range(0,len(core_number)):
             f.write('{} {} \n'.format(num, res[i]))
     f.close()
 
-#nbub_lf latency, ratio
-def gen_figure_nbub_lf_latency_ratio():
-    print ('Figure nbub-lf_latency_ratio')
+#cubit_lf latency, ratio
+def gen_figure_cubit_lf_latency_ratio():
+    print ('Figure cubit-lf_latency_ratio')
     print ('-' * 10)
     ratio_number = [0.01, 0.05, 0.1, 0.2, 0.4]
-    f = open('dat/figure_nbub-lf_latency_ratio.dat','w')
+    f = open('dat/figure_cubit-lf_latency_ratio.dat','w')
     for num in ratio_number:
-        cmd = gen_cmd_others(16, 'nbub-lf', 'yes', 1000, num)
+        cmd = gen_cmd_others(16, 'cubit-lf', 'yes', 1000, num)
         print(cmd)
         os.system(cmd)
-        res = latency_analysis('figure_nbub-lf_latency_raw_w_{}_ratio_{}.dat'.format(16, num))
+        res = latency_analysis('figure_cubit-lf_latency_raw_w_{}_ratio_{}.dat'.format(16, num))
         print(res)
         print('\n')
         for i in range(0,len(ratio_number)):
@@ -422,8 +422,8 @@ def gen_figure_nbub_lf_latency_ratio():
 
 def cdf():
     cmd = "./build/nicolas -w 16 -a naive -m mix --number-of-queries 950 -r 50 -c 100 -i 100M_100/ -n 100000000 -v yes --fence-pointer no > figure_naive_latency_raw_w_32_ratio_0.05.dat"
-    cmd2 = "./build/nicolas -w 16 -a nbub -m mix --number-of-queries 950 -r 50 -c 100 -i 100M_100/ -n 100000000 -v yes --fence-pointer yes --fence-length 100000 > figure_nbub_latency_raw_w_32_ratio_0.05.dat"
-    cmd3 = "./build/nicolas -w 16 -a nbub-lf -m mix --number-of-queries 950 -r 50 -c 100 -i 100M_100/ -n 100000000 -v yes --fence-pointer yes --fence-length 100000 > figure_nbub-lf_latency_raw_w_32_ratio_0.05.dat"
+    cmd2 = "./build/nicolas -w 16 -a cubit -m mix --number-of-queries 950 -r 50 -c 100 -i 100M_100/ -n 100000000 -v yes --fence-pointer yes --fence-length 100000 > figure_cubit_latency_raw_w_32_ratio_0.05.dat"
+    cmd3 = "./build/nicolas -w 16 -a cubit-lf -m mix --number-of-queries 950 -r 50 -c 100 -i 100M_100/ -n 100000000 -v yes --fence-pointer yes --fence-length 100000 > figure_cubit-lf_latency_raw_w_32_ratio_0.05.dat"
     cmd4 = "./build/nicolas -w 16 -a ub -m mix --number-of-queries 950 -r 50 -c 100 -i 100M_100/ -n 100000000 -v yes --fence-pointer yes --fence-length 100000 > figure_ub_latency_raw_w_32_ratio_0.05.dat"
     cmd5 = "./build/nicolas -w 16 -a ucb -m mix --number-of-queries 950 -r 50 -c 100 -i 100M_100/ -n 100000000 -v yes --fence-pointer yes --fence-length 100000 > figure_ucb_latency_raw_w_32_ratio_0.05.dat"
     os.system(cmd)
@@ -452,17 +452,17 @@ def run():
     # gen_figure_ub_latency_core()
     gen_figure_ub_latency_ratio()
 
-    #nbub
-    # gen_figure_nbub_throughput_core()
-    # gen_figure_nbub_throughput_ratio()
-    # gen_figure_nbub_latency_core()
-    gen_figure_nbub_latency_ratio()
+    #cubit
+    # gen_figure_cubit_throughput_core()
+    # gen_figure_cubit_throughput_ratio()
+    # gen_figure_cubit_latency_core()
+    gen_figure_cubit_latency_ratio()
 
-    #nbub_lf
-    # gen_figure_nbub_lf_throughput_core()
-    # gen_figure_nbub_lf_throughput_ratio()
-    # gen_figure_nbub_lf_latency_core()
-    gen_figure_nbub_lf_latency_ratio()
+    #cubit_lf
+    # gen_figure_cubit_lf_throughput_core()
+    # gen_figure_cubit_lf_throughput_ratio()
+    # gen_figure_cubit_lf_latency_core()
+    gen_figure_cubit_lf_latency_ratio()
 
     #cdf
     #cdf()

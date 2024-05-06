@@ -17,7 +17,7 @@ cp -r $1/dat $1/dat_tmp_1B ./
 cd gnuplot-scripts
 make make_dir_1B
 make figure_multiple_sz_1B
-# make figure_multiple_sz_ub+nbub-lk+nbub-lf_1B
+# make figure_multiple_sz_ub+cubit-lk+cubit-lf_1B
 
 cd ../
 python3 cdf_sz_1B.py > graphs_1B/cdf_output.txt

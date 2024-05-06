@@ -1,18 +1,18 @@
 PLOT=gnuplot 
 all: make_dir make_dir_zipf make_dir_earth fence getvalue intro thres core_experiments tpch figure_single_sz figure_test_latency \
-	figure_multiple_sz figure_multiple_sz_ub+nbub-lk+nbub-lf \
-	figure_multiple_sz_earth figure_multiple_sz_ub+nbub-lk+nbub-lf_earth \
-	figure_multiple_sz_zipf figure_multiple_sz_ub+nbub-lk+nbub-lf_zipf \
-	figure_multiple_sz_ub+nbub-lk+nbub-lf_naive \
-	figure_multiple_sz_ub+nbub-lk+nbub-lf_naive_zipf \
-	figure_multiple_sz_ub+nbub-lk+nbub-lf_naive_earth \
+	figure_multiple_sz figure_multiple_sz_ub+cubit-lk+cubit-lf \
+	figure_multiple_sz_earth figure_multiple_sz_ub+cubit-lk+cubit-lf_earth \
+	figure_multiple_sz_zipf figure_multiple_sz_ub+cubit-lk+cubit-lf_zipf \
+	figure_multiple_sz_ub+cubit-lk+cubit-lf_naive \
+	figure_multiple_sz_ub+cubit-lk+cubit-lf_naive_zipf \
+	figure_multiple_sz_ub+cubit-lk+cubit-lf_naive_earth \
 	figure_multiple_sz_MT
 	#temporarily removed:  mem upbit_vs_scan
 make_dir:
 	mkdir -p ../graphs
 	mkdir -p ../graphs/multiple
-#	mkdir -p ../graphs/multiple_ub+nbub-lk+nbub-lf
-#	mkdir -p ../graphs/multiple_ub+nbub-lk+nbub-lf_naive
+#	mkdir -p ../graphs/multiple_ub+cubit-lk+cubit-lf
+#	mkdir -p ../graphs/multiple_ub+cubit-lk+cubit-lf_naive
 
 # make_dir_lk:
 # 	mkdir -p ../graphs_lk
@@ -21,20 +21,20 @@ make_dir:
 make_dir_zipf:
 	mkdir -p ../graphs_zipf
 	mkdir -p ../graphs_zipf/multiple
-#	mkdir -p ../graphs_zipf/multiple_ub+nbub-lk+nbub-lf
-#	mkdir -p ../graphs_zipf/multiple_ub+nbub-lk+nbub-lf_naive
+#	mkdir -p ../graphs_zipf/multiple_ub+cubit-lk+cubit-lf
+#	mkdir -p ../graphs_zipf/multiple_ub+cubit-lk+cubit-lf_naive
 
 make_dir_earth:
 	mkdir -p ../graphs_earth
 	mkdir -p ../graphs_earth/multiple
-#	mkdir -p ../graphs_earth/multiple_ub+nbub-lk+nbub-lf
-#	mkdir -p ../graphs_earth/multiple_ub+nbub-lk+nbub-lf_naive
+#	mkdir -p ../graphs_earth/multiple_ub+cubit-lk+cubit-lf
+#	mkdir -p ../graphs_earth/multiple_ub+cubit-lk+cubit-lf_naive
 
 make_dir_1B:
 	mkdir -p ../graphs_1B
 	mkdir -p ../graphs_1B/multiple
-#	mkdir -p ../graphs_1B/multiple_ub+nbub-lk+nbub-lf
-#	mkdir -p ../graphs_1B/multiple_ub+nbub-lk+nbub-lf_naive
+#	mkdir -p ../graphs_1B/multiple_ub+cubit-lk+cubit-lf
+#	mkdir -p ../graphs_1B/multiple_ub+cubit-lk+cubit-lf_naive
 
 make_dir_MT:
 	mkdir -p ../graphs_MT
@@ -88,8 +88,8 @@ fence: fence.gnu ../dat/fp_ub_su.dat ../dat/fp_ucb.dat ../dat/fp_ub.dat
 # 	   ../dat/figure_ucb_latency_core.dat ../dat/figure_ucb_latency_ratio.dat\
 # 	   ../dat/figure_ub_throughput_core.dat ../dat/figure_ub_throughput_ratio.dat\
 # 	   ../dat/figure_ub_latency_core.dat ../dat/figure_ub_latency_ratio.dat\
-# 	   	../dat/figure_nbub-lk_throughput_core.dat ../dat/figure_nbub-lk_throughput_ratio.dat\
-# 	   ../dat/figure_nbub-lk_latency_core.dat ../dat/figure_nbub-lk_latency_ratio.dat
+# 	   	../dat/figure_cubit-lk_throughput_core.dat ../dat/figure_cubit-lk_throughput_ratio.dat\
+# 	   ../dat/figure_cubit-lk_latency_core.dat ../dat/figure_cubit-lk_latency_ratio.dat
 # 	$(PLOT) single_sz.gnu
 
 figure_multiple_sz: multiple_sz.gnu ../dat/figure_naive_throughput_core.dat ../dat/figure_naive_throughput_ratio.dat \
@@ -101,115 +101,115 @@ figure_multiple_sz: multiple_sz.gnu ../dat/figure_naive_throughput_core.dat ../d
 	   ../dat/figure_ub_throughput_core.dat ../dat/figure_ub_throughput_ratio.dat\
 	   ../dat/figure_ub_latency_core.dat ../dat/figure_ub_latency_ratio.dat\
 	   ../dat/figure_ub_latency_cardinality.dat ../dat/figure_ub_latency_cardinality.dat\
-	   	../dat/figure_nbub-lk_throughput_core.dat ../dat/figure_nbub-lk_throughput_ratio.dat\
-	   ../dat/figure_nbub-lk_latency_core.dat ../dat/figure_nbub-lk_latency_ratio.dat \
-	   ../dat/figure_nbub-lk_latency_cardinality.dat ../dat/figure_nbub-lk_latency_cardinality.dat\
-	   	../dat/figure_nbub-lf_throughput_core.dat ../dat/figure_nbub-lf_throughput_ratio.dat\
-	   ../dat/figure_nbub-lf_latency_core.dat ../dat/figure_nbub-lf_latency_ratio.dat \
-	   ../dat/figure_nbub-lf_latency_cardinality.dat ../dat/figure_nbub-lf_latency_cardinality.dat
+	   	../dat/figure_cubit-lk_throughput_core.dat ../dat/figure_cubit-lk_throughput_ratio.dat\
+	   ../dat/figure_cubit-lk_latency_core.dat ../dat/figure_cubit-lk_latency_ratio.dat \
+	   ../dat/figure_cubit-lk_latency_cardinality.dat ../dat/figure_cubit-lk_latency_cardinality.dat\
+	   	../dat/figure_cubit-lf_throughput_core.dat ../dat/figure_cubit-lf_throughput_ratio.dat\
+	   ../dat/figure_cubit-lf_latency_core.dat ../dat/figure_cubit-lf_latency_ratio.dat \
+	   ../dat/figure_cubit-lf_latency_cardinality.dat ../dat/figure_cubit-lf_latency_cardinality.dat
 	$(PLOT) multiple_sz.gnu
 
-# figure_multiple_sz_ub+nbub-lk+nbub-lf:../dat/figure_ub_throughput_core.dat ../dat/figure_ub_throughput_ratio.dat\
+# figure_multiple_sz_ub+cubit-lk+cubit-lf:../dat/figure_ub_throughput_core.dat ../dat/figure_ub_throughput_ratio.dat\
 # 	   ../dat/figure_ub_latency_core.dat ../dat/figure_ub_latency_ratio.dat\
 # 	   	../dat/figure_ub_latency_cardinality.dat ../dat/figure_ub_latency_cardinality.dat\
-# 	   	../dat/figure_nbub-lk_throughput_core.dat ../dat/figure_nbub-lk_throughput_ratio.dat\
-# 	   ../dat/figure_nbub-lk_latency_core.dat ../dat/figure_nbub-lk_latency_ratio.dat \
-# 	   ../dat/figure_nbub-lk_latency_cardinality.dat ../dat/figure_nbub-lk_latency_cardinality.dat\
-# 	   	../dat/figure_nbub-lf_throughput_core.dat ../dat/figure_nbub-lf_throughput_ratio.dat\
-# 	   ../dat/figure_nbub-lf_latency_core.dat ../dat/figure_nbub-lf_latency_ratio.dat \
-# 		../dat/figure_nbub-lf_latency_cardinality.dat ../dat/figure_nbub-lf_latency_cardinality.dat
-# 	$(PLOT) multiple_sz_ub+nbub-lk+nbub-lf.gnu
+# 	   	../dat/figure_cubit-lk_throughput_core.dat ../dat/figure_cubit-lk_throughput_ratio.dat\
+# 	   ../dat/figure_cubit-lk_latency_core.dat ../dat/figure_cubit-lk_latency_ratio.dat \
+# 	   ../dat/figure_cubit-lk_latency_cardinality.dat ../dat/figure_cubit-lk_latency_cardinality.dat\
+# 	   	../dat/figure_cubit-lf_throughput_core.dat ../dat/figure_cubit-lf_throughput_ratio.dat\
+# 	   ../dat/figure_cubit-lf_latency_core.dat ../dat/figure_cubit-lf_latency_ratio.dat \
+# 		../dat/figure_cubit-lf_latency_cardinality.dat ../dat/figure_cubit-lf_latency_cardinality.dat
+# 	$(PLOT) multiple_sz_ub+cubit-lk+cubit-lf.gnu
 
 figure_test_latency: ../dat/figure_ub_latency_core.dat ../dat/figure_ub_latency_ratio.dat\
-			../dat/figure_nbub-lk_latency_core.dat ../dat/figure_nbub-lk_latency_ratio.dat \
-			../dat/figure_nbub-lf_latency_core.dat ../dat/figure_nbub-lf_latency_ratio.dat
+			../dat/figure_cubit-lk_latency_core.dat ../dat/figure_cubit-lk_latency_ratio.dat \
+			../dat/figure_cubit-lf_latency_core.dat ../dat/figure_cubit-lf_latency_ratio.dat
 	$(PLOT) test_latency.gnu
 
 # for zipf & earth
 figure_multiple_sz_earth: multiple_sz.gnu ../dat/figure_naive_throughput_core.dat  \
 	   ../dat/figure_ucb_throughput_core.dat \
 	   ../dat/figure_ub_throughput_core.dat .\
-	   	../dat/figure_nbub-lk_throughput_core.dat \
-	   	../dat/figure_nbub-lf_throughput_core.dat
+	   	../dat/figure_cubit-lk_throughput_core.dat \
+	   	../dat/figure_cubit-lf_throughput_core.dat
 	$(PLOT) multiple_sz_earth.gnu
 
-# figure_multiple_sz_ub+nbub-lk+nbub-lf_earth:../dat/figure_ub_throughput_core.dat \
+# figure_multiple_sz_ub+cubit-lk+cubit-lf_earth:../dat/figure_ub_throughput_core.dat \
 # 	   ../dat/figure_ub_latency_core.dat \
-# 	   	../dat/figure_nbub-lk_throughput_core.dat \
-# 	   ../dat/figure_nbub-lk_latency_core.dat  \
-# 	   	../dat/figure_nbub-lf_throughput_core.dat \
-# 	   ../dat/figure_nbub-lf_latency_core.dat 
-# 	$(PLOT) multiple_sz_ub+nbub-lk+nbub-lf_earth.gnu
+# 	   	../dat/figure_cubit-lk_throughput_core.dat \
+# 	   ../dat/figure_cubit-lk_latency_core.dat  \
+# 	   	../dat/figure_cubit-lf_throughput_core.dat \
+# 	   ../dat/figure_cubit-lf_latency_core.dat 
+# 	$(PLOT) multiple_sz_ub+cubit-lk+cubit-lf_earth.gnu
 
 figure_multiple_sz_zipf: multiple_sz.gnu ../dat/figure_naive_throughput_core.dat ../dat/figure_naive_latency_core.dat \
 	   ../dat/figure_ucb_throughput_core.dat ../dat/figure_ucb_latency_core.dat \
 	   ../dat/figure_ub_throughput_core.dat ../dat/figure_ub_latency_core.dat \
-	   	../dat/figure_nbub-lk_throughput_core.dat ../dat/figure_nbub-lk_latency_core.dat \
-	   	../dat/figure_nbub-lf_throughput_core.dat ../dat/figure_nbub-lf_latency_core.dat 
+	   	../dat/figure_cubit-lk_throughput_core.dat ../dat/figure_cubit-lk_latency_core.dat \
+	   	../dat/figure_cubit-lf_throughput_core.dat ../dat/figure_cubit-lf_latency_core.dat 
 	$(PLOT) multiple_sz_zipf.gnu
 
-# figure_multiple_sz_ub+nbub-lk+nbub-lf_zipf:../dat/figure_ub_throughput_core.dat ../dat/figure_ub_latency_core.dat \
-# 	   	../dat/figure_nbub-lk_throughput_core.dat ../dat/figure_nbub-lk_latency_core.dat \
-# 	   	../dat/figure_nbub-lf_throughput_core.dat ../dat/figure_nbub-lf_latency_core.dat 
-# 	$(PLOT) multiple_sz_ub+nbub-lk+nbub-lf_zipf.gnu
+# figure_multiple_sz_ub+cubit-lk+cubit-lf_zipf:../dat/figure_ub_throughput_core.dat ../dat/figure_ub_latency_core.dat \
+# 	   	../dat/figure_cubit-lk_throughput_core.dat ../dat/figure_cubit-lk_latency_core.dat \
+# 	   	../dat/figure_cubit-lf_throughput_core.dat ../dat/figure_cubit-lf_latency_core.dat 
+# 	$(PLOT) multiple_sz_ub+cubit-lk+cubit-lf_zipf.gnu
 
 
-# naive & nbub-lk\lf & ub
-# figure_multiple_sz_ub+nbub-lk+nbub-lf_naive: multiple_sz.gnu ../dat/figure_naive_throughput_core.dat ../dat/figure_naive_throughput_ratio.dat \
+# naive & cubit-lk\lf & ub
+# figure_multiple_sz_ub+cubit-lk+cubit-lf_naive: multiple_sz.gnu ../dat/figure_naive_throughput_core.dat ../dat/figure_naive_throughput_ratio.dat \
 # 	   ../dat/figure_naive_latency_core.dat ../dat/figure_naive_latency_ratio.dat\
 # 	   ../dat/figure_naive_latency_cardinality.dat ../dat/figure_naive_latency_cardinality.dat\
 # 	   ../dat/figure_ub_throughput_core.dat ../dat/figure_ub_throughput_ratio.dat\
 # 	   ../dat/figure_ub_latency_core.dat ../dat/figure_ub_latency_ratio.dat\
 # 	   ../dat/figure_ub_latency_cardinality.dat ../dat/figure_ub_latency_cardinality.dat\
-# 	   	../dat/figure_nbub-lk_throughput_core.dat ../dat/figure_nbub-lk_throughput_ratio.dat\
-# 	   ../dat/figure_nbub-lk_latency_core.dat ../dat/figure_nbub-lk_latency_ratio.dat \
-# 	   ../dat/figure_nbub-lk_latency_cardinality.dat ../dat/figure_nbub-lk_latency_cardinality.dat\
-# 	   	../dat/figure_nbub-lf_throughput_core.dat ../dat/figure_nbub-lf_throughput_ratio.dat\
-# 	   ../dat/figure_nbub-lf_latency_core.dat ../dat/figure_nbub-lf_latency_ratio.dat \
-# 	   ../dat/figure_nbub-lf_latency_cardinality.dat ../dat/figure_nbub-lf_latency_cardinality.dat
-# 	$(PLOT) multiple_sz_ub+nbub-lk+nbub-lf_naive.gnu
+# 	   	../dat/figure_cubit-lk_throughput_core.dat ../dat/figure_cubit-lk_throughput_ratio.dat\
+# 	   ../dat/figure_cubit-lk_latency_core.dat ../dat/figure_cubit-lk_latency_ratio.dat \
+# 	   ../dat/figure_cubit-lk_latency_cardinality.dat ../dat/figure_cubit-lk_latency_cardinality.dat\
+# 	   	../dat/figure_cubit-lf_throughput_core.dat ../dat/figure_cubit-lf_throughput_ratio.dat\
+# 	   ../dat/figure_cubit-lf_latency_core.dat ../dat/figure_cubit-lf_latency_ratio.dat \
+# 	   ../dat/figure_cubit-lf_latency_cardinality.dat ../dat/figure_cubit-lf_latency_cardinality.dat
+# 	$(PLOT) multiple_sz_ub+cubit-lk+cubit-lf_naive.gnu
 
-# figure_multiple_sz_ub+nbub-lk+nbub-lf_naive_zipf:../dat/figure_ub_throughput_core.dat ../dat/figure_ub_latency_core.dat \
-# 	   	../dat/figure_nbub-lk_throughput_core.dat ../dat/figure_nbub-lk_latency_core.dat \
-# 	   	../dat/figure_nbub-lf_throughput_core.dat ../dat/figure_nbub-lf_latency_core.dat \
+# figure_multiple_sz_ub+cubit-lk+cubit-lf_naive_zipf:../dat/figure_ub_throughput_core.dat ../dat/figure_ub_latency_core.dat \
+# 	   	../dat/figure_cubit-lk_throughput_core.dat ../dat/figure_cubit-lk_latency_core.dat \
+# 	   	../dat/figure_cubit-lf_throughput_core.dat ../dat/figure_cubit-lf_latency_core.dat \
 # 	   ../dat/figure_naive_throughput_core.dat ../dat/figure_naive_latency_core.dat 
-# 	$(PLOT) multiple_sz_ub+nbub-lk+nbub-lf_naive_zipf.gnu
+# 	$(PLOT) multiple_sz_ub+cubit-lk+cubit-lf_naive_zipf.gnu
 
-# figure_multiple_sz_ub+nbub-lk+nbub-lf_naive_earth:../dat/figure_ub_throughput_core.dat ../dat/figure_ub_throughput_ratio.dat\
+# figure_multiple_sz_ub+cubit-lk+cubit-lf_naive_earth:../dat/figure_ub_throughput_core.dat ../dat/figure_ub_throughput_ratio.dat\
 # 	   ../dat/figure_ub_latency_core.dat ../dat/figure_ub_latency_ratio.dat\
-# 	   	../dat/figure_nbub-lk_throughput_core.dat ../dat/figure_nbub-lk_throughput_ratio.dat\
-# 	   ../dat/figure_nbub-lk_latency_core.dat ../dat/figure_nbub-lk_latency_ratio.dat \
-# 	   	../dat/figure_nbub-lf_throughput_core.dat ../dat/figure_nbub-lf_throughput_ratio.dat\
-# 	   ../dat/figure_nbub-lf_latency_core.dat ../dat/figure_nbub-lf_latency_ratio.dat \
+# 	   	../dat/figure_cubit-lk_throughput_core.dat ../dat/figure_cubit-lk_throughput_ratio.dat\
+# 	   ../dat/figure_cubit-lk_latency_core.dat ../dat/figure_cubit-lk_latency_ratio.dat \
+# 	   	../dat/figure_cubit-lf_throughput_core.dat ../dat/figure_cubit-lf_throughput_ratio.dat\
+# 	   ../dat/figure_cubit-lf_latency_core.dat ../dat/figure_cubit-lf_latency_ratio.dat \
 # 	   ../dat/figure_naive_throughput_core.dat ../dat/figure_naive_throughput_ratio.dat \
 # 	   ../dat/figure_naive_latency_core.dat ../dat/figure_naive_latency_ratio.dat
-# 	$(PLOT) multiple_sz_ub+nbub-lk+nbub-lf_naive_earth.gnu
+# 	$(PLOT) multiple_sz_ub+cubit-lk+cubit-lf_naive_earth.gnu
 
 
 # for 1B_100
-figure_multiple_sz_1B:  ../dat/figure_naive_throughput_core.dat ../dat/figure_ucb_throughput_core.dat ../dat/figure_ub_throughput_core.dat ../dat/figure_nbub-lk_throughput_core.dat ../dat/figure_nbub-lf_throughput_core.dat 
+figure_multiple_sz_1B:  ../dat/figure_naive_throughput_core.dat ../dat/figure_ucb_throughput_core.dat ../dat/figure_ub_throughput_core.dat ../dat/figure_cubit-lk_throughput_core.dat ../dat/figure_cubit-lf_throughput_core.dat 
 	$(PLOT) multiple_sz_1B.gnu
 
-# figure_multiple_sz_ub+nbub-lk+nbub-lf_1B:../dat/figure_ub_throughput_core.dat ../dat/figure_ub_latency_core.dat \
-# 	   	../dat/figure_nbub-lk_throughput_core.dat ../dat/figure_nbub-lk_latency_core.dat \
-# 	   	../dat/figure_nbub-lf_throughput_core.dat ../dat/figure_nbub-lf_latency_core.dat 
-# 	$(PLOT) multiple_sz_ub+nbub-lk+nbub-lf_1B.gnu
+# figure_multiple_sz_ub+cubit-lk+cubit-lf_1B:../dat/figure_ub_throughput_core.dat ../dat/figure_ub_latency_core.dat \
+# 	   	../dat/figure_cubit-lk_throughput_core.dat ../dat/figure_cubit-lk_latency_core.dat \
+# 	   	../dat/figure_cubit-lf_throughput_core.dat ../dat/figure_cubit-lf_latency_core.dat 
+# 	$(PLOT) multiple_sz_ub+cubit-lk+cubit-lf_1B.gnu
 
 # for merge threshold
-figure_multiple_sz_MT: ../dat/figure_nbub-lk_latency_MT.dat 
+figure_multiple_sz_MT: ../dat/figure_cubit-lk_latency_MT.dat 
 	$(PLOT) multiple_sz_MT.gnu
 
 
 # for workers per merge threshold
-figure_multiple_sz_WPMT: ../dat/figure_nbub-lf_latency_WPMT.dat 
+figure_multiple_sz_WPMT: ../dat/figure_cubit-lf_latency_WPMT.dat 
 	$(PLOT) multiple_sz_WPMT.gnu
 
 # for segments per bitvector
-figure_multiple_sz_Seg: ../dat/figure_nbub-lk_latency_Seg.dat 
+figure_multiple_sz_Seg: ../dat/figure_cubit-lk_latency_Seg.dat 
 	$(PLOT) multiple_sz_Seg.gnu
 
 # for parallelism for counting each bitvector
-figure_multiple_sz_Para: ../dat/figure_nbub-lk_latency_Para.dat 
+figure_multiple_sz_Para: ../dat/figure_cubit-lk_latency_Para.dat 
 	$(PLOT) multiple_sz_Para.gnu
 
 
@@ -222,10 +222,10 @@ figure_multiple_sz_Para: ../dat/figure_nbub-lk_latency_Para.dat
 # 	   ../dat/figure_ub_throughput_core.dat ../dat/figure_ub_throughput_ratio.dat\
 # 	   ../dat/figure_ub_latency_core.dat ../dat/figure_ub_latency_ratio.dat\
 # 	   ../dat/figure_ub_latency_cardinality.dat ../dat/figure_ub_latency_cardinality.dat\
-# 	   	../dat/figure_nbub-lk_throughput_core.dat ../dat/figure_nbub-lk_throughput_ratio.dat\
-# 	   ../dat/figure_nbub-lk_latency_core.dat ../dat/figure_nbub-lk_latency_ratio.dat \
-# 	   ../dat/figure_nbub-lk_latency_cardinality.dat ../dat/figure_nbub-lk_latency_cardinality.dat\
-# 	   	../dat/figure_nbub-lf_throughput_core.dat ../dat/figure_nbub-lf_throughput_ratio.dat\
-# 	   ../dat/figure_nbub-lf_latency_core.dat ../dat/figure_nbub-lf_latency_ratio.dat \
-# 	   ../dat/figure_nbub-lf_latency_cardinality.dat ../dat/figure_nbub-lf_latency_cardinality.dat
+# 	   	../dat/figure_cubit-lk_throughput_core.dat ../dat/figure_cubit-lk_throughput_ratio.dat\
+# 	   ../dat/figure_cubit-lk_latency_core.dat ../dat/figure_cubit-lk_latency_ratio.dat \
+# 	   ../dat/figure_cubit-lk_latency_cardinality.dat ../dat/figure_cubit-lk_latency_cardinality.dat\
+# 	   	../dat/figure_cubit-lf_throughput_core.dat ../dat/figure_cubit-lf_throughput_ratio.dat\
+# 	   ../dat/figure_cubit-lf_latency_core.dat ../dat/figure_cubit-lf_latency_ratio.dat \
+# 	   ../dat/figure_cubit-lf_latency_cardinality.dat ../dat/figure_cubit-lf_latency_cardinality.dat
 # 	$(PLOT) multiple_sz_lk.gnu

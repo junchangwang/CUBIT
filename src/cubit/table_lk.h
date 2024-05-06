@@ -9,11 +9,11 @@
 #include "nicolas/base_table.h"
 
 // using namespace std;
-// using namespace nbub;
+// using namespace cubit;
 
-namespace nbub_lk {
+namespace cubit_lk {
 
-class NbubLK: public nbub::Nbub{
+class CubitLK: public cubit::Cubit{
 private:
     /* *********************** */
 
@@ -21,11 +21,11 @@ private:
     std::shared_mutex g_trans_lk;
 
 public:
-    NbubLK(Table_config *config);
+    CubitLK(Table_config *config);
 
     int trans_commit(int tid, uint64_t db_timestamp_t, uint64_t db_row_nums) override;
 
-    int merge_bitmap(int tid, uint32_t val, TransDesc *trans, nbub::Bitmap *bitmap_old, nbub::Bitmap *bitmap_new, std::map<uint64_t, RUB> *rubs) override;
+    int merge_bitmap(int tid, uint32_t val, TransDesc *trans, cubit::Bitmap *bitmap_old, cubit::Bitmap *bitmap_new, std::map<uint64_t, RUB> *rubs) override;
 };
 
 };

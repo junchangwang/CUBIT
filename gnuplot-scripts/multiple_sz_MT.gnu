@@ -39,5 +39,5 @@ set bmargin 2.2
 
 set key top right
 
-plot '../dat/figure_nbub-lk_latency_MT.dat' every 2    using ($2):($1) t "Query" with boxes fs solid 1.0 border rgb "black" lc rgb "black", \
-     '../dat/figure_nbub-lk_latency_MT.dat' every 2::1 using ($2):($1) t "UDI" with boxes fill pattern 7 border rgb "black" lc rgb "black" axes x1y2
+plot '../dat/figure_cubit-lk_latency_MT.dat' every 2    using ($2):($1) t "Query" with boxes fs solid 1.0 border rgb "black" lc rgb "black", \
+     '../dat/figure_cubit-lk_latency_MT.dat' every 2::1 using ($2):($1) t "UDI" with boxes fill pattern 7 border rgb "black" lc rgb "black" axes x1y2

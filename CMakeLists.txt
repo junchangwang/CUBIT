@@ -46,7 +46,7 @@ set(FASTBIT_FILES src/fastbit/bitvector.cpp src/fastbit/bitvector.h
 set(NAIVE_SOURCE_FILES src/naive/table.h src/naive/table.cpp)
 set(UCB_SOURCE_FILES src/ucb/table.h src/ucb/table.cpp)
 set(UB_SOURCE_FILES src/ub/table.h src/ub/table.cpp)
-set(NBUB_SOURCE_FILES src/nbub/table.h src/nbub/table.cpp src/nbub/table_lk.h src/nbub/table_lk.cpp src/nbub/table_lf.h src/nbub/table_lf.cpp src/nbub/test.cpp)
+set(NBUB_SOURCE_FILES src/cubit/table.h src/cubit/table.cpp src/cubit/table_lk.h src/cubit/table_lk.cpp src/cubit/table_lf.h src/cubit/table_lf.cpp src/cubit/test.cpp)
 set(BASE_FILES src/nicolas/base_table.h src/nicolas/base_table.cpp src/nicolas/tablex.cpp src/nicolas/tablex.h src/nicolas/util.h src/nicolas/util.cpp src/nicolas/segBtv.h src/nicolas/segBtv.cpp src/nicolas/perf.h src/nicolas/perf.cpp)
 add_library(bitmap STATIC ${BASE_FILES} ${FASTBIT_FILES} ${NAIVE_SOURCE_FILES} ${UCB_SOURCE_FILES} ${UB_SOURCE_FILES} ${NBUB_SOURCE_FILES})
 target_link_libraries(bitmap pthread atomic ${Boost_LIBRARIES} ${URCU_LIBRARIES})

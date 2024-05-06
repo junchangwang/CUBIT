@@ -41,13 +41,13 @@ struct TransDesc
     TransDesc *l_end_trans;
 
     // For helping update the new bitmap.
-    // For nbub_lf only.
+    // For cubit_lf only.
     uint32_t val_h;
     void *bitmap_old_h;
     void *bitmap_new_h;
 } DOUBLE_CACHE_ALIGNED;
 
-namespace nbub {
+namespace cubit {
 
 // It is not neccessary for CUBIT to play this trick to get good insertion performance.
 // const int NBUB_PAD_BITS = (1000000 / 310) * 31;
@@ -90,7 +90,7 @@ typedef struct _queue_t {
     struct TransDesc * tail DOUBLE_CACHE_ALIGNED;
 } queue_t DOUBLE_CACHE_ALIGNED;
 
-class Nbub : public BaseTable {
+class Cubit : public BaseTable {
 
 private:
     /* *********************** */
@@ -139,7 +139,7 @@ public:
     uint64_t g_timestamp __attribute__((aligned(128)));
     uint64_t g_number_of_rows;
 
-    Nbub(Table_config *);
+    Cubit(Table_config *);
 
     int append(int, int, uint64_t row_id = UINT64_MAX);
     int remove(int, uint64_t);

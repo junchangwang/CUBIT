@@ -17,7 +17,7 @@ cp -r $1/dat $1/dat_tmp_zipf ./
 cd gnuplot-scripts
 make make_dir_zipf
 make figure_multiple_sz_zipf
-# make figure_multiple_sz_ub+nbub-lk+nbub-lf_zipf
+# make figure_multiple_sz_ub+cubit-lk+cubit-lf_zipf
 
 cd ../
 python3 cdf_sz_zipf.py > graphs_zipf/cdf_output.txt

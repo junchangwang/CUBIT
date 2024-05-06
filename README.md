@@ -5,9 +5,9 @@ CUBIT is a scalable bitmap index that provides efficient reads and real-time upd
 
 **How is this project organized?**
 
-The code artifact of our paper is in the src/ folder, which contains several parallelized updatable bitmap indexes including In-place (src/naive), UCB (src/ucb), UpBit (src/ub), and our algorithm CUBIT (src/nbub). They are parallelized for modern multicore architectures by using different strategies (e.g., fine-grained reader-writer locks and MVCC). Please check the paper for more details.
+The code artifact of our paper is in the src/ folder, which contains several parallelized updatable bitmap indexes including In-place (src/naive), UCB (src/ucb), UpBit (src/ub), and our algorithm CUBIT (src/cubit). They are parallelized for modern multicore architectures by using different strategies (e.g., fine-grained reader-writer locks and MVCC). Please check the paper for more details.
 
-The files src/nbub/table_lk.cpp and src/nbub/table_lf.cpp correspond to the algorithms CUBIT-lk and CUBIT-lf, respectively. Both files inherit src/nbub/table.cpp that contains several important common functions like Evaluate/Query.
+The files src/cubit/table_lk.cpp and src/cubit/table_lf.cpp correspond to the algorithms CUBIT-lk and CUBIT-lf, respectively. Both files inherit src/cubit/table.cpp that contains several important common functions like Evaluate/Query.
 
 **How to compile and run the code?**
 

@@ -35,21 +35,21 @@ def check(exp_name):
 #####################
 #####################
 
-experiments_lookup = ['latency_output_nbub-lk',
+experiments_lookup = ['latency_output_cubit-lk',
                       'latency_output_ub',
                       'latency_output_naive',
                       'latency_output_ucb'
                       ]
 
-experiments_lookup_2 = ['latency_output_nbub-lf',   # for ub nbub-lk nbub-lf
-                      'latency_output_nbub-lk',
+experiments_lookup_2 = ['latency_output_cubit-lf',   # for ub cubit-lk cubit-lf
+                      'latency_output_cubit-lk',
                       'latency_output_ub'
                       ]
 # file_map
 file_map = {
     'latency_output_naive'   :   'dat_tmp_earth/figure_naive_latency_raw_w_32_ratio_0.1.dat',
-    'latency_output_nbub-lk'    :   'dat_tmp_earth/figure_nbub-lk_latency_raw_w_32_ratio_0.1.dat',
-    'latency_output_nbub-lf'    :   'dat_tmp_earth/figure_nbub-lf_latency_raw_w_32_ratio_0.1.dat',
+    'latency_output_cubit-lk'    :   'dat_tmp_earth/figure_cubit-lk_latency_raw_w_32_ratio_0.1.dat',
+    'latency_output_cubit-lf'    :   'dat_tmp_earth/figure_cubit-lf_latency_raw_w_32_ratio_0.1.dat',
     'latency_output_ub'      :   'dat_tmp_earth/figure_ub_latency_raw_w_32_ratio_0.1.dat',
     'latency_output_ucb'     :   'dat_tmp_earth/figure_ucb_latency_raw_w_32_ratio_0.1.dat'
 }
@@ -57,8 +57,8 @@ file_map = {
 # name_map
 nm_map = {
     'latency_output_naive'   :   'In-place',
-    'latency_output_nbub-lk'    :   'CUBIT',
-    'latency_output_nbub-lf'    :   'CUBIT-lf',
+    'latency_output_cubit-lk'    :   'CUBIT',
+    'latency_output_cubit-lf'    :   'CUBIT-lf',
     'latency_output_ub'      :   'UpBit',
     'latency_output_ucb'     :   'UCB'
 }
@@ -66,8 +66,8 @@ nm_map = {
 # linestyle_map
 ls_map = {
     'latency_output_naive'   :   (0, (3, 1, 1, 1, 1, 1)),
-    'latency_output_nbub-lk'   :   '-',
-    'latency_output_nbub-lf'   :   (0, (3, 1, 1, 1)), #'densely dashdotted',
+    'latency_output_cubit-lk'   :   '-',
+    'latency_output_cubit-lf'   :   (0, (3, 1, 1, 1)), #'densely dashdotted',
     'latency_output_ub'        :   '-.',
     'latency_output_ucb'         :   'dashed', #'dashdotted',   
     #'HT-Split'      :   
@@ -77,8 +77,8 @@ ls_map = {
 # color map
 co_map = {
     'latency_output_naive'   :   'black',
-    'latency_output_nbub-lk'   :   'b',
-    'latency_output_nbub-lf'   :   'b',
+    'latency_output_cubit-lk'   :   'b',
+    'latency_output_cubit-lf'   :   'b',
     'latency_output_ub'        :   'g',
     'latency_output_ucb'         :   'brown',  
     #'HT-Split'      :   '',
@@ -175,7 +175,7 @@ def figure_UID():
         plt.savefig(dir + '/graphs_earth/cdf_UID.eps', format='eps', dpi=1200)
         plt.savefig(dir + '/graphs_earth/cdf_UID.png', format='png', dpi=1200)
 
-def figure_Q_2():   # for ub nbub nbub-lf
+def figure_Q_2():   # for ub cubit cubit-lf
     for exp_name in experiments_2:
         if exists(exp_name):
             remove(exp_name)
@@ -213,10 +213,10 @@ def figure_Q_2():   # for ub nbub nbub-lf
     if fig == 0:
         plt.show()
     else:
-        plt.savefig(dir + '/graphs_earth/cdf_Q_ub+nbub-lk+nbub-lf.png', format='png', dpi=1200)
-        plt.savefig(dir + '/graphs_earth/cdf_Q_ub+nbub-lk+nbub-lf.eps', format='eps', dpi=1200)
+        plt.savefig(dir + '/graphs_earth/cdf_Q_ub+cubit-lk+cubit-lf.png', format='png', dpi=1200)
+        plt.savefig(dir + '/graphs_earth/cdf_Q_ub+cubit-lk+cubit-lf.eps', format='eps', dpi=1200)
     
-def figure_UID_2(): # for ub nbub nbub-lf
+def figure_UID_2(): # for ub cubit cubit-lf
     for exp_name in experiments_2:
         if exists(exp_name):
             remove(exp_name)
@@ -253,15 +253,15 @@ def figure_UID_2(): # for ub nbub nbub-lf
     if fig == 0:
         plt.show()
     else:
-        plt.savefig(dir + '/graphs_earth/cdf_UID_ub+nbub-lk+nbub-lf.png', format='png', dpi=1200)
-        plt.savefig(dir + '/graphs_earth/cdf_UID_ub+nbub-lk+nbub-lf.eps', format='eps', dpi=1200)
+        plt.savefig(dir + '/graphs_earth/cdf_UID_ub+cubit-lk+cubit-lf.png', format='png', dpi=1200)
+        plt.savefig(dir + '/graphs_earth/cdf_UID_ub+cubit-lk+cubit-lf.eps', format='eps', dpi=1200)
 
 print("\n\n\n##################### Q ########################\n\n")     
 figure_Q()
 print('\n\n##################### UID ########################\n\n')
 figure_UID()
 
-# print("\n\n\n##################### Q_ub+nbub-lk+nbub-lf ########################\n\n")     
+# print("\n\n\n##################### Q_ub+cubit-lk+cubit-lf ########################\n\n")     
 # figure_Q_2()
-# print('\n\n##################### UID_ub+nbub-lk+nbub-lf ########################\n\n')
+# print('\n\n##################### UID_ub+cubit-lk+cubit-lf ########################\n\n')
 # figure_UID_2()    

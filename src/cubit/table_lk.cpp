@@ -8,11 +8,11 @@
 #include "nicolas/base_table.h"
 
 using namespace std;
-using namespace nbub_lk;
+using namespace cubit_lk;
 
-NbubLK::NbubLK(Table_config *config) : Nbub(config)
+CubitLK::CubitLK(Table_config *config) : Cubit(config)
 {
-    trans_queue = new nbub::queue_t{};
+    trans_queue = new cubit::queue_t{};
     __atomic_store_n(&trans_queue->head, bitmaps[0]->l_start_trans, MM_RELAXED);
     __atomic_store_n(&trans_queue->tail, bitmaps[0]->l_start_trans, MM_RELAXED);
 }
@@ -21,7 +21,7 @@ NbubLK::NbubLK(Table_config *config) : Nbub(config)
  *       Transaction Semantics       *
  ************************************/
 
-int NbubLK::trans_commit(int tid, uint64_t db_timestamp_t, uint64_t db_row_nums) 
+int CubitLK::trans_commit(int tid, uint64_t db_timestamp_t, uint64_t db_row_nums) 
 {
     ThreadInfo *th = &g_ths_info[tid];
     TransDesc *trans = (TransDesc *)__atomic_load_n(&th->active_trans, MM_ACQUIRE);
@@ -116,8 +116,8 @@ int NbubLK::trans_commit(int tid, uint64_t db_timestamp_t, uint64_t db_row_nums)
     return 0;
 }
 
-int NbubLK::merge_bitmap(int tid, uint32_t val, TransDesc *trans,
-        nbub::Bitmap *bitmap_old, nbub::Bitmap *bitmap_new, map<uint64_t, RUB> *rubs)
+int CubitLK::merge_bitmap(int tid, uint32_t val, TransDesc *trans,
+        cubit::Bitmap *bitmap_old, cubit::Bitmap *bitmap_new, map<uint64_t, RUB> *rubs)
 {
     /* Prepare trans_merge */
     struct TransDesc *trans_merge = allocate_trans();

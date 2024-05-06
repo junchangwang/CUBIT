@@ -4,7 +4,7 @@
 
 #include "fastbit/bitvector.h"
 #include "nicolas/base_table.h"
-#include "nbub/table.h"
+#include "cubit/table.h"
 
 using namespace std;
 
@@ -14,11 +14,11 @@ bool run_merge_func = false;
 
 void merge_func(BaseTable *table, int begin, int range, Table_config *config)
 {
-    assert((config->approach == "nbub-lf") || (config->approach == "nbub-lk"));
+    assert((config->approach == "cubit-lf") || (config->approach == "cubit-lk"));
 
     rcu_register_thread();
 
-    nbub::Nbub* table2 = dynamic_cast<nbub::Nbub*>(table);
+    cubit::Cubit* table2 = dynamic_cast<cubit::Cubit*>(table);
 
     while (READ_ONCE(run_merge_func)) {
         int n_merges = 0;
@@ -31,7 +31,7 @@ void merge_func(BaseTable *table, int begin, int range, Table_config *config)
                 // if there are more reqs in a single queue.
                 while (table2->merge_req_queues[q].size() > 0) 
                 {
-                    struct nbub::Nbub::merge_req *req = table2->merge_req_queues[q].front();
+                    struct cubit::Cubit::merge_req *req = table2->merge_req_queues[q].front();
 
                     if (config->enable_fence_pointer) {
                         if (config->segmented_btv) {
@@ -47,12 +47,12 @@ void merge_func(BaseTable *table, int begin, int range, Table_config *config)
                             req->btm_old, req->btm_new, req->rubs);
 
                     if (ret == 0) {
-                        // call_rcu(&req->btm_old->head, nbub::free_bitmap_cb);
+                        // call_rcu(&req->btm_old->head, cubit::free_bitmap_cb);
                         // cout << "[CUBIT:] Successfully merge one bitvector on btv " << req->val 
                         //     << " from " << req->btm_old << " to " << req->btm_new << endl;
                     }
                     else {
-                        nbub::free_bitmap_cb(&req->btm_new->head);
+                        cubit::free_bitmap_cb(&req->btm_new->head);
                         // cout << "[CUBIT:] Failed to merge one bitvector on btv " << req->val 
                         //     << " from " << req->btm_old << " to " << req->btm_new << endl;
                     }

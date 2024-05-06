@@ -55,7 +55,7 @@ def help_gen_data_and_index(N, C, index_path): # N for number_of_rows; C for car
 
 ###################################### cmd for WPMT #########################################
 
-def gen_cmd_nbub_WPMT(w, a, v, total, ratio, index_path, WPMT):
+def gen_cmd_cubit_WPMT(w, a, v, total, ratio, index_path, WPMT):
     cmd = './build/nicolas -q {} -w {} -a {} -m {} --number-of-queries {} -r {} -c {} -i {} -n {} -v {} --fence-pointer yes --fence-length 100000 --merge-threshold {} --rows-per-seg {} --num-embarr-parallel {} --parallel-cnt {} > dat_tmp_WPMT/figure_{}_{}_raw_w_{}_ratio_{}_WPMT_{}.dat'.format(WPMT, w, a, mode, int(total * (1 - ratio)), int(total * ratio), cardinality, index_path, number_of_rows, v, MERGE_THRESHOLD_NBUB, ROWS_PER_SEG, NUM_EMBARR_PARALLEL, PARALLEL_CNT, a, 'latency' if (v == 'yes') else 'throughput',w, ratio, WPMT)
     return cmd
 
@@ -110,33 +110,33 @@ def latency_analysis(filename):
 
 ############################################## NBUB-lk ##########################################################
 #WPMT
-# def gen_figure_nbub_lk_latency_WPMT():
-#     print ('Figure nbub-lk_latency_WPMT')
+# def gen_figure_cubit_lk_latency_WPMT():
+#     print ('Figure cubit-lk_latency_WPMT')
 #     print ('-' * 10)    
-#     f = open('dat/figure_nbub-lk_latency_WPMT.dat','w')
+#     f = open('dat/figure_cubit-lk_latency_WPMT.dat','w')
 #     for num in merge_threshold_num:
-#         cmd = gen_cmd_others_WPMT(core_for_WPMT, 'nbub-lk', 'yes', 1000, ratio_percentage, index_path, num)
+#         cmd = gen_cmd_others_WPMT(core_for_WPMT, 'cubit-lk', 'yes', 1000, ratio_percentage, index_path, num)
 #         print(cmd)
 #         os.system(cmd) 
-#         ret = latency_analysis('dat_tmp_WPMT/figure_nbub-lk_latency_raw_w_{}_ratio_{}_WPMT_{}.dat'.format(core_for_WPMT, ratio_percentage, num))  
+#         ret = latency_analysis('dat_tmp_WPMT/figure_cubit-lk_latency_raw_w_{}_ratio_{}_WPMT_{}.dat'.format(core_for_WPMT, ratio_percentage, num))  
 #         print(ret)     
 #         print('\n')
 #         # output for gnuplot
 #     f.close()
 ############################################## NBUB_LF ##########################################################
 #WPMT
-def gen_figure_nbub_lf_latency_WPMT():
-    print ('Figure nbub-lf_latency_WPMT')
+def gen_figure_cubit_lf_latency_WPMT():
+    print ('Figure cubit-lf_latency_WPMT')
     print ('-' * 10)    
     ret = [[]]
     ret.clear()
     for num in workers_num:
         temp_list = []
         temp_list.clear()
-        cmd = gen_cmd_others_WPMT(core_for_WPMT, 'nbub-lf', 'yes', 1000, ratio_percentage, index_path, num)
+        cmd = gen_cmd_others_WPMT(core_for_WPMT, 'cubit-lf', 'yes', 1000, ratio_percentage, index_path, num)
         print(cmd)
         os.system(cmd) 
-        res = latency_analysis('dat_tmp_WPMT/figure_nbub-lf_latency_raw_w_{}_ratio_{}_WPMT_{}.dat'.format(core_for_WPMT, ratio_percentage, num))  
+        res = latency_analysis('dat_tmp_WPMT/figure_cubit-lf_latency_raw_w_{}_ratio_{}_WPMT_{}.dat'.format(core_for_WPMT, ratio_percentage, num))  
         print(res)     
         print('\n')
         temp_list.append(res[0])
@@ -146,12 +146,12 @@ def gen_figure_nbub_lf_latency_WPMT():
     return ret
 
 def run():
-    # #nbub-lk
-    # gen_figure_nbub_lk_latency_WPMT()
+    # #cubit-lk
+    # gen_figure_cubit_lk_latency_WPMT()
 
-    # #nbub_lf
-    f = open('dat/figure_nbub-lf_latency_WPMT.dat','w')
-    ret = gen_figure_nbub_lf_latency_WPMT()
+    # #cubit_lf
+    f = open('dat/figure_cubit-lf_latency_WPMT.dat','w')
+    ret = gen_figure_cubit_lf_latency_WPMT()
     f.write('{} 1\n'.format(ret[0][0]))
     f.write('{} 2\n'.format(ret[0][1]))
     f.write('{} 4\n'.format(ret[1][0]))

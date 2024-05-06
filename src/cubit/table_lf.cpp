@@ -8,11 +8,11 @@
 #include "nicolas/base_table.h"
 
 using namespace std;
-using namespace nbub_lf;
+using namespace cubit_lf;
 
-NbubLF::NbubLF(Table_config *config) : Nbub(config)
+CubitLF::CubitLF(Table_config *config) : Cubit(config)
 {
-    trans_queue = new nbub::queue_t{};
+    trans_queue = new cubit::queue_t{};
     __atomic_store_n(&trans_queue->head, bitmaps[0]->l_start_trans, MM_RELAXED);
     __atomic_store_n(&trans_queue->tail, bitmaps[0]->l_start_trans, MM_RELAXED);
     
@@ -23,13 +23,13 @@ NbubLF::NbubLF(Table_config *config) : Nbub(config)
     }
 }
 
-int NbubLF::help_insert_trans(TransDesc *tail, TransDesc *trans)
+int CubitLF::help_insert_trans(TransDesc *tail, TransDesc *trans)
 { 
     // Insert new bitmap if necessary
     if ((trans->bitmap_new_h != NULL) &&
-        (__atomic_load_n(&bitmaps[trans->val_h], MM_RELAXED) != (nbub::Bitmap *)trans->bitmap_new_h)) {
-        if (cmpxchg(&bitmaps[trans->val_h], (nbub::Bitmap *)trans->bitmap_old_h, (nbub::Bitmap *)trans->bitmap_new_h) 
-                != (nbub::Bitmap *)trans->bitmap_old_h) {
+        (__atomic_load_n(&bitmaps[trans->val_h], MM_RELAXED) != (cubit::Bitmap *)trans->bitmap_new_h)) {
+        if (cmpxchg(&bitmaps[trans->val_h], (cubit::Bitmap *)trans->bitmap_old_h, (cubit::Bitmap *)trans->bitmap_new_h) 
+                != (cubit::Bitmap *)trans->bitmap_old_h) {
             #if defined(VERIFY_RESULTS)
             cout << "NOTE: In help_insert_trans(): bitmap_new has been set by other helpers." << endl;
             #endif
@@ -62,7 +62,7 @@ int NbubLF::help_insert_trans(TransDesc *tail, TransDesc *trans)
  *       Transaction Semantics       *
  ************************************/
 
-int NbubLF::trans_commit(int tid, uint64_t db_timestamp_t, uint64_t db_row_nums) 
+int CubitLF::trans_commit(int tid, uint64_t db_timestamp_t, uint64_t db_row_nums) 
 {
     ThreadInfo *th = &g_ths_info[tid];
     TransDesc *trans = (TransDesc *)__atomic_load_n(&th->active_trans, MM_ACQUIRE);
@@ -143,8 +143,8 @@ int NbubLF::trans_commit(int tid, uint64_t db_timestamp_t, uint64_t db_row_nums)
     return 0;
 }
 
-int NbubLF::merge_bitmap(int tid, uint32_t val, TransDesc *trans,
-        nbub::Bitmap *bitmap_old, nbub::Bitmap *bitmap_new, map<uint64_t, RUB> *rubs)
+int CubitLF::merge_bitmap(int tid, uint32_t val, TransDesc *trans,
+        cubit::Bitmap *bitmap_old, cubit::Bitmap *bitmap_new, map<uint64_t, RUB> *rubs)
 {
     /* Prepare trans_merge */
     TransDesc *trans_merge = allocate_trans();

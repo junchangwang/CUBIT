@@ -18,9 +18,9 @@
 #include "ub/table.h"
 #include "ucb/table.h"
 #include "naive/table.h"
-#include "nbub/table.h"
-#include "nbub/table_lf.h"
-#include "nbub/table_lk.h"
+#include "cubit/table.h"
+#include "cubit/table_lf.h"
+#include "cubit/table_lk.h"
 
 #ifdef LINUX
 #include "nicolas/perf.h"
@@ -100,9 +100,9 @@ void verify_op_rcu(int rid, int expected_val, Table_config *config)
     //     ub::Table* table2 = dynamic_cast<ub::Table*>(table);
     //     assert(table2->get_value(rid) == expected_val);
     // }
-    if ((config->approach == "nbub-lf") || (config->approach == "nbub-lk")) {
+    if ((config->approach == "cubit-lf") || (config->approach == "cubit-lk")) {
         RUB rub_t{0, TYPE_INV, {}};
-        nbub::Nbub* table2 = dynamic_cast<nbub::Nbub*>(table);
+        cubit::Cubit* table2 = dynamic_cast<cubit::Cubit*>(table);
         assert(table2->get_value_rcu(rid, table2->get_g_timestamp(), rub_t) == expected_val);
     }
     return;
@@ -288,10 +288,10 @@ void evaluate(Table_config *config, string mode)
     auto t1 = std::chrono::high_resolution_clock::now();
     if (config->approach == "ub") {
         table = new ub::Table(config);
-    } else if (config->approach == "nbub-lk") {
-        table = new nbub_lk::NbubLK(config);
-    } else if (config->approach == "nbub-lf" || config->approach =="nbub") {
-        table = new nbub_lf::NbubLF(config);
+    } else if (config->approach == "cubit-lk") {
+        table = new cubit_lk::CubitLK(config);
+    } else if (config->approach == "cubit-lf" || config->approach =="cubit") {
+        table = new cubit_lf::CubitLF(config);
     } else if (config->approach == "ucb") {
         table = new ucb::Table(config);
     } else if (config->approach == "naive") {
@@ -323,9 +323,9 @@ void evaluate(Table_config *config, string mode)
     int n_merge_ths;
     std::thread *merge_ths;
 
-    if ((config->approach == "nbub-lf") || (config->approach == "nbub-lk")) 
+    if ((config->approach == "cubit-lf") || (config->approach == "cubit-lk")) 
     {
-        nbub::Nbub *bitmap = dynamic_cast<nbub::Nbub*>(table);
+        cubit::Cubit *bitmap = dynamic_cast<cubit::Cubit*>(table);
         merge_ths = new thread[config->n_workers / WORKERS_PER_MERGE_TH + 1];
 
         __atomic_store_n(&run_merge_func, true, MM_CST);
@@ -365,7 +365,7 @@ void evaluate(Table_config *config, string mode)
     }
     delete[] ths;
 
-    if ((config->approach == "nbub-lf") || (config->approach == "nbub-lk")) 
+    if ((config->approach == "cubit-lf") || (config->approach == "cubit-lk")) 
     {
         __atomic_store_n(&run_merge_func, false, MM_CST);
 

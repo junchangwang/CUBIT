@@ -8,15 +8,15 @@ set xtics ("1" 1, "2" 2 1, "4" 4, "8" 8, "16" 16, "24" 24, "32" 32)
 set yrange [0:]
 set xrange [0:35]
 set terminal png font 'Linux Libertine O,15' size 400, 500
-set output "../graphs/multiple_ub+nbub-lk+nbub-lf/Figure_multiple_throughput_core_ub+nbub-lk+nbub-lf.png"
+set output "../graphs/multiple_ub+cubit-lk+cubit-lf/Figure_multiple_throughput_core_ub+cubit-lk+cubit-lf.png"
 set key font ",18" reverse Left top left
 
-plot "../dat/figure_nbub-lf_throughput_core.dat" title "CUBIT-lf" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
-    "../dat/figure_nbub-lk_throughput_core.dat" title "CUBIT-lk" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+plot "../dat/figure_cubit-lf_throughput_core.dat" title "CUBIT-lf" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+    "../dat/figure_cubit-lk_throughput_core.dat" title "CUBIT-lk" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
       "../dat/figure_ub_throughput_core.dat" title "UpBit" lc rgb "green" lw 8 ps 1.5 pt 10 dt 9 with linespoints
 
 set terminal eps font 'Linux Libertine O,17' 
-set output "../graphs/multiple_ub+nbub-lk+nbub-lf/Figure_multiple_throughput_core_ub+nbub-lk+nbub-lf.eps"
+set output "../graphs/multiple_ub+cubit-lk+cubit-lf/Figure_multiple_throughput_core_ub+cubit-lk+cubit-lf.eps"
 replot
 
 #all_throughput_ratio
@@ -27,15 +27,15 @@ set ylabel "Throughput (op/s)" font 'Linux Libertine O,25'
 set xlabel font 'Linux Libertine O,25' "UDI ratio"
 set yrange [0:]
 set terminal png font 'Linux Libertine O,15' size 400, 500
-set output "../graphs/multiple_ub+nbub-lk+nbub-lf/Figure_multiple_throughput_ratio_ub+nbub-lk+nbub-lf.png"
+set output "../graphs/multiple_ub+cubit-lk+cubit-lf/Figure_multiple_throughput_ratio_ub+cubit-lk+cubit-lf.png"
 set key font ",18" reverse Left top
 
-plot  "../dat/figure_nbub-lf_throughput_ratio.dat" title "CUBIT-lf" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
-    "../dat/figure_nbub-lk_throughput_ratio.dat" title "CUBIT-lk" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+plot  "../dat/figure_cubit-lf_throughput_ratio.dat" title "CUBIT-lf" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+    "../dat/figure_cubit-lk_throughput_ratio.dat" title "CUBIT-lk" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
       "../dat/figure_ub_throughput_ratio.dat" title "UpBit" lc rgb "green" lw 8 ps 1.5 pt 10 dt 9 with linespoints
 
 set terminal eps font 'Linux Libertine O,17' 
-set output "../graphs/multiple_ub+nbub-lk+nbub-lf/Figure_multiple_throughput_ratio_ub+nbub-lk+nbub-lf.eps"
+set output "../graphs/multiple_ub+cubit-lk+cubit-lf/Figure_multiple_throughput_ratio_ub+cubit-lk+cubit-lf.eps"
 replot
 
 
@@ -49,15 +49,15 @@ set xtics ("1" 1, "2" 2 1, "4" 4, "8" 8, "16" 16, "24" 24, "32" 32)
 set yrange [0:]
 set xrange [0:35]
 set terminal png font 'Linux Libertine O,15' size 400, 500
-set output "../graphs/multiple_ub+nbub-lk+nbub-lf/Figure_multiple_latency_core_Query_ub+nbub-lk+nbub-lf.png"
+set output "../graphs/multiple_ub+cubit-lk+cubit-lf/Figure_multiple_latency_core_Query_ub+cubit-lk+cubit-lf.png"
 set key font ",18" reverse Left top left
 
-plot "../dat/figure_nbub-lf_latency_core.dat" every 5::0::30 title "CUBIT-lf" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
-      "../dat/figure_nbub-lk_latency_core.dat" every 5::0::30 title "CUBIT-lk" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+plot "../dat/figure_cubit-lf_latency_core.dat" every 5::0::30 title "CUBIT-lf" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+      "../dat/figure_cubit-lk_latency_core.dat" every 5::0::30 title "CUBIT-lk" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
       "../dat/figure_ub_latency_core.dat" every 5::0::30 title "UpBit" lc rgb "green" lw 8 ps 1.5 pt 10 dt 9 with linespoints
 
 set terminal eps font 'Linux Libertine O,17' 
-set output "../graphs/multiple_ub+nbub-lk+nbub-lf/Figure_multiple_latency_core_Query_ub+nbub-lk+nbub-lf.eps"
+set output "../graphs/multiple_ub+cubit-lk+cubit-lf/Figure_multiple_latency_core_Query_ub+cubit-lk+cubit-lf.eps"
 replot
 
 #all_latency_core_Update
@@ -70,15 +70,15 @@ set xtics ("1" 1, "2" 2 1, "4" 4, "8" 8, "16" 16, "24" 24, "32" 32)
 set yrange [0:]
 set xrange [0:35]
 set terminal png font 'Linux Libertine O,15' size 400, 500
-set output "../graphs/multiple_ub+nbub-lk+nbub-lf/Figure_multiple_latency_core_Update_ub+nbub-lk+nbub-lf.png"
+set output "../graphs/multiple_ub+cubit-lk+cubit-lf/Figure_multiple_latency_core_Update_ub+cubit-lk+cubit-lf.png"
 set key font ",18" reverse Left top left
 
-plot "../dat/figure_nbub-lf_latency_core.dat" every 5::1::31 title "CUBIT-lf" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
-      "../dat/figure_nbub-lk_latency_core.dat" every 5::1::31 title "CUBIT-lk" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+plot "../dat/figure_cubit-lf_latency_core.dat" every 5::1::31 title "CUBIT-lf" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+      "../dat/figure_cubit-lk_latency_core.dat" every 5::1::31 title "CUBIT-lk" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
       "../dat/figure_ub_latency_core.dat" every 5::1::31 title "UpBit" lc rgb "green" lw 8 ps 1.5 pt 10 dt 9 with linespoints
 
 set terminal eps font 'Linux Libertine O,17' 
-set output "../graphs/multiple_ub+nbub-lk+nbub-lf/Figure_multiple_latency_core_Update_ub+nbub-lk+nbub-lf.eps"
+set output "../graphs/multiple_ub+cubit-lk+cubit-lf/Figure_multiple_latency_core_Update_ub+cubit-lk+cubit-lf.eps"
 replot
 
 #all_latency_core_Insert
@@ -91,15 +91,15 @@ set xtics ("1" 1, "2" 2 1, "4" 4, "8" 8, "16" 16, "24" 24, "32" 32)
 set yrange [0:]
 set xrange [0:35]
 set terminal png font 'Linux Libertine O,15' size 400, 500
-set output "../graphs/multiple_ub+nbub-lk+nbub-lf/Figure_multiple_latency_core_Insert_ub+nbub-lk+nbub-lf.png"
+set output "../graphs/multiple_ub+cubit-lk+cubit-lf/Figure_multiple_latency_core_Insert_ub+cubit-lk+cubit-lf.png"
 set key font ",18" reverse Left top left
 
-plot  "../dat/figure_nbub-lf_latency_core.dat" every 5::2::32 title "CUBIT-lf" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
-      "../dat/figure_nbub-lk_latency_core.dat" every 5::2::32 title "CUBIT-lk" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+plot  "../dat/figure_cubit-lf_latency_core.dat" every 5::2::32 title "CUBIT-lf" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+      "../dat/figure_cubit-lk_latency_core.dat" every 5::2::32 title "CUBIT-lk" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
       "../dat/figure_ub_latency_core.dat" every 5::2::32 title "UpBit" lc rgb "green" lw 8 ps 1.5 pt 10 dt 9 with linespoints
 
 set terminal eps font 'Linux Libertine O,17' 
-set output "../graphs/multiple_ub+nbub-lk+nbub-lf/Figure_multiple_latency_core_Insert_ub+nbub-lk+nbub-lf.eps"
+set output "../graphs/multiple_ub+cubit-lk+cubit-lf/Figure_multiple_latency_core_Insert_ub+cubit-lk+cubit-lf.eps"
 replot
 
 #all_latency_core_Delete
@@ -112,15 +112,15 @@ set xtics ("1" 1, "2" 2 1, "4" 4, "8" 8, "16" 16, "24" 24, "32" 32)
 set yrange [0:]
 set xrange [0:35]
 set terminal png font 'Linux Libertine O,15' size 400, 500
-set output "../graphs/multiple_ub+nbub-lk+nbub-lf/Figure_multiple_latency_core_Delete_ub+nbub-lk+nbub-lf.png"
+set output "../graphs/multiple_ub+cubit-lk+cubit-lf/Figure_multiple_latency_core_Delete_ub+cubit-lk+cubit-lf.png"
 set key font ",18" reverse Left top left
 
-plot "../dat/figure_nbub-lf_latency_core.dat" every 5::3::33 title "CUBIT-lf" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
-      "../dat/figure_nbub-lk_latency_core.dat" every 5::3::33 title "CUBIT-lk" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+plot "../dat/figure_cubit-lf_latency_core.dat" every 5::3::33 title "CUBIT-lf" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+      "../dat/figure_cubit-lk_latency_core.dat" every 5::3::33 title "CUBIT-lk" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
       "../dat/figure_ub_latency_core.dat" every 5::3::33 title "UpBit" lc rgb "green" lw 8 ps 1.5 pt 10 dt 9 with linespoints
 
 set terminal eps font 'Linux Libertine O,17' 
-set output "../graphs/multiple_ub+nbub-lk+nbub-lf/Figure_multiple_latency_core_Delete_ub+nbub-lk+nbub-lf.eps"
+set output "../graphs/multiple_ub+cubit-lk+cubit-lf/Figure_multiple_latency_core_Delete_ub+cubit-lk+cubit-lf.eps"
 replot
 
 #all_latency_core_All
@@ -133,15 +133,15 @@ set xtics ("1" 1, "2" 2 1, "4" 4, "8" 8, "16" 16, "24" 24, "32" 32)
 set yrange [0:]
 set xrange [0:35]
 set terminal png font 'Linux Libertine O,15' size 400, 500
-set output "../graphs/multiple_ub+nbub-lk+nbub-lf/Figure_multiple_latency_core_Overall_ub+nbub-lk+nbub-lf.png"
+set output "../graphs/multiple_ub+cubit-lk+cubit-lf/Figure_multiple_latency_core_Overall_ub+cubit-lk+cubit-lf.png"
 set key font ",18" reverse Left top left
 
-plot "../dat/figure_nbub-lf_latency_core.dat" every 5::4::34 title "CUBIT-lf" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
-      "../dat/figure_nbub-lk_latency_core.dat" every 5::4::34 title "CUBIT-lk" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+plot "../dat/figure_cubit-lf_latency_core.dat" every 5::4::34 title "CUBIT-lf" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+      "../dat/figure_cubit-lk_latency_core.dat" every 5::4::34 title "CUBIT-lk" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
       "../dat/figure_ub_latency_core.dat" every 5::4::34 title "UpBit" lc rgb "green" lw 8 ps 1.5 pt 10 dt 9 with linespoints
 
 set terminal eps font 'Linux Libertine O,17' 
-set output "../graphs/multiple_ub+nbub-lk+nbub-lf/Figure_multiple_latency_core_Overall_ub+nbub-lk+nbub-lf.eps"
+set output "../graphs/multiple_ub+cubit-lk+cubit-lf/Figure_multiple_latency_core_Overall_ub+cubit-lk+cubit-lf.eps"
 replot
 
 
@@ -153,15 +153,15 @@ set ylabel "Query latency (ms)" font 'Linux Libertine O,25'
 set xlabel font 'Linux Libertine O,25' "UDI ratio"
 set yrange [0:]
 set terminal png font 'Linux Libertine O,15' size 400, 500
-set output "../graphs/multiple_ub+nbub-lk+nbub-lf/Figure_multiple_latency_ratio_Query_ub+nbub-lk+nbub-lf.png"
+set output "../graphs/multiple_ub+cubit-lk+cubit-lf/Figure_multiple_latency_ratio_Query_ub+cubit-lk+cubit-lf.png"
 set key font ",18" reverse Left top left
 
-plot "../dat/figure_nbub-lf_latency_ratio.dat" every 5::0::30 title "CUBIT-lf" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
-      "../dat/figure_nbub-lk_latency_ratio.dat" every 5::0::30 title "CUBIT-lk" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+plot "../dat/figure_cubit-lf_latency_ratio.dat" every 5::0::30 title "CUBIT-lf" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+      "../dat/figure_cubit-lk_latency_ratio.dat" every 5::0::30 title "CUBIT-lk" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
       "../dat/figure_ub_latency_ratio.dat" every 5::0::30 title "UpBit" lc rgb "green" lw 8 ps 1.5 pt 10 dt 9 with linespoints
 
 set terminal eps font 'Linux Libertine O,17' 
-set output "../graphs/multiple_ub+nbub-lk+nbub-lf/Figure_multiple_latency_ratio_Query_ub+nbub-lk+nbub-lf.eps"
+set output "../graphs/multiple_ub+cubit-lk+cubit-lf/Figure_multiple_latency_ratio_Query_ub+cubit-lk+cubit-lf.eps"
 replot
 
 #all_latency_ratio_Update
@@ -172,15 +172,15 @@ set ylabel "Update latency (ms)" font 'Linux Libertine O,25'
 set xlabel font 'Linux Libertine O,25' "UDI ratio"
 set yrange [0:]
 set terminal png font 'Linux Libertine O,15' size 400, 500
-set output "../graphs/multiple_ub+nbub-lk+nbub-lf/Figure_multiple_latency_ratio_Update_ub+nbub-lk+nbub-lf.png"
+set output "../graphs/multiple_ub+cubit-lk+cubit-lf/Figure_multiple_latency_ratio_Update_ub+cubit-lk+cubit-lf.png"
 set key font ",18" reverse Left top left
 
-plot "../dat/figure_nbub-lf_latency_ratio.dat" every 5::1::31 title "CUBIT-lf" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
-      "../dat/figure_nbub-lk_latency_ratio.dat" every 5::1::31 title "CUBIT-lk" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+plot "../dat/figure_cubit-lf_latency_ratio.dat" every 5::1::31 title "CUBIT-lf" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+      "../dat/figure_cubit-lk_latency_ratio.dat" every 5::1::31 title "CUBIT-lk" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
       "../dat/figure_ub_latency_ratio.dat" every 5::1::31 title "UpBit" lc rgb "green" lw 8 ps 1.5 pt 10 dt 9 with linespoints
 
 set terminal eps font 'Linux Libertine O,17' 
-set output "../graphs/multiple_ub+nbub-lk+nbub-lf/Figure_multiple_latency_ratio_Update_ub+nbub-lk+nbub-lf.eps"
+set output "../graphs/multiple_ub+cubit-lk+cubit-lf/Figure_multiple_latency_ratio_Update_ub+cubit-lk+cubit-lf.eps"
 replot
 
 #all_latency_ratio_Insert
@@ -191,15 +191,15 @@ set ylabel "Insert latency (ms)" font 'Linux Libertine O,25'
 set xlabel font 'Linux Libertine O,25' "UDI ratio"
 set yrange [0:]
 set terminal png font 'Linux Libertine O,15' size 400, 500
-set output "../graphs/multiple_ub+nbub-lk+nbub-lf/Figure_multiple_latency_ratio_Insert_ub+nbub-lk+nbub-lf.png"
+set output "../graphs/multiple_ub+cubit-lk+cubit-lf/Figure_multiple_latency_ratio_Insert_ub+cubit-lk+cubit-lf.png"
 set key font ",18" reverse Left top left
 
-plot "../dat/figure_nbub-lf_latency_ratio.dat" every 5::2::32 title "CUBIT-lf" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
-      "../dat/figure_nbub-lk_latency_ratio.dat" every 5::2::32 title "CUBIT-lk" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+plot "../dat/figure_cubit-lf_latency_ratio.dat" every 5::2::32 title "CUBIT-lf" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+      "../dat/figure_cubit-lk_latency_ratio.dat" every 5::2::32 title "CUBIT-lk" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
       "../dat/figure_ub_latency_ratio.dat" every 5::2::32 title "UpBit" lc rgb "green" lw 8 ps 1.5 pt 10 dt 9 with linespoints
 
 set terminal eps font 'Linux Libertine O,17' 
-set output "../graphs/multiple_ub+nbub-lk+nbub-lf/Figure_multiple_latency_ratio_Insert_ub+nbub-lk+nbub-lf.eps"
+set output "../graphs/multiple_ub+cubit-lk+cubit-lf/Figure_multiple_latency_ratio_Insert_ub+cubit-lk+cubit-lf.eps"
 replot
 
 #all_latency_ratio_Delete
@@ -210,15 +210,15 @@ set ylabel "Delete latency (ms)" font 'Linux Libertine O,25'
 set xlabel font 'Linux Libertine O,25' "UDI ratio"
 set yrange [0:]
 set terminal png font 'Linux Libertine O,15' size 400, 500
-set output "../graphs/multiple_ub+nbub-lk+nbub-lf/Figure_multiple_latency_ratio_Delete_ub+nbub-lk+nbub-lf.png"
+set output "../graphs/multiple_ub+cubit-lk+cubit-lf/Figure_multiple_latency_ratio_Delete_ub+cubit-lk+cubit-lf.png"
 set key font ",18" reverse Left top left
 
-plot "../dat/figure_nbub-lf_latency_ratio.dat" every 5::3::33 title "CUBIT-lf" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
-      "../dat/figure_nbub-lk_latency_ratio.dat" every 5::3::33 title "CUBIT-lk" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+plot "../dat/figure_cubit-lf_latency_ratio.dat" every 5::3::33 title "CUBIT-lf" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+      "../dat/figure_cubit-lk_latency_ratio.dat" every 5::3::33 title "CUBIT-lk" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
       "../dat/figure_ub_latency_ratio.dat" every 5::3::33 title "UpBit" lc rgb "green" lw 8 ps 1.5 pt 10 dt 9 with linespoints
 
 set terminal eps font 'Linux Libertine O,17' 
-set output "../graphs/multiple_ub+nbub-lk+nbub-lf/Figure_multiple_latency_ratio_Delete_ub+nbub-lk+nbub-lf.eps"
+set output "../graphs/multiple_ub+cubit-lk+cubit-lf/Figure_multiple_latency_ratio_Delete_ub+cubit-lk+cubit-lf.eps"
 replot
 
 #all_latency_ratio_All
@@ -229,15 +229,15 @@ set ylabel "Overall latency (ms)" font 'Linux Libertine O,25'
 set xlabel font 'Linux Libertine O,25' "UDI ratio"
 set yrange [0:]
 set terminal png font 'Linux Libertine O,15' size 400, 500
-set output "../graphs/multiple_ub+nbub-lk+nbub-lf/Figure_multiple_latency_ratio_Overall_ub+nbub-lk+nbub-lf.png"
+set output "../graphs/multiple_ub+cubit-lk+cubit-lf/Figure_multiple_latency_ratio_Overall_ub+cubit-lk+cubit-lf.png"
 set key font ",18" reverse Left top left
 
-plot  "../dat/figure_nbub-lf_latency_ratio.dat" every 5::4::34 title "CUBIT-lf" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
-      "../dat/figure_nbub-lk_latency_ratio.dat" every 5::4::34 title "CUBIT-lk" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+plot  "../dat/figure_cubit-lf_latency_ratio.dat" every 5::4::34 title "CUBIT-lf" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+      "../dat/figure_cubit-lk_latency_ratio.dat" every 5::4::34 title "CUBIT-lk" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
       "../dat/figure_ub_latency_ratio.dat" every 5::4::34 title "UpBit" lc rgb "green" lw 8 ps 1.5 pt 10 dt 9 with linespoints
 
 set terminal eps font 'Linux Libertine O,17' 
-set output "../graphs/multiple_ub+nbub-lk+nbub-lf/Figure_multiple_latency_ratio_Overall_ub+nbub-lk+nbub-lf.eps"
+set output "../graphs/multiple_ub+cubit-lk+cubit-lf/Figure_multiple_latency_ratio_Overall_ub+cubit-lk+cubit-lf.eps"
 replot
 
 
@@ -255,15 +255,15 @@ set xtics ("16" 16, "32" 32 , "64" 64, "128" 128, "256" 256)
 set yrange [0:]
 set xrange [10:260]
 set terminal png font 'Linux Libertine O,15' size 400, 500
-set output "../graphs/multiple_ub+nbub-lk+nbub-lf/Figure_multiple_throughput_cardinality_ub+nbub-lk+nbub-lf.png"
+set output "../graphs/multiple_ub+cubit-lk+cubit-lf/Figure_multiple_throughput_cardinality_ub+cubit-lk+cubit-lf.png"
 set key font ",18" reverse Left top left
 
-plot "../dat/figure_nbub-lf_throughput_cardinality.dat" title "CUBIT-lf" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
-    "../dat/figure_nbub-lk_throughput_cardinality.dat" title "CUBIT-lk" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+plot "../dat/figure_cubit-lf_throughput_cardinality.dat" title "CUBIT-lf" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+    "../dat/figure_cubit-lk_throughput_cardinality.dat" title "CUBIT-lk" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
       "../dat/figure_ub_throughput_cardinality.dat" title "UpBit" lc rgb "green" lw 8 ps 1.5 pt 10 dt 9 with linespoints
 
 set terminal eps font 'Linux Libertine O,17' 
-set output "../graphs/multiple_ub+nbub-lk+nbub-lf/Figure_multiple_throughput_cardinality_ub+nbub-lk+nbub-lf.eps"
+set output "../graphs/multiple_ub+cubit-lk+cubit-lf/Figure_multiple_throughput_cardinality_ub+cubit-lk+cubit-lf.eps"
 replot
 
 
@@ -278,15 +278,15 @@ set xtics ("16" 16, "32" 32 , "64" 64, "128" 128, "256" 256)
 set yrange [0:]
 set xrange [10:260]
 set terminal png font 'Linux Libertine O,15' size 400, 500
-set output "../graphs/multiple_ub+nbub-lk+nbub-lf/Figure_multiple_latency_cardinality_Query_ub+nbub-lk+nbub-lf.png"
+set output "../graphs/multiple_ub+cubit-lk+cubit-lf/Figure_multiple_latency_cardinality_Query_ub+cubit-lk+cubit-lf.png"
 set key font ",18" reverse Left top
 
-plot "../dat/figure_nbub-lf_latency_cardinality.dat" every 5::0::30 title "CUBIT-lf" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
-      "../dat/figure_nbub-lk_latency_cardinality.dat" every 5::0::30 title "CUBIT-lk" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+plot "../dat/figure_cubit-lf_latency_cardinality.dat" every 5::0::30 title "CUBIT-lf" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+      "../dat/figure_cubit-lk_latency_cardinality.dat" every 5::0::30 title "CUBIT-lk" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
       "../dat/figure_ub_latency_cardinality.dat" every 5::0::30 title "UpBit" lc rgb "green" lw 8 ps 1.5 pt 10 dt 9 with linespoints
 
 set terminal eps font 'Linux Libertine O,17' 
-set output "../graphs/multiple_ub+nbub-lk+nbub-lf/Figure_multiple_latency_cardinality_Query_ub+nbub-lk+nbub-lf.eps"
+set output "../graphs/multiple_ub+cubit-lk+cubit-lf/Figure_multiple_latency_cardinality_Query_ub+cubit-lk+cubit-lf.eps"
 replot
 
 #all_latency_cardinality_Update
@@ -299,15 +299,15 @@ set xtics ("16" 16, "32" 32 , "64" 64, "128" 128, "256" 256)
 set yrange [0:]
 set xrange [10:260]
 set terminal png font 'Linux Libertine O,15' size 400, 500
-set output "../graphs/multiple_ub+nbub-lk+nbub-lf/Figure_multiple_latency_cardinality_Update_ub+nbub-lk+nbub-lf.png"
+set output "../graphs/multiple_ub+cubit-lk+cubit-lf/Figure_multiple_latency_cardinality_Update_ub+cubit-lk+cubit-lf.png"
 set key font ",18" reverse Left top
 
-plot "../dat/figure_nbub-lf_latency_cardinality.dat" every 5::1::31 title "CUBIT-lf" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
-      "../dat/figure_nbub-lk_latency_cardinality.dat" every 5::1::31 title "CUBIT-lk" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+plot "../dat/figure_cubit-lf_latency_cardinality.dat" every 5::1::31 title "CUBIT-lf" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+      "../dat/figure_cubit-lk_latency_cardinality.dat" every 5::1::31 title "CUBIT-lk" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
       "../dat/figure_ub_latency_cardinality.dat" every 5::1::31 title "UpBit" lc rgb "green" lw 8 ps 1.5 pt 10 dt 9 with linespoints
 
 set terminal eps font 'Linux Libertine O,17' 
-set output "../graphs/multiple_ub+nbub-lk+nbub-lf/Figure_multiple_latency_cardinality_Update_ub+nbub-lk+nbub-lf.eps"
+set output "../graphs/multiple_ub+cubit-lk+cubit-lf/Figure_multiple_latency_cardinality_Update_ub+cubit-lk+cubit-lf.eps"
 replot
 
 #all_latency_cardinality_Insert
@@ -320,15 +320,15 @@ set xtics ("16" 16, "32" 32 , "64" 64, "128" 128, "256" 256)
 set yrange [0:]
 set xrange [10:260]
 set terminal png font 'Linux Libertine O,15' size 400, 500
-set output "../graphs/multiple_ub+nbub-lk+nbub-lf/Figure_multiple_latency_cardinality_Insert_ub+nbub-lk+nbub-lf.png"
+set output "../graphs/multiple_ub+cubit-lk+cubit-lf/Figure_multiple_latency_cardinality_Insert_ub+cubit-lk+cubit-lf.png"
 set key font ",18" reverse Left top
 
-plot  "../dat/figure_nbub-lf_latency_cardinality.dat" every 5::2::32 title "CUBIT-lf" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
-      "../dat/figure_nbub-lk_latency_cardinality.dat" every 5::2::32 title "CUBIT-lk" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+plot  "../dat/figure_cubit-lf_latency_cardinality.dat" every 5::2::32 title "CUBIT-lf" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+      "../dat/figure_cubit-lk_latency_cardinality.dat" every 5::2::32 title "CUBIT-lk" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
       "../dat/figure_ub_latency_cardinality.dat" every 5::2::32 title "UpBit" lc rgb "green" lw 8 ps 1.5 pt 10 dt 9 with linespoints
 
 set terminal eps font 'Linux Libertine O,17' 
-set output "../graphs/multiple_ub+nbub-lk+nbub-lf/Figure_multiple_latency_cardinality_Insert_ub+nbub-lk+nbub-lf.eps"
+set output "../graphs/multiple_ub+cubit-lk+cubit-lf/Figure_multiple_latency_cardinality_Insert_ub+cubit-lk+cubit-lf.eps"
 replot
 
 #all_latency_cardinality_Delete
@@ -341,15 +341,15 @@ set xtics ("16" 16, "32" 32 , "64" 64, "128" 128, "256" 256)
 set yrange [0:]
 set xrange [10:260]
 set terminal png font 'Linux Libertine O,15' size 400, 500
-set output "../graphs/multiple_ub+nbub-lk+nbub-lf/Figure_multiple_latency_cardinality_Delete_ub+nbub-lk+nbub-lf.png"
+set output "../graphs/multiple_ub+cubit-lk+cubit-lf/Figure_multiple_latency_cardinality_Delete_ub+cubit-lk+cubit-lf.png"
 set key font ",18" reverse Left top
 
-plot "../dat/figure_nbub-lf_latency_cardinality.dat" every 5::3::33 title "CUBIT-lf" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
-      "../dat/figure_nbub-lk_latency_cardinality.dat" every 5::3::33 title "CUBIT-lk" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+plot "../dat/figure_cubit-lf_latency_cardinality.dat" every 5::3::33 title "CUBIT-lf" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+      "../dat/figure_cubit-lk_latency_cardinality.dat" every 5::3::33 title "CUBIT-lk" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
       "../dat/figure_ub_latency_cardinality.dat" every 5::3::33 title "UpBit" lc rgb "green" lw 8 ps 1.5 pt 10 dt 9 with linespoints
 
 set terminal eps font 'Linux Libertine O,17' 
-set output "../graphs/multiple_ub+nbub-lk+nbub-lf/Figure_multiple_latency_cardinality_Delete_ub+nbub-lk+nbub-lf.eps"
+set output "../graphs/multiple_ub+cubit-lk+cubit-lf/Figure_multiple_latency_cardinality_Delete_ub+cubit-lk+cubit-lf.eps"
 replot
 
 #all_latency_cardinality_All
@@ -362,14 +362,14 @@ set xtics ("16" 16, "32" 32 , "64" 64, "128" 128, "256" 256)
 set yrange [0:]
 set xrange [10:260]
 set terminal png font 'Linux Libertine O,15' size 400, 500
-set output "../graphs/multiple_ub+nbub-lk+nbub-lf/Figure_multiple_latency_cardinality_Overall_ub+nbub-lk+nbub-lf.png"
+set output "../graphs/multiple_ub+cubit-lk+cubit-lf/Figure_multiple_latency_cardinality_Overall_ub+cubit-lk+cubit-lf.png"
 set key font ",18" reverse Left top
 
-plot "../dat/figure_nbub-lf_latency_cardinality.dat" every 5::4::34 title "CUBIT-lf" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
-      "../dat/figure_nbub-lk_latency_cardinality.dat" every 5::4::34 title "CUBIT-lk" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+plot "../dat/figure_cubit-lf_latency_cardinality.dat" every 5::4::34 title "CUBIT-lf" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
+      "../dat/figure_cubit-lk_latency_cardinality.dat" every 5::4::34 title "CUBIT-lk" lc rgb "blue" lw 8 ps 1.5 pt 6 with linespoints,\
       "../dat/figure_ub_latency_cardinality.dat" every 5::4::34 title "UpBit" lc rgb "green" lw 8 ps 1.5 pt 10 dt 9 with linespoints
 
 set terminal eps font 'Linux Libertine O,17' 
-set output "../graphs/multiple_ub+nbub-lk+nbub-lf/Figure_multiple_latency_cardinality_Overall_ub+nbub-lk+nbub-lf.eps"
+set output "../graphs/multiple_ub+cubit-lk+cubit-lf/Figure_multiple_latency_cardinality_Overall_ub+cubit-lk+cubit-lf.eps"
 replot
 
