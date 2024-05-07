@@ -3,6 +3,7 @@
 
 #include <thread>
 #include <future>
+#include <shared_mutex>
 
 #include "nicolas/util.h"
 #include "fastbit/bitvector.h"
@@ -41,7 +42,7 @@ protected:
     }
 };
 
-void merge_func(BaseTable *table, int begin, int range, Table_config *config);
+void merge_func(BaseTable *table, int begin, int range, Table_config *config, std::shared_mutex *bitmap_mutex = nullptr);
 
 extern bool run_merge_func;
 

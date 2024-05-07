@@ -335,13 +335,13 @@ void evaluate(Table_config *config, string mode)
             int begin = i * WORKERS_PER_MERGE_TH;
             int range = WORKERS_PER_MERGE_TH;
             cout << "Range for merge thread " << i << " : " << begin << " : " << range << endl;
-            merge_ths[i] = std::thread(merge_func, table, begin, range, config);
+            merge_ths[i] = std::thread(merge_func, table, begin, range, config, nullptr);
         }
         if ( config->n_workers % WORKERS_PER_MERGE_TH != 0) {
             int begin = n_merge_ths * WORKERS_PER_MERGE_TH;
             int range = (config->n_workers % WORKERS_PER_MERGE_TH);
             cout << "Range for merge thread " << n_merge_ths << " : " << begin << " : " << range << endl;
-            merge_ths[n_merge_ths] = std::thread(merge_func, table, begin, range, config);
+            merge_ths[n_merge_ths] = std::thread(merge_func, table, begin, range, config, nullptr);
             n_merge_ths ++;
         }
         cout << "Creating " << n_merge_ths << " merging threads" << endl;

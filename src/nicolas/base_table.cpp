@@ -10,7 +10,7 @@ using namespace std;
 
 bool run_merge_func = false;
 
-void merge_func(BaseTable *table, int begin, int range, Table_config *config)
+void merge_func(BaseTable *table, int begin, int range, Table_config *config, shared_mutex *bitmap_mutex)
 {
     assert((config->approach == "cubit-lf") || (config->approach == "cubit-lk"));
 
@@ -21,6 +21,8 @@ void merge_func(BaseTable *table, int begin, int range, Table_config *config)
     while (READ_ONCE(run_merge_func)) {
         int n_merges = 0;
         {
+            if(bitmap_mutex)
+                lock_guard<shared_mutex> guard(*bitmap_mutex);
             for (int q = begin; q < begin + range; q++) 
             {
                 lock_guard<mutex> lock(table2->lk_merge_req_queues[q]);
