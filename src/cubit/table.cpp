@@ -168,13 +168,6 @@ TransDesc * Cubit::trans_begin(int tid, uint64_t db_timestamp_t)
         }
     }
     else {
-        // NOTE: 
-        // The original CC in CUBIT is light-weight; only transactions including updates increment timestamp.
-        // In contrast, the CC in DBMS (e.g., DBx1000) increases timestamp for both queries and updates.
-        // In the latter case, if (trans->l_start_ts > READ_ONCE(trans->l_end_trans->l_commit_ts)),
-        // we cannot distinguish whether some queries have been successfully committed or a new trans has been
-        // inserted into the list. So we simply assume no new trans has been inserted when CUBIT is controled by DBx1000.
-
         if(db_timestamp_t != UINT64_MAX) {
             trans->l_start_ts = db_timestamp_t;
         }
