@@ -1,6 +1,6 @@
 [submodule "DuckDB"]
 	path = DuckDB
-	url = https://github.com/junchangwang/DuckDB-CUBIT
+	url = git@github.com:junchangwang/DuckDB-CUBIT.git
 [submodule "DBx1000"]
 	path = DBx1000
 	url = git@github.com:junchangwang/DBx1000-CUBIT.git
