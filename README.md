@@ -39,7 +39,7 @@ The above command writes the experimental results to a group of folders named gr
 ./gen_graphs_normal.sh graphs_x
 ```
 
-We can replicate other experiments by using the corresponding scripts (with different suffixes) in the directory figures-scripts/ . For example, the evaluation with 1B entries can be performed by using the two scripts run_sz_1B.sh and gen_graphs_1B.sh.
+We can replicate other experiments by using the corresponding scripts (with different suffixes) in the directory eva-scripts/ . For example, the evaluation with 1B entries can be performed by using the two scripts run_sz_1B.sh and gen_graphs_1B.sh.
 
 Note that it may take dozens of hours to run the whole experimentation for the first time because it involves generating datasets, which is time-consuming. Therefore, it is better to execute only the experiments that are of most interest each time.
 
