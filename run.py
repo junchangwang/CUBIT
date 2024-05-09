@@ -1,4 +1,3 @@
-
 from calendar import c
 from multiprocessing.pool import ApplyResult
 from numbers import Rational
@@ -34,7 +33,7 @@ number_of_rows = ONE_HUNDRED_MILLION # -n
 
 mode = "mix" # -m
 
-MERGE_THRESHOLD_NBUB = 20
+MERGE_THRESHOLD_CUBIT = 20
 
 ROWS_PER_SEG = 100000  # 0.1M
 
@@ -62,7 +61,7 @@ def gen_cmd_naive(w, a, v, total, ratio, index_path):
     return cmd
 
 def gen_cmd_cubit(w, a, v, total, ratio, index_path):
-    cmd = './build/nicolas -w {} -a {} -m {} --number-of-queries {} -r {} -c {} -i {} -n {} -v {} --fence-pointer yes --fence-length 100000 --merge-threshold {} --rows-per-seg {} --num-embarr-parallel {} --parallel-cnt {} > dat_tmp/figure_{}_{}_raw_w_{}_ratio_{}.dat'.format(w, a, mode, int(total * (1 - ratio)), int(total * ratio), cardinality, index_path, number_of_rows, v, MERGE_THRESHOLD_NBUB, ROWS_PER_SEG, NUM_EMBARR_PARALLEL, PARALLEL_CNT, a, 'latency' if (v == 'yes') else 'throughput',w, ratio )
+    cmd = './build/nicolas -w {} -a {} -m {} --number-of-queries {} -r {} -c {} -i {} -n {} -v {} --fence-pointer yes --fence-length 100000 --merge-threshold {} --rows-per-seg {} --num-embarr-parallel {} --parallel-cnt {} > dat_tmp/figure_{}_{}_raw_w_{}_ratio_{}.dat'.format(w, a, mode, int(total * (1 - ratio)), int(total * ratio), cardinality, index_path, number_of_rows, v, MERGE_THRESHOLD_CUBIT, ROWS_PER_SEG, NUM_EMBARR_PARALLEL, PARALLEL_CNT, a, 'latency' if (v == 'yes') else 'throughput',w, ratio )
     return cmd
 
 def gen_cmd_others(w, a, v, total, ratio, index_path):
@@ -75,7 +74,7 @@ def gen_cmd_naive_cardinality(w, a, v, total, ratio, index_path, c, n):
     return cmd
 
 def gen_cmd_cubit_cardinality(w, a, v, total, ratio, index_path, c, n):
-    cmd = './build/nicolas -w {} -a {} -m {} --number-of-queries {} -r {} -c {} -i {} -n {} -v {} --fence-pointer yes --fence-length 100000 --merge-threshold {} --rows-per-seg {} --num-embarr-parallel {} --parallel-cnt {} > dat_tmp/figure_{}_{}_raw_w_{}_ratio_{}_c_{}.dat'.format(w, a, mode, int(total * (1 - ratio)), int(total * ratio), c, index_path, n, v, MERGE_THRESHOLD_NBUB, ROWS_PER_SEG, NUM_EMBARR_PARALLEL, PARALLEL_CNT, a, 'latency' if (v == 'yes') else 'throughput',w, ratio ,c)
+    cmd = './build/nicolas -w {} -a {} -m {} --number-of-queries {} -r {} -c {} -i {} -n {} -v {} --fence-pointer yes --fence-length 100000 --merge-threshold {} --rows-per-seg {} --num-embarr-parallel {} --parallel-cnt {} > dat_tmp/figure_{}_{}_raw_w_{}_ratio_{}_c_{}.dat'.format(w, a, mode, int(total * (1 - ratio)), int(total * ratio), c, index_path, n, v, MERGE_THRESHOLD_CUBIT, ROWS_PER_SEG, NUM_EMBARR_PARALLEL, PARALLEL_CNT, a, 'latency' if (v == 'yes') else 'throughput',w, ratio ,c)
     return cmd
 
 def gen_cmd_others_cardinality(w, a, v, total, ratio, index_path, c, n):
@@ -140,9 +139,7 @@ def latency_analysis(filename):
     return ret
 
 
-
-
-############################################## NAIVE ############################################################
+###################################### NAIVE ##########################################
 # naive throughput, core
 def gen_figure_naive_throughput_core(): 
     print ('Figure naive_throughput_core')
@@ -242,7 +239,7 @@ def gen_figure_naive_latency_cardinality():
             f.write('{} {} \n'.format(num, ret[i]))
     f.close()
 
-############################################## UCB ############################################################
+################################# UCB ############################################
 
 # ucb throughput, core
 def gen_figure_ucb_throughput_core(): 
@@ -343,7 +340,7 @@ def gen_figure_ucb_latency_cardinality():
             f.write('{} {} \n'.format(num, ret[i]))
     f.close()
 
-############################################## UB ##########################################################
+################################## UB ###############################################
 # ub throughput, core
 def gen_figure_ub_throughput_core(): 
     print ('Figure ub_throughput_core')
@@ -443,7 +440,7 @@ def gen_figure_ub_latency_cardinality():
             f.write('{} {} \n'.format(num, ret[i]))
     f.close()
 
-############################################## NBUB-lk ##########################################################
+####################################### CUBIT-lk #############################################
 def gen_figure_cubit_lk_throughput_core(): 
     print ('Figure cubit-lk_throughput_core')
     print ('-' * 10)
@@ -542,7 +539,7 @@ def gen_figure_cubit_lk_latency_cardinality():
             f.write('{} {} \n'.format(num, ret[i]))
     f.close()
 
-############################################## NBUB_LF ##########################################################
+################################# CUBIT-LF ########################################
 def gen_figure_cubit_lf_throughput_core(): 
     print ('Figure cubit-lf_throughput_core')
     print ('-' * 10)
@@ -659,9 +656,9 @@ def gen_data_and_index():
     help_gen_data_and_index(number_of_rows, cardinality, index_path)
 
     # generate 100M_X   X = [16, 32, 64, 128, 256]
-    cardinality_array = [16, 32, 64, 128, 256]
-    for num in cardinality_array:
-        help_gen_data_and_index(ONE_HUNDRED_MILLION, num, "100M_{}".format(num))
+    # cardinality_array = [16, 32, 64, 128, 256]
+    # for num in cardinality_array:
+    #     help_gen_data_and_index(ONE_HUNDRED_MILLION, num, "100M_{}".format(num))
     
     # generate 1B_X   X = [16, 32, 64, 128, 256]
     # cardinality_array = [100]
@@ -672,42 +669,42 @@ def run():
     # #naive
     gen_figure_naive_throughput_core()
     gen_figure_naive_throughput_ratio()
-    gen_figure_naive_throughput_cardinality()
+    # gen_figure_naive_throughput_cardinality()
     gen_figure_naive_latency_core()
     gen_figure_naive_latency_ratio()
-    gen_figure_naive_latency_cardinality()
+    # gen_figure_naive_latency_cardinality()
 
     # #ucb
     gen_figure_ucb_throughput_core()
     gen_figure_ucb_throughput_ratio()
-    gen_figure_ucb_throughput_cardinality()
+    # gen_figure_ucb_throughput_cardinality()
     gen_figure_ucb_latency_core()
     gen_figure_ucb_latency_ratio()
-    gen_figure_ucb_latency_cardinality()
+    # gen_figure_ucb_latency_cardinality()
 
     # #ub
     gen_figure_ub_throughput_core()
     gen_figure_ub_throughput_ratio()
-    gen_figure_ub_throughput_cardinality()
+    # gen_figure_ub_throughput_cardinality()
     gen_figure_ub_latency_core()
     gen_figure_ub_latency_ratio()
-    gen_figure_ub_latency_cardinality()
+    # gen_figure_ub_latency_cardinality()
 
     # #cubit-lk
     gen_figure_cubit_lk_throughput_core()
     gen_figure_cubit_lk_throughput_ratio()
-    gen_figure_cubit_lk_throughput_cardinality()
+    # gen_figure_cubit_lk_throughput_cardinality()
     gen_figure_cubit_lk_latency_core()
     gen_figure_cubit_lk_latency_ratio()
-    gen_figure_cubit_lk_latency_cardinality()
+    # gen_figure_cubit_lk_latency_cardinality()
 
     # #cubit_lf
     gen_figure_cubit_lf_throughput_core()
     gen_figure_cubit_lf_throughput_ratio()
-    gen_figure_cubit_lf_throughput_cardinality()
+    # gen_figure_cubit_lf_throughput_cardinality()
     gen_figure_cubit_lf_latency_core()
     gen_figure_cubit_lf_latency_ratio()
-    gen_figure_cubit_lf_latency_cardinality()
+    # gen_figure_cubit_lf_latency_cardinality()
 
     #cdf
     #cdf()

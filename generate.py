@@ -12,7 +12,7 @@ N, C = int(sys.argv[1]), int(sys.argv[2])
 filename = 'a_' + str(N) + '_' + str(C)
 
 if (os.path.isfile(filename + "_done")):
-    print("Valide data file " + filename + " already exists. Skip creating.")
+    print("Data file " + filename + " already exists. Skip creating.")
     exit()
 
 print("To create datafile: " + filename)
