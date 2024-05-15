@@ -22,7 +22,7 @@ valgrind*
 run_temp.py
 Land_and_Ocean_EqualArea.nc
 earth_new/
-run_sz_tmp.py
+run_tmp.py
 ExperimentalData*
 
 
