@@ -22,8 +22,8 @@ for i in range(N):
     f.write(struct.pack('i', r.randint(1, C)))
 f.close()
 g = open(filename + "_done", 'wb')
-g.write("Created in ")
-g.write(str(datetime.now()))
+g.write("Created in ".encode("utf-8"))
+g.write(str(datetime.now()).encode("utf-8"))
 g.close()
 
 print("Datafile: " + filename + " has been created.")
