@@ -16,7 +16,7 @@ cp -r $1/dat $1/dat_tmp_Para ./
 
 cd gnuplot-scripts
 make make_dir_Para
-make figure_multiple_sz_Para
+make figure_multiple_Para
 
 cd ../
 mv graphs_Para $1

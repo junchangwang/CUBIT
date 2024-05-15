@@ -1,11 +1,5 @@
 ################
 # Tiancheng Hang
-#
-# Notice
-# mv run.py                        eva-scripts/run_core.py
-# mv gen_graphs_normal.sh          eva-scripts/gen_graphs_core.sh
-# mv eva-scripts/run_sz_ParaCNT.py eva-scripts/run_Para.py
-# remove ALL `sz` (Unresolved)
 ################
 import argparse
 import os

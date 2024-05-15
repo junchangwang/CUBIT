@@ -473,7 +473,7 @@ def gen_graph():
     #os.system("./prepare_normalized.sh")
     # os.system("rm -r ../graphs")
     os.system("make make_dir")
-    # os.system("make figure_multiple_sz")
+    # os.system("make figure_multiple")
     os.system("make figure_test")
     os.chdir("../graphs")
     os.system('echo "Figures generated in \"`pwd`\""')
@@ -481,7 +481,7 @@ def gen_graph():
 
     # gen_cdf 
     # os.chdir("../")
-    # os.system("python3 cdf_sz.py > graphs/cdf_output.txt") 
+    # os.system("python3 eva-scripts/cdf_core.py > graphs/cdf_output.txt")
 
 def main():
     os.chdir(ROOT_PATH)

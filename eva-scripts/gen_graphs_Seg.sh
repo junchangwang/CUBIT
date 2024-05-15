@@ -16,7 +16,7 @@ cp -r $1/dat $1/dat_tmp_Seg ./
 
 cd gnuplot-scripts
 make make_dir_Seg
-make figure_multiple_sz_Seg
+make figure_multiple_Seg
 
 cd ../
 mv graphs_Seg $1

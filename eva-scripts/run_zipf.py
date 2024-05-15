@@ -14,9 +14,6 @@ ROOT_PATH = os.getcwd()
 
 ossystem = os.system
 
-def build():
-    cmd = 'sh build.sh'
-    os.system(cmd)
 
 ONE_HUNDRED_MILLION = 100000000
 ONE_BILLION = 1000000000
@@ -24,21 +21,13 @@ ONE_MILLION = 1000000
 
 ######################################### parameters for ratio and core cmd ##########################################
 
-index_path = "earth_new/" # dataset (-i)
+index_path = "100M_zipf15/" # dataset (-i)
 
-cardinality = 114 # -c
+cardinality = 100 # -c
 
-number_of_rows = 31648320  # -n
+number_of_rows = ONE_HUNDRED_MILLION # -n
 
 mode = "mix" # -m
-
-MERGE_THRESHOLD_NBUB = 20
-
-ROWS_PER_SEG = 100000  # 0.1M
-
-NUM_EMBARR_PARALLEL = 2
-
-PARALLEL_CNT = 'true'
 
 ######################################### global parameters ##########################################
 
@@ -56,28 +45,20 @@ def help_gen_data_and_index(N, C, index_path): # N for number_of_rows; C for car
 
 ###################################### cmd for core and ratio #########################################
 def gen_cmd_naive(w, a, v, total, ratio, index_path): 
-    cmd = './build/nicolas -w {} -a {} -m {} --number-of-queries {} -r {} -c {} -i {} -n {} -v {} --fence-pointer no > dat_tmp_earth/figure_{}_{}_raw_w_{}_ratio_{}.dat'.format(w, a, mode,int(total * (1 - ratio)), int(total * ratio), cardinality, index_path, number_of_rows, v, a, 'latency' if (v == 'yes') else 'throughput',w, ratio )
-    return cmd
-    
-def gen_cmd_cubit(w, a, v, total, ratio, index_path):
-    cmd = './build/nicolas -w {} -a {} -m {} --number-of-queries {} -r {} -c {} -i {} -n {} -v {} --fence-pointer yes --fence-length 100000 --merge-threshold {} --rows-per-seg {} --num-embarr-parallel {} --parallel-cnt {} > dat_tmp_earth/figure_{}_{}_raw_w_{}_ratio_{}.dat'.format(w, a, mode, int(total * (1 - ratio)), int(total * ratio), cardinality, index_path, number_of_rows, v, MERGE_THRESHOLD_NBUB, ROWS_PER_SEG, NUM_EMBARR_PARALLEL, PARALLEL_CNT, a, 'latency' if (v == 'yes') else 'throughput',w, ratio )
+    cmd = './build/nicolas -w {} -a {} -m {} --number-of-queries {} -r {} -c {} -i {} -n {} -v {} --fence-pointer no > dat_tmp_zipf/figure_{}_{}_raw_w_{}_ratio_{}.dat'.format(w, a, mode,int(total * (1 - ratio)), int(total * ratio), cardinality, index_path, number_of_rows, v, a, 'latency' if (v == 'yes') else 'throughput',w, ratio )
     return cmd
 
 def gen_cmd_others(w, a, v, total, ratio, index_path):
-    cmd = './build/nicolas -w {} -a {} -m {} --number-of-queries {} -r {} -c {} -i {} -n {} -v {} --fence-pointer yes --fence-length 100000 > dat_tmp_earth/figure_{}_{}_raw_w_{}_ratio_{}.dat'.format(w, a, mode, int(total * (1 - ratio)), int(total * ratio), cardinality, index_path, number_of_rows, v, a, 'latency' if (v == 'yes') else 'throughput',w, ratio )
+    cmd = './build/nicolas -w {} -a {} -m {} --number-of-queries {} -r {} -c {} -i {} -n {} -v {} --fence-pointer yes --fence-length 100000 > dat_tmp_zipf/figure_{}_{}_raw_w_{}_ratio_{}.dat'.format(w, a, mode, int(total * (1 - ratio)), int(total * ratio), cardinality, index_path, number_of_rows, v, a, 'latency' if (v == 'yes') else 'throughput',w, ratio )
     return cmd
 
 ###################################### cmd for cardinality #########################################
 def gen_cmd_naive_cardinality(w, a, v, total, ratio, index_path, c, n): 
-    cmd = './build/nicolas -w {} -a {} -m {} --number-of-queries {} -r {} -c {} -i {} -n {} -v {} --fence-pointer no > dat_tmp_earth/figure_{}_{}_raw_w_{}_ratio_{}_c_{}.dat'.format(w, a, mode,int(total * (1 - ratio)), int(total * ratio), c, index_path, n, v, a, 'latency' if (v == 'yes') else 'throughput',w, ratio ,c)
-    return cmd
-    
-def gen_cmd_cubit_cardinality(w, a, v, total, ratio, index_path, c, n):
-    cmd = './build/nicolas -w {} -a {} -m {} --number-of-queries {} -r {} -c {} -i {} -n {} -v {} --fence-pointer yes --fence-length 100000 --merge-threshold {} --rows-per-seg {} --num-embarr-parallel {} --parallel-cnt {} > dat_tmp_earth/figure_{}_{}_raw_w_{}_ratio_{}_c_{}.dat'.format(w, a, mode, int(total * (1 - ratio)), int(total * ratio), c, index_path, n, v, MERGE_THRESHOLD_NBUB, ROWS_PER_SEG, NUM_EMBARR_PARALLEL, PARALLEL_CNT, a, 'latency' if (v == 'yes') else 'throughput',w, ratio ,c)
+    cmd = './build/nicolas -w {} -a {} -m {} --number-of-queries {} -r {} -c {} -i {} -n {} -v {} --fence-pointer no > dat_tmp_zipf/figure_{}_{}_raw_w_{}_ratio_{}_c_{}.dat'.format(w, a, mode,int(total * (1 - ratio)), int(total * ratio), c, index_path, n, v, a, 'latency' if (v == 'yes') else 'throughput',w, ratio ,c)
     return cmd
 
 def gen_cmd_others_cardinality(w, a, v, total, ratio, index_path, c, n):
-    cmd = './build/nicolas -w {} -a {} -m {} --number-of-queries {} -r {} -c {} -i {} -n {} -v {} --fence-pointer yes --fence-length 100000 > dat_tmp_earth/figure_{}_{}_raw_w_{}_ratio_{}_c_{}.dat'.format(w, a, mode, int(total * (1 - ratio)), int(total * ratio), c, index_path, n, v, a, 'latency' if (v == 'yes') else 'throughput',w, ratio ,c)
+    cmd = './build/nicolas -w {} -a {} -m {} --number-of-queries {} -r {} -c {} -i {} -n {} -v {} --fence-pointer yes --fence-length 100000 > dat_tmp_zipf/figure_{}_{}_raw_w_{}_ratio_{}_c_{}.dat'.format(w, a, mode, int(total * (1 - ratio)), int(total * ratio), c, index_path, n, v, a, 'latency' if (v == 'yes') else 'throughput',w, ratio ,c)
     return cmd
 
 
@@ -153,7 +134,7 @@ def gen_figure_naive_throughput_core():
         cmd = gen_cmd_naive(num, 'naive', 'no', 1000, ratio_percentage, index_path)
         print(cmd)
         os.system(cmd)
-        ret = throughput_analysis('dat_tmp_earth/figure_naive_throughput_raw_w_{}_ratio_{}.dat'.format(num, ratio_percentage))
+        ret = throughput_analysis('dat_tmp_zipf/figure_naive_throughput_raw_w_{}_ratio_{}.dat'.format(num, ratio_percentage))
         print(ret)
         print('\n')
         f.write('{} {} \n'.format(num, ret))
@@ -169,7 +150,7 @@ def gen_figure_naive_throughput_ratio():
         cmd = gen_cmd_naive(16, 'naive', 'no', 1000, num, index_path)
         print(cmd)
         os.system(cmd)
-        ret = throughput_analysis('dat_tmp_earth/figure_naive_throughput_raw_w_{}_ratio_{}.dat'.format(16, num))
+        ret = throughput_analysis('dat_tmp_zipf/figure_naive_throughput_raw_w_{}_ratio_{}.dat'.format(16, num))
         print(ret)
         print('\n')
         f.write('{} {} \n'.format(num, ret))
@@ -186,7 +167,7 @@ def gen_figure_naive_throughput_cardinality():
         cmd = gen_cmd_naive_cardinality(core_for_cardinality, 'naive', 'no', 1000, ratio_percentage, index_path, num, ONE_HUNDRED_MILLION)
         print(cmd)
         os.system(cmd)
-        ret = throughput_analysis('dat_tmp_earth/figure_naive_throughput_raw_w_{}_ratio_{}_c_{}.dat'.format(core_for_cardinality, ratio_percentage, num))
+        ret = throughput_analysis('dat_tmp_zipf/figure_naive_throughput_raw_w_{}_ratio_{}_c_{}.dat'.format(core_for_cardinality, ratio_percentage, num))
         print(ret)
         print('\n')
         f.write('{} {} \n'.format(num, ret))
@@ -202,7 +183,7 @@ def gen_figure_naive_latency_core(): # latency
         cmd = gen_cmd_naive(num, 'naive', 'yes', 1000, ratio_percentage, index_path)
         print(cmd)
         os.system(cmd)
-        ret = latency_analysis('dat_tmp_earth/figure_naive_latency_raw_w_{}_ratio_{}.dat'.format(num, ratio_percentage))
+        ret = latency_analysis('dat_tmp_zipf/figure_naive_latency_raw_w_{}_ratio_{}.dat'.format(num, ratio_percentage))
         print(ret)
         print('\n')
         for i in range(0,len(ret)):
@@ -219,7 +200,7 @@ def gen_figure_naive_latency_ratio():
         cmd = gen_cmd_naive(16, 'naive', 'yes', 1000, num, index_path)
         print(cmd)
         os.system(cmd)
-        ret = latency_analysis('dat_tmp_earth/figure_naive_latency_raw_w_{}_ratio_{}.dat'.format(16, num))
+        ret = latency_analysis('dat_tmp_zipf/figure_naive_latency_raw_w_{}_ratio_{}.dat'.format(16, num))
         print(ret)
         print('\n')
         for i in range(0,len(ret)):
@@ -237,7 +218,7 @@ def gen_figure_naive_latency_cardinality():
         cmd = gen_cmd_naive_cardinality(core_for_cardinality, 'naive', 'yes', 1000, ratio_percentage, index_path, num, ONE_HUNDRED_MILLION)
         print(cmd)
         os.system(cmd)
-        ret = latency_analysis('dat_tmp_earth/figure_naive_latency_raw_w_{}_ratio_{}_c_{}.dat'.format(core_for_cardinality, ratio_percentage, num))
+        ret = latency_analysis('dat_tmp_zipf/figure_naive_latency_raw_w_{}_ratio_{}_c_{}.dat'.format(core_for_cardinality, ratio_percentage, num))
         print(ret)
         print('\n')
         for i in range(0,len(ret)):
@@ -256,7 +237,7 @@ def gen_figure_ucb_throughput_core():
         cmd = gen_cmd_others(num, 'ucb', 'no', 1000, ratio_percentage, index_path)
         print(cmd)
         os.system(cmd)
-        ret = throughput_analysis('dat_tmp_earth/figure_ucb_throughput_raw_w_{}_ratio_{}.dat'.format(num, ratio_percentage))
+        ret = throughput_analysis('dat_tmp_zipf/figure_ucb_throughput_raw_w_{}_ratio_{}.dat'.format(num, ratio_percentage))
         print(ret)
         print('\n')
         f.write('{} {} \n'.format(num, ret))
@@ -272,7 +253,7 @@ def gen_figure_ucb_throughput_ratio():
         cmd = gen_cmd_others(16, 'ucb', 'no', 1000, num, index_path)
         print(cmd)
         os.system(cmd)
-        ret = throughput_analysis('dat_tmp_earth/figure_ucb_throughput_raw_w_{}_ratio_{}.dat'.format(16, num))
+        ret = throughput_analysis('dat_tmp_zipf/figure_ucb_throughput_raw_w_{}_ratio_{}.dat'.format(16, num))
         print(ret)
         print('\n')
         f.write('{} {} \n'.format(num, ret))
@@ -289,7 +270,7 @@ def gen_figure_ucb_throughput_cardinality():
         cmd = gen_cmd_others_cardinality(core_for_cardinality, 'ucb', 'no', 1000, ratio_percentage, index_path, num, ONE_HUNDRED_MILLION)
         print(cmd)
         os.system(cmd)
-        ret = throughput_analysis('dat_tmp_earth/figure_ucb_throughput_raw_w_{}_ratio_{}_c_{}.dat'.format(core_for_cardinality, ratio_percentage, num))
+        ret = throughput_analysis('dat_tmp_zipf/figure_ucb_throughput_raw_w_{}_ratio_{}_c_{}.dat'.format(core_for_cardinality, ratio_percentage, num))
         print(ret)
         print('\n')
         f.write('{} {} \n'.format(num, ret))
@@ -305,7 +286,7 @@ def gen_figure_ucb_latency_core(): # latency
         cmd = gen_cmd_others(num, 'ucb', 'yes', 1000, ratio_percentage, index_path)
         print(cmd)
         os.system(cmd)
-        ret = latency_analysis('dat_tmp_earth/figure_ucb_latency_raw_w_{}_ratio_{}.dat'.format(num, ratio_percentage))
+        ret = latency_analysis('dat_tmp_zipf/figure_ucb_latency_raw_w_{}_ratio_{}.dat'.format(num, ratio_percentage))
         print(ret)
         print('\n')
         for i in range(0,len(ret)):
@@ -322,7 +303,7 @@ def gen_figure_ucb_latency_ratio():
         cmd = gen_cmd_others(16, 'ucb', 'yes', 1000, num, index_path)
         print(cmd)
         os.system(cmd)
-        ret = latency_analysis('dat_tmp_earth/figure_ucb_latency_raw_w_{}_ratio_{}.dat'.format(16, num))
+        ret = latency_analysis('dat_tmp_zipf/figure_ucb_latency_raw_w_{}_ratio_{}.dat'.format(16, num))
         print(ret)
         print('\n')
         for i in range(0,len(ret)):
@@ -340,7 +321,7 @@ def gen_figure_ucb_latency_cardinality():
         cmd = gen_cmd_others_cardinality(core_for_cardinality, 'ucb', 'yes', 1000, ratio_percentage, index_path, num, ONE_HUNDRED_MILLION)
         print(cmd)
         os.system(cmd)
-        ret = latency_analysis('dat_tmp_earth/figure_ucb_latency_raw_w_{}_ratio_{}_c_{}.dat'.format(core_for_cardinality, ratio_percentage, num))
+        ret = latency_analysis('dat_tmp_zipf/figure_ucb_latency_raw_w_{}_ratio_{}_c_{}.dat'.format(core_for_cardinality, ratio_percentage, num))
         print(ret)
         print('\n')
         for i in range(0,len(ret)):
@@ -358,7 +339,7 @@ def gen_figure_ub_throughput_core():
         cmd = gen_cmd_others(num, 'ub', 'no', 1000, ratio_percentage, index_path)
         print(cmd)
         os.system(cmd)
-        ret = throughput_analysis('dat_tmp_earth/figure_ub_throughput_raw_w_{}_ratio_{}.dat'.format(num, ratio_percentage))
+        ret = throughput_analysis('dat_tmp_zipf/figure_ub_throughput_raw_w_{}_ratio_{}.dat'.format(num, ratio_percentage))
         print(ret)
         print('\n')
         f.write('{} {} \n'.format(num, ret))
@@ -374,7 +355,7 @@ def gen_figure_ub_throughput_ratio():
         cmd = gen_cmd_others(16, 'ub', 'no', 1000, num, index_path)
         print(cmd)
         os.system(cmd)
-        ret = throughput_analysis('dat_tmp_earth/figure_ub_throughput_raw_w_{}_ratio_{}.dat'.format(16, num))
+        ret = throughput_analysis('dat_tmp_zipf/figure_ub_throughput_raw_w_{}_ratio_{}.dat'.format(16, num))
         print(ret)
         print('\n')
         f.write('{} {} \n'.format(num, ret))
@@ -391,7 +372,7 @@ def gen_figure_ub_throughput_cardinality():
         cmd = gen_cmd_others_cardinality(core_for_cardinality, 'ub', 'no', 1000, ratio_percentage, index_path, num, ONE_HUNDRED_MILLION)
         print(cmd)
         os.system(cmd)
-        ret = throughput_analysis('dat_tmp_earth/figure_ub_throughput_raw_w_{}_ratio_{}_c_{}.dat'.format(core_for_cardinality, ratio_percentage, num))
+        ret = throughput_analysis('dat_tmp_zipf/figure_ub_throughput_raw_w_{}_ratio_{}_c_{}.dat'.format(core_for_cardinality, ratio_percentage, num))
         print(ret)
         print('\n')
         f.write('{} {} \n'.format(num, ret))
@@ -407,7 +388,7 @@ def gen_figure_ub_latency_core(): # latency
         cmd = gen_cmd_others(num, 'ub', 'yes', 1000, ratio_percentage, index_path)
         print(cmd)
         os.system(cmd)
-        ret = latency_analysis('dat_tmp_earth/figure_ub_latency_raw_w_{}_ratio_{}.dat'.format(num, ratio_percentage))
+        ret = latency_analysis('dat_tmp_zipf/figure_ub_latency_raw_w_{}_ratio_{}.dat'.format(num, ratio_percentage))
         print(ret)
         print('\n')
         for i in range(0,len(ret)):
@@ -424,7 +405,7 @@ def gen_figure_ub_latency_ratio():
         cmd = gen_cmd_others(16, 'ub', 'yes', 1000, num, index_path)
         print(cmd)
         os.system(cmd)
-        ret = latency_analysis('dat_tmp_earth/figure_ub_latency_raw_w_{}_ratio_{}.dat'.format(16, num))
+        ret = latency_analysis('dat_tmp_zipf/figure_ub_latency_raw_w_{}_ratio_{}.dat'.format(16, num))
         print(ret)
         print('\n')
         for i in range(0,len(ret)):
@@ -442,7 +423,7 @@ def gen_figure_ub_latency_cardinality():
         cmd = gen_cmd_others_cardinality(core_for_cardinality, 'ub', 'yes', 1000, ratio_percentage, index_path, num, ONE_HUNDRED_MILLION)
         print(cmd)
         os.system(cmd)
-        ret = latency_analysis('dat_tmp_earth/figure_ub_latency_raw_w_{}_ratio_{}_c_{}.dat'.format(core_for_cardinality, ratio_percentage, num))
+        ret = latency_analysis('dat_tmp_zipf/figure_ub_latency_raw_w_{}_ratio_{}_c_{}.dat'.format(core_for_cardinality, ratio_percentage, num))
         print(ret)
         print('\n')
         for i in range(0,len(ret)):
@@ -456,10 +437,10 @@ def gen_figure_cubit_lk_throughput_core():
     core_number = [1, 2, 4, 8, 16, 24, 32]
     f = open('dat/figure_cubit-lk_throughput_core.dat','w')
     for num in core_number:
-        cmd = gen_cmd_cubit(num, 'cubit-lk', 'no', 1000, ratio_percentage, index_path)
+        cmd = gen_cmd_others(num, 'cubit-lk', 'no', 1000, ratio_percentage, index_path)
         print(cmd)
         os.system(cmd)
-        ret = throughput_analysis('dat_tmp_earth/figure_cubit-lk_throughput_raw_w_{}_ratio_{}.dat'.format(num, ratio_percentage))
+        ret = throughput_analysis('dat_tmp_zipf/figure_cubit-lk_throughput_raw_w_{}_ratio_{}.dat'.format(num, ratio_percentage))
         print(ret)
         print('\n')
         f.write('{} {} \n'.format(num, ret))
@@ -472,10 +453,10 @@ def gen_figure_cubit_lk_throughput_ratio():
     ratio_number = [0.01, 0.02, 0.05, 0.1, 0.2]
     f = open('dat/figure_cubit-lk_throughput_ratio.dat','w')
     for num in ratio_number:
-        cmd = gen_cmd_cubit(16, 'cubit-lk', 'no', 1000, num, index_path)
+        cmd = gen_cmd_others(16, 'cubit-lk', 'no', 1000, num, index_path)
         print(cmd)
         os.system(cmd)
-        ret = throughput_analysis('dat_tmp_earth/figure_cubit-lk_throughput_raw_w_{}_ratio_{}.dat'.format(16, num))
+        ret = throughput_analysis('dat_tmp_zipf/figure_cubit-lk_throughput_raw_w_{}_ratio_{}.dat'.format(16, num))
         print(ret)
         print('\n')
         f.write('{} {} \n'.format(num, ret))
@@ -489,10 +470,10 @@ def gen_figure_cubit_lk_throughput_cardinality():
     f = open('dat/figure_cubit-lk_throughput_cardinality.dat','w')
     for num in cardinality_number:
         index_path = "100M_{}".format(num)
-        cmd = gen_cmd_cubit_cardinality(core_for_cardinality, 'cubit-lk', 'no', 1000, ratio_percentage, index_path, num, ONE_HUNDRED_MILLION)
+        cmd = gen_cmd_others_cardinality(core_for_cardinality, 'cubit-lk', 'no', 1000, ratio_percentage, index_path, num, ONE_HUNDRED_MILLION)
         print(cmd)
         os.system(cmd)
-        ret = throughput_analysis('dat_tmp_earth/figure_cubit-lk_throughput_raw_w_{}_ratio_{}_c_{}.dat'.format(core_for_cardinality, ratio_percentage, num))
+        ret = throughput_analysis('dat_tmp_zipf/figure_cubit-lk_throughput_raw_w_{}_ratio_{}_c_{}.dat'.format(core_for_cardinality, ratio_percentage, num))
         print(ret)
         print('\n')
         f.write('{} {} \n'.format(num, ret))
@@ -505,10 +486,10 @@ def gen_figure_cubit_lk_latency_core(): # latency
     core_number = [1, 2, 4, 8, 16, 24, 32]
     f = open('dat/figure_cubit-lk_latency_core.dat','w')
     for num in core_number:
-        cmd = gen_cmd_cubit(num, 'cubit-lk', 'yes', 1000, ratio_percentage, index_path)
+        cmd = gen_cmd_others(num, 'cubit-lk', 'yes', 1000, ratio_percentage, index_path)
         print(cmd)
         os.system(cmd)
-        ret = latency_analysis('dat_tmp_earth/figure_cubit-lk_latency_raw_w_{}_ratio_{}.dat'.format(num, ratio_percentage))
+        ret = latency_analysis('dat_tmp_zipf/figure_cubit-lk_latency_raw_w_{}_ratio_{}.dat'.format(num, ratio_percentage))
         print(ret)
         print('\n')
         for i in range(0,len(ret)):
@@ -522,10 +503,10 @@ def gen_figure_cubit_lk_latency_ratio():
     ratio_number = [0.01, 0.02, 0.05, 0.1, 0.2]
     f = open('dat/figure_cubit-lk_latency_ratio.dat','w')
     for num in ratio_number:
-        cmd = gen_cmd_cubit(16, 'cubit-lk', 'yes', 1000, num, index_path)
+        cmd = gen_cmd_others(16, 'cubit-lk', 'yes', 1000, num, index_path)
         print(cmd)
         os.system(cmd)
-        ret = latency_analysis('dat_tmp_earth/figure_cubit-lk_latency_raw_w_{}_ratio_{}.dat'.format(16, num))
+        ret = latency_analysis('dat_tmp_zipf/figure_cubit-lk_latency_raw_w_{}_ratio_{}.dat'.format(16, num))
         print(ret)
         print('\n')
         for i in range(0,len(ret)):
@@ -540,10 +521,10 @@ def gen_figure_cubit_lk_latency_cardinality():
     f = open('dat/figure_cubit-lk_latency_cardinality.dat','w')
     for num in cardinality_number:
         index_path = "100M_{}".format(num)
-        cmd = gen_cmd_cubit_cardinality(core_for_cardinality, 'cubit-lk', 'yes', 1000, ratio_percentage, index_path, num, ONE_HUNDRED_MILLION)
+        cmd = gen_cmd_others_cardinality(core_for_cardinality, 'cubit-lk', 'yes', 1000, ratio_percentage, index_path, num, ONE_HUNDRED_MILLION)
         print(cmd)
         os.system(cmd)
-        ret = latency_analysis('dat_tmp_earth/figure_cubit-lk_latency_raw_w_{}_ratio_{}_c_{}.dat'.format(core_for_cardinality, ratio_percentage, num))
+        ret = latency_analysis('dat_tmp_zipf/figure_cubit-lk_latency_raw_w_{}_ratio_{}_c_{}.dat'.format(core_for_cardinality, ratio_percentage, num))
         print(ret)
         print('\n')
         for i in range(0,len(ret)):
@@ -557,10 +538,10 @@ def gen_figure_cubit_lf_throughput_core():
     core_number = [1, 2, 4, 8, 16, 24, 32]
     f = open('dat/figure_cubit-lf_throughput_core.dat','w')
     for num in core_number:
-        cmd = gen_cmd_cubit(num, 'cubit-lf', 'no', 1000, ratio_percentage, index_path)
+        cmd = gen_cmd_others(num, 'cubit-lf', 'no', 1000, ratio_percentage, index_path)
         print(cmd)
         os.system(cmd)
-        ret = throughput_analysis('dat_tmp_earth/figure_cubit-lf_throughput_raw_w_{}_ratio_{}.dat'.format(num, ratio_percentage))
+        ret = throughput_analysis('dat_tmp_zipf/figure_cubit-lf_throughput_raw_w_{}_ratio_{}.dat'.format(num, ratio_percentage))
         print(ret)
         print('\n')
         f.write('{} {} \n'.format(num, ret))
@@ -573,10 +554,10 @@ def gen_figure_cubit_lf_throughput_ratio():
     ratio_number = [0.01, 0.02, 0.05, 0.1, 0.2]
     f = open('dat/figure_cubit-lf_throughput_ratio.dat','w')
     for num in ratio_number:
-        cmd = gen_cmd_cubit(16, 'cubit-lf', 'no', 1000, num, index_path)
+        cmd = gen_cmd_others(16, 'cubit-lf', 'no', 1000, num, index_path)
         print(cmd)
         os.system(cmd)
-        ret = throughput_analysis('dat_tmp_earth/figure_cubit-lf_throughput_raw_w_{}_ratio_{}.dat'.format(16, num))
+        ret = throughput_analysis('dat_tmp_zipf/figure_cubit-lf_throughput_raw_w_{}_ratio_{}.dat'.format(16, num))
         print(ret)
         print('\n')
         f.write('{} {} \n'.format(num, ret))
@@ -590,10 +571,10 @@ def gen_figure_cubit_lf_throughput_cardinality():
     f = open('dat/figure_cubit-lf_throughput_cardinality.dat','w')
     for num in cardinality_number:
         index_path = "100M_{}".format(num)
-        cmd = gen_cmd_cubit_cardinality(core_for_cardinality, 'cubit-lf', 'no', 1000, ratio_percentage, index_path, num, ONE_HUNDRED_MILLION)
+        cmd = gen_cmd_others_cardinality(core_for_cardinality, 'cubit-lf', 'no', 1000, ratio_percentage, index_path, num, ONE_HUNDRED_MILLION)
         print(cmd)
         os.system(cmd)
-        ret = throughput_analysis('dat_tmp_earth/figure_cubit-lf_throughput_raw_w_{}_ratio_{}_c_{}.dat'.format(core_for_cardinality, ratio_percentage, num))
+        ret = throughput_analysis('dat_tmp_zipf/figure_cubit-lf_throughput_raw_w_{}_ratio_{}_c_{}.dat'.format(core_for_cardinality, ratio_percentage, num))
         print(ret)
         print('\n')
         f.write('{} {} \n'.format(num, ret))
@@ -606,10 +587,10 @@ def gen_figure_cubit_lf_latency_core(): # latency
     core_number = [1, 2, 4, 8, 16, 24, 32]
     f = open('dat/figure_cubit-lf_latency_core.dat','w')
     for num in core_number:
-        cmd = gen_cmd_cubit(num, 'cubit-lf', 'yes', 1000, ratio_percentage, index_path)
+        cmd = gen_cmd_others(num, 'cubit-lf', 'yes', 1000, ratio_percentage, index_path)
         print(cmd)
         os.system(cmd)
-        ret = latency_analysis('dat_tmp_earth/figure_cubit-lf_latency_raw_w_{}_ratio_{}.dat'.format(num, ratio_percentage))
+        ret = latency_analysis('dat_tmp_zipf/figure_cubit-lf_latency_raw_w_{}_ratio_{}.dat'.format(num, ratio_percentage))
         print(ret)
         print('\n')
         for i in range(0,len(ret)):
@@ -623,10 +604,10 @@ def gen_figure_cubit_lf_latency_ratio():
     ratio_number = [0.01, 0.02, 0.05, 0.1, 0.2]
     f = open('dat/figure_cubit-lf_latency_ratio.dat','w')
     for num in ratio_number:
-        cmd = gen_cmd_cubit(16, 'cubit-lf', 'yes', 1000, num, index_path)
+        cmd = gen_cmd_others(16, 'cubit-lf', 'yes', 1000, num, index_path)
         print(cmd)
         os.system(cmd)
-        ret = latency_analysis('dat_tmp_earth/figure_cubit-lf_latency_raw_w_{}_ratio_{}.dat'.format(16, num))
+        ret = latency_analysis('dat_tmp_zipf/figure_cubit-lf_latency_raw_w_{}_ratio_{}.dat'.format(16, num))
         print(ret)
         print('\n')
         for i in range(0,len(ret)):
@@ -641,35 +622,22 @@ def gen_figure_cubit_lf_latency_cardinality():
     f = open('dat/figure_cubit-lf_latency_cardinality.dat','w')
     for num in cardinality_number:
         index_path = "100M_{}".format(num)
-        cmd = gen_cmd_cubit_cardinality(core_for_cardinality, 'cubit-lf', 'yes', 1000, ratio_percentage, index_path, num, ONE_HUNDRED_MILLION)
+        cmd = gen_cmd_others_cardinality(core_for_cardinality, 'cubit-lf', 'yes', 1000, ratio_percentage, index_path, num, ONE_HUNDRED_MILLION)
         print(cmd)
         os.system(cmd)
-        ret = latency_analysis('dat_tmp_earth/figure_cubit-lf_latency_raw_w_{}_ratio_{}_c_{}.dat'.format(core_for_cardinality, ratio_percentage, num))
+        ret = latency_analysis('dat_tmp_zipf/figure_cubit-lf_latency_raw_w_{}_ratio_{}_c_{}.dat'.format(core_for_cardinality, ratio_percentage, num))
         print(ret)
         print('\n')
         for i in range(0,len(ret)):
             f.write('{} {} \n'.format(num, ret[i]))
     f.close()
 
-
-def cdf():
-    cmd = "./build/nicolas -w 16 -a naive -m mix --number-of-queries 970 -r 30 -c 32 -i 100M_32/ -n 100000000 -v yes --fence-pointer no > dat_tmp_earth/figure_naive_latency_raw_w_32_ratio_0.03_c_32.dat"
-    cmd2 = "./build/nicolas -w 16 -a cubit-lk -m mix --number-of-queries 970 -r 30 -c 32 -i 100M_32/ -n 100000000 -v yes --fence-pointer yes --fence-length 100000 > dat_tmp_earth/figure_cubit-lk_latency_raw_w_32_ratio_0.03_c_32.dat"
-    cmd3 = "./build/nicolas -w 16 -a cubit-lf -m mix --number-of-queries 970 -r 30 -c 32 -i 100M_32/ -n 100000000 -v yes --fence-pointer yes --fence-length 100000 > dat_tmp_earth/figure_cubit-lf_latency_raw_w_32_ratio_0.03_c_32.dat"
-    cmd4 = "./build/nicolas -w 16 -a ub -m mix --number-of-queries 970 -r 30 -c 32 -i 100M_32/ -n 100000000 -v yes --fence-pointer yes --fence-length 100000 > dat_tmp_earth/figure_ub_latency_raw_w_32_ratio_0.03_c_32.dat"
-    cmd5 = "./build/nicolas -w 16 -a ucb -m mix --number-of-queries 970 -r 30 -c 32 -i 100M_32/ -n 100000000 -v yes --fence-pointer yes --fence-length 100000 > dat_tmp_earth/figure_ucb_latency_raw_w_32_ratio_0.03_c_32.dat"
-    os.system(cmd)
-    os.system(cmd2)
-    os.system(cmd3)
-    os.system(cmd4)
-    os.system(cmd5)
-
 def run():
     # #naive
     gen_figure_naive_throughput_core()
     # gen_figure_naive_throughput_ratio()
     # gen_figure_naive_throughput_cardinality()
-#    gen_figure_naive_latency_core()
+    gen_figure_naive_latency_core()
     # gen_figure_naive_latency_ratio()
     # gen_figure_naive_latency_cardinality()
 
@@ -677,7 +645,7 @@ def run():
     gen_figure_ucb_throughput_core()
     # gen_figure_ucb_throughput_ratio()
     # gen_figure_ucb_throughput_cardinality()
-#    gen_figure_ucb_latency_core()
+    gen_figure_ucb_latency_core()
     # gen_figure_ucb_latency_ratio()
     # gen_figure_ucb_latency_cardinality()
 
@@ -685,7 +653,7 @@ def run():
     gen_figure_ub_throughput_core()
     # gen_figure_ub_throughput_ratio()
     # gen_figure_ub_throughput_cardinality()
-#    gen_figure_ub_latency_core()
+    gen_figure_ub_latency_core()
     # gen_figure_ub_latency_ratio()
     # gen_figure_ub_latency_cardinality()
 
@@ -693,7 +661,7 @@ def run():
     gen_figure_cubit_lk_throughput_core()
     # gen_figure_cubit_lk_throughput_ratio()
     # gen_figure_cubit_lk_throughput_cardinality()
-#    gen_figure_cubit_lk_latency_core()
+    gen_figure_cubit_lk_latency_core()
     # gen_figure_cubit_lk_latency_ratio()
     # gen_figure_cubit_lk_latency_cardinality()
 
@@ -701,28 +669,25 @@ def run():
     gen_figure_cubit_lf_throughput_core()
     # gen_figure_cubit_lf_throughput_ratio()
     # gen_figure_cubit_lf_throughput_cardinality()
-#    gen_figure_cubit_lf_latency_core()
+    gen_figure_cubit_lf_latency_core()
     # gen_figure_cubit_lf_latency_ratio()
     # gen_figure_cubit_lf_latency_cardinality()
 
-    #cdf
-    #cdf()
-
 def main():
     itr = 0
-    cmd = 'mv graphs_earth graphs_earth_{}'
-    cmd2 = "mv dat graphs_earth"
-    cmd3 = "cp run_sz_earth.sh graphs_earth"    
-    cmd4 = "mv dat_tmp_earth graphs_earth"
-    while itr < 2:
+    cmd = 'mv graphs_zipf graphs_zipf_{}'
+    cmd2 = "mv dat graphs_zipf"
+    cmd3 = "cp run_zipf.sh graphs_zipf"
+    cmd4 = "mv dat_tmp_zipf graphs_zipf"
+    while itr < 3:
         os.chdir(ROOT_PATH)
 
-        # generate earth
-        if (os.path.isfile("a_earth")):
-            print("a_earth exists")
+        # generate zipf
+        if (os.path.isfile("zipf_15")):
+            print("zipf_15 exists")
         else:
-            os.system("python3 gen_earth.py")
-            os.system("./build/nicolas -m build -d a_earth -c 114 -n 31648320 -i earth_new")
+            os.system("python gen_zipf.py")
+            os.system("./build/nicolas -m build -d zipf_15 -c 100 -n 100000000 -i 100M_zipf15")
 
         datdir = 'dat'
         if os.path.exists(datdir) and os.path.isdir(datdir):
@@ -730,22 +695,22 @@ def main():
             shutil.rmtree(datdir)
         os.mkdir(datdir)
 
-        dat_tmp_earth = 'dat_tmp_earth'
-        if os.path.exists(dat_tmp_earth) and os.path.isdir(dat_tmp_earth):
-            print ('Deleting existing directory ./dat_tmp_earth')
-            shutil.rmtree(dat_tmp_earth)
-        os.mkdir(dat_tmp_earth)
+        dat_tmp_zipf = 'dat_tmp_zipf'
+        if os.path.exists(dat_tmp_zipf) and os.path.isdir(dat_tmp_zipf):
+            print ('Deleting existing directory ./dat_tmp_zipf')
+            shutil.rmtree(dat_tmp_zipf)
+        os.mkdir(dat_tmp_zipf)
 
-        graphs = 'graphs_earth'
+        graphs = 'graphs_zipf'
         if os.path.exists(graphs) and os.path.isdir(graphs):
-            print ('Deleting existing directory ./graphs_earth')
+            print ('Deleting existing directory ./graphs_zipf')
             shutil.rmtree(graphs)
         os.mkdir(graphs)
 
         run()
         os.system(cmd4)
         # os.system(cmd3)
-        os.system(cmd2)
+        os.system(cmd2)       
         os.system(cmd.format(itr))
         itr += 1
     print('Done!\n')

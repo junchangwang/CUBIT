@@ -16,7 +16,7 @@ cp -r $1/dat $1/dat_tmp_WPMT ./
 
 cd gnuplot-scripts
 make make_dir_WPMT
-make figure_multiple_sz_WPMT
+make figure_multiple_WPMT
 
 cd ../
 mv graphs_WPMT $1

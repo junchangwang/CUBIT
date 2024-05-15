@@ -16,11 +16,11 @@ cp -r $1/dat $1/dat_tmp ./
 
 cd gnuplot-scripts
 make make_dir_lk
-make figure_multiple_sz_lk
-# make figure_multiple_sz_ub+cubit-lk+cubit-lf
+make figure_multiple_lk
+# make figure_multiple_ub+cubit-lk+cubit-lf
 
 cd ../
-python3 cdf_sz.py > graphs_lk/cdf_output.txt
+python3 eva-scripts/cdf_core.py > graphs_lk/cdf_output.txt
 
 python3 figure1.py
 

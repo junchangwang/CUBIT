@@ -16,7 +16,7 @@ cp -r $1/dat $1/dat_tmp_MT ./
 
 cd gnuplot-scripts
 make make_dir_MT
-make figure_multiple_sz_MT
+make figure_multiple_MT
 
 cd ../
 mv graphs_MT $1
