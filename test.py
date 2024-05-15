@@ -8,6 +8,7 @@
 # remove ALL `sz` (Unresolved)
 ################
 import argparse
+import os
 
 EXPS: list[str] = ["core", "1B", "earth", "MT", "Para", "Seg", "WPMT", "zipf"]
 
@@ -26,7 +27,7 @@ if __name__ == "__main__":
                         help="execute all experiments, default false")
 
     parser.add_argument("-e", "--exp",
-                        default=0,
+                        default="core",
                         type=str,
                         choices=[EXPS[0], EXPS[1], EXPS[2], EXPS[3], EXPS[4], EXPS[5], EXPS[6], EXPS[7]],
                         help="which experiment, default 'core'")
@@ -50,22 +51,14 @@ if __name__ == "__main__":
                 cmds = (f"python3 eva-scripts/run_{exp}.py",
                         f"eva-scripts/gen_graphs_{exp}.sh graphs_{trial}")
 
-                # Uncomment
-                # os.system(cmds[0])
-                # os.system(cmds[1])
-                print(cmds[0])
-                print(cmds[1])
-                print()
+                os.system(cmds[0])
+                os.system(cmds[1])
     else:
         print("\033[32m" + "=" * 20 + f" Experiment {args.exp} on graphs_{args.trial} " + "=" * 20 + "\033[0m")
         cmds = (f"python3 eva-scripts/run_{args.exp}.py",
                 f"eva-scripts/gen_graphs_{args.exp}.sh graphs_{args.trial}")
 
-        # Uncomment
-        # os.system(cmds[0])
-        # os.system(cmds[1])
-        print(cmds[0])
-        print(cmds[1])
-        print()
+        os.system(cmds[0])
+        os.system(cmds[1])
 
     print("Done!")
