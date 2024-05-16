@@ -4,7 +4,7 @@
 import argparse
 import os
 
-EXPS: list[str] = ["core", "1B", "earth", "MT", "Para", "Seg", "WPMT", "zipf"]
+EXPS = ("core", "1B", "earth", "MT", "Para", "Seg", "WPMT", "zipf")
 
 if __name__ == "__main__":
     print("=" * 20)
