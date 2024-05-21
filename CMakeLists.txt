@@ -12,9 +12,9 @@ include_directories(${CMAKE_SOURCE_DIR}/src)
 IF(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     # Linux
     set(CMAKE_CXX_FLAGS "-g -O3 -std=gnu++17 -fPIC")
-    set(FASTBIF_LIBRARY "~/usr/local/lib/libfastbit.so")
-    include_directories("~/usr/include/x86_64-linux-gnu")
-    include_directories("~/usr/local/include")
+    set(FASTBIT_LIBRARY "/usr/local/lib/libfastbit.so")
+    include_directories("/usr/include/x86_64-linux-gnu")
+    include_directories("/usr/local/include")
     set(BOOST_LIBRARYDIR /usr/lib/x86_64-linux-gnu)
     set(BOOST_INCLUDEDIR /usr/include)
     set(Boost_NO_SYSTEM_PATHS on)
@@ -59,7 +59,7 @@ target_link_libraries(nicolas bitmap pthread atomic ${Boost_LIBRARIES} ${URCU_LI
 
 # bench
 # add_executable(bench src/nicolas/bench.cpp src/nicolas/util.h src/nicolas/util.cpp ${ProtoSources} ${ProtoHeaders})
-# target_link_libraries(bench ${Boost_LIBRARIES} ${FASTBIF_LIBRARY} ${PROTOBUF_LIBRARY})
+# target_link_libraries(bench ${Boost_LIBRARIES} ${FASTBIT_LIBRARY} ${PROTOBUF_LIBRARY})
 
 # ucb
 # add_executable(ucb src/ucb/ucb.cpp src/ucb/table.h src/ucb/table.cpp ${FASTBIT_FILES} src/nicolas/util.h src/nicolas/util.cpp)

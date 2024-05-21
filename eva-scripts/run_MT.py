@@ -48,7 +48,7 @@ core_for_MT = 16
 merge_threshold_num = [1, 4, 16, 32, 64] 
 
 def help_gen_data_and_index(N, C, index_path): # N for number_of_rows; C for cardinality
-    cmd = 'python generate.py {} {}'
+    cmd = 'python3 generate.py {} {}'
     os.system(cmd.format(N, C))
     cmd2 = './build/nicolas -m build -d {} -c {} -n {} -i {}'
     os.system(cmd2.format("a_{}_{}".format(N, C), C, N, index_path))

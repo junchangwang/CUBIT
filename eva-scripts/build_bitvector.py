@@ -19,7 +19,7 @@ ONE_BILLION_DATA = 'a_' + ONE_BILLION + '_100'
 
 
 def gen_data():
-    cmd = 'python generate.py {} {}'
+    cmd = 'python3 generate.py {} {}'
     os.system(cmd.format(TEN_MILLION, 100))
     os.system(cmd.format(FIFTY_MILLION, 100))
     os.system(cmd.format(ONE_HUNDRED_MILLION, 100))

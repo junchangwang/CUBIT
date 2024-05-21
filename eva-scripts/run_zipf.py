@@ -37,7 +37,7 @@ core_for_cardinality = 16
 
 
 def help_gen_data_and_index(N, C, index_path): # N for number_of_rows; C for cardinality
-    cmd = 'python generate.py {} {}'
+    cmd = 'python3 generate.py {} {}'
     os.system(cmd.format(N, C))
     cmd2 = './build/nicolas -m build -d {} -c {} -n {} -i {}'
     os.system(cmd2.format("a_{}_{}".format(N, C), C, N, index_path))
@@ -686,7 +686,7 @@ def main():
         if (os.path.isfile("zipf_15")):
             print("zipf_15 exists")
         else:
-            os.system("python gen_zipf.py")
+            os.system("python3 gen_zipf.py")
             os.system("./build/nicolas -m build -d zipf_15 -c 100 -n 100000000 -i 100M_zipf15")
 
         datdir = 'dat'
