@@ -1,7 +1,6 @@
 
 # Brief history of CUBIT
 
-
 The CUBIT project stemmed from an effort to parallelize UpBit [1], the state-of-the-art updatable bitmap index that runs queries and UDIs sequentially on multicore architectures. We refer to this preliminary version as **CUBIT v1**, with the major contribution **being the first concurrent updatable bitmap index**. Based on CUBIT v1, we submitted a research paper to a top DB conference in 2023.
 
 While the paper was not accepted, we used the constructive feedback we got from the reviewers and additional observations we made to **substantially** broaden the contributions of this project. More specifically, in **CUBIT v2**, we develop a very lightweight snapshotting mechanism for (wait-free) queries and a consolidation-aware helping mechanism for (latch-free) UDIs. The end result is that CUBIT v2 scales much better than any prior updatable bitmap index and can meet time requirements for indexing in practical DBMSs. More importantly, we adapt CUBIT v2 to various use cases with OLAP, HTAP, and OLTP workloads. Our thorough evaluation shows that **CUBIT v2 is a promising indexing candidate for selective queries on any workload with updates**.
@@ -32,16 +31,16 @@ First, use the following command to compile the entire project.
 Then, reproduce the key results (Figures 2, 8, 9, and 10) by using the following command. 
 
 ```
-python3 run.py 
+python3 test.py -e core
 ```
 
-The above command writes the experimental results to a group of folders named graphs_x, where x is the ID of each trial. We can analyze the results in graphs_x and draw figures by using the following command:
+The above command writes the experimental results to a group of folders named graphs_x, where x is the ID of each trial. It then analyzes the results in graphs_x and draws figures.
+
+We can replicate other experiments by specifying different experiment types in {core, 1B, earth, MT, Para, Seg, WPMT, zipf}. The following command performs all experiments.
 
 ```
-./gen_graphs_normal.sh graphs_x
+python3 test.py -e all
 ```
-
-We can replicate other experiments by using the corresponding scripts (with different suffixes) in the directory eva-scripts/ . For example, the evaluation with 1B entries can be performed by using the two scripts run_1B.sh and gen_graphs_1B.sh.
 
 Note that it may take dozens of hours to run the whole experimentation for the first time because it involves generating datasets, which is time-consuming. Therefore, it is better to execute only the experiments that are of most interest each time.
 
@@ -56,4 +55,3 @@ git submodule update --init --recursive
 ```
 
 Then, please follow the instructions in the subdirectories to compile the code and run the experiments.
-
