@@ -19,7 +19,7 @@ make make_dir_Para
 make figure_multiple_Para
 
 cd ../
-mv graphs_Para $1
+mv graphs_Para $1/graphs_Para
 rm -fr dat dat_tmp_Para
 
 echo "Done!"

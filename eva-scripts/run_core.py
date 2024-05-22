@@ -656,9 +656,9 @@ def gen_data_and_index():
     help_gen_data_and_index(number_of_rows, cardinality, index_path)
 
     # generate 100M_X   X = [16, 32, 64, 128, 256]
-    # cardinality_array = [16, 32, 64, 128, 256]
-    # for num in cardinality_array:
-    #     help_gen_data_and_index(ONE_HUNDRED_MILLION, num, "100M_{}".format(num))
+    cardinality_array = [16, 32, 64, 128, 256]
+    for num in cardinality_array:
+        help_gen_data_and_index(ONE_HUNDRED_MILLION, num, "100M_{}".format(num))
     
     # generate 1B_X   X = [16, 32, 64, 128, 256]
     # cardinality_array = [100]

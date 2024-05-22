@@ -9,8 +9,8 @@ fi
 
 rm -fr dat
 rm -fr dat_tmp
-rm -fr graphs
-rm -fr $1/graphs
+rm -fr graphs_core
+rm -fr $1/graphs_core
 
 cp -r $1/dat $1/dat_tmp ./
 
@@ -20,11 +20,11 @@ make figure_multiple
 # make figure_multiple_ub+cubit-lk+cubit-lf
 
 cd ../
-python3 eva-scripts/cdf_core.py > graphs/cdf_output.txt
+python3 eva-scripts/cdf_core.py > graphs_core/cdf_output.txt
 
 python3 figure1.py
 
-mv graphs $1
+mv graphs_core $1/graphs_core
 rm -fr dat dat_tmp
 
 echo "Done!"

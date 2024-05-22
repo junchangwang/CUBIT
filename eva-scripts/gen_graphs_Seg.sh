@@ -19,7 +19,7 @@ make make_dir_Seg
 make figure_multiple_Seg
 
 cd ../
-mv graphs_Seg $1
+mv graphs_Seg $1/graphs_Seg
 rm -fr dat dat_tmp_Seg
 
 echo "Done!"
