@@ -710,7 +710,7 @@ def run():
     #cdf()
 
     # figure1
-    # os.system('python3 figure1.py')
+    # os.system('python3 eva-scripts/figure1.py')
 
 def main():
     itr = 0

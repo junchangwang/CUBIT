@@ -22,7 +22,7 @@ make figure_multiple_lk
 cd ../
 python3 eva-scripts/cdf_core.py > graphs_lk/cdf_output.txt
 
-python3 figure1.py
+python3 eva-scripts/figure1.py
 
 mv graphs_lk $1
 rm -fr dat dat_tmp
