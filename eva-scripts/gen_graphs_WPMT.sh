@@ -19,7 +19,7 @@ make make_dir_WPMT
 make figure_multiple_WPMT
 
 cd ../
-mv graphs_WPMT $1/graphs_WPMT
+mv graphs_WPMT $1
 rm -fr dat dat_tmp_WPMT
 
 echo "Done!"

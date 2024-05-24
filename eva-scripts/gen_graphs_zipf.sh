@@ -22,7 +22,7 @@ make figure_multiple_zipf
 cd ../
 python3 eva-scripts/cdf_zipf.py > graphs_zipf/cdf_output.txt
 
-mv graphs_zipf $1/graphs_zipf
+mv graphs_zipf $1
 rm -fr dat dat_tmp_zipf
 
 echo "Done!"

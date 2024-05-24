@@ -19,7 +19,7 @@ make make_dir_MT
 make figure_multiple_MT
 
 cd ../
-mv graphs_MT $1/graphs_MT
+mv graphs_MT $1
 rm -fr dat dat_tmp_MT
 
 echo "Done!"
