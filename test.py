@@ -30,9 +30,6 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     if "all" in args.exp:  # execute ALL experiments
-        exe = input("Execute all experiments, y/n? ")
-        if exe != "y" and exe != "Y":
-            exit(0)
         # print("python3 eva-scripts/run_core.py")
         os.system("python3 eva-scripts/run_core.py")
         for trial in ("graphs_0", "graphs_1", "graphs_2"):

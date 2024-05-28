@@ -1,5 +1,7 @@
 import sys
 import collections
+from functools import reduce
+
 
 def throughput(filename):
     f = open(filename)
@@ -252,7 +254,7 @@ def mem():
         else:
             sum += t
             n += 1
-    print float(tot) / (float(q) + float(t) / threshold)
+    print (float(tot) / (float(q) + float(t) / threshold))
 
 
 def CM():
@@ -289,7 +291,7 @@ def CM():
             else:
                 sum += 1.0
 
-    print reduce(lambda x, y: x + y, vec) / len(vec)
+    print (reduce(lambda x, y: x + y, vec) / len(vec))
 
 def _get(f, str):
     q = collections.deque()
@@ -318,7 +320,7 @@ def _get(f, str):
             u += 1
             if u == 100 or u == 1010 or u == 10010 or u == 200010 or u == 400010:
                 ans.append(reduce(lambda x, y: x + y, q) / len(q))
-    print u, ans
+    print (u, ans)
     return ans
 
 def get_ud(fn):
@@ -336,7 +338,7 @@ def get_qa(fn):
     return _get(open(fn), 'Q And')
 
 if __name__ == '__main__':
-    print latency_query(sys.argv[-1])
+    print (latency_query(sys.argv[-1]))
     # CM()
     # throughput_query()
     # throughput_update()

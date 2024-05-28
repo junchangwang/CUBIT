@@ -25,7 +25,7 @@ def cal_percentile(data):
         print ("{}% percentile: {}".format (q, np.percentile(data, q)))
 
 def get_figure_data():
-    cmd = "python3 run_naive_latency.py"  
+    cmd = "python3 eva-scripts/run_naive_latency.py"
     os.system(cmd)  
         
 def draw_bar():

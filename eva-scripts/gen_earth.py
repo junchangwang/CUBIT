@@ -15,7 +15,7 @@ for i in range(12):
 # temperature = []
 # mask = []
 # for i in range(1980):
-#     print i
+#     print (i)
 #     current = []
 #     m = []
 #     for j in range(15984):
@@ -27,7 +27,7 @@ for i in range(12):
 # data = []
 # minval = 100
 # for i in range(15984):
-#     print i
+#     print (i)
 #     row = []
 #     for k in range(1980):
 #         if nc.variables['temperature'][k].mask[i]:
@@ -37,7 +37,7 @@ for i in range(12):
 #             row.append(int(round(nc.variables['temperature'][k][i] + climatology[k % 12][i])))
 #             minval = min(minval, row[-1])
 #     data.append(row)
-#     print minval
+#     print (minval)
 
 data = []
 minval = 100

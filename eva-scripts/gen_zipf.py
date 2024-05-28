@@ -15,7 +15,7 @@ while True:
         if count >= 100000000:
             break
         elif count % 1000000 == 0:
-            print count
+            print (count)
     if count >= 100000000:
         break
 f.close()

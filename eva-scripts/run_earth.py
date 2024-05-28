@@ -667,43 +667,43 @@ def cdf():
 def run():
     # #naive
     gen_figure_naive_throughput_core()
-    # gen_figure_naive_throughput_ratio()
-    # gen_figure_naive_throughput_cardinality()
-#    gen_figure_naive_latency_core()
-    # gen_figure_naive_latency_ratio()
-    # gen_figure_naive_latency_cardinality()
+    gen_figure_naive_throughput_ratio()
+    gen_figure_naive_throughput_cardinality()
+    gen_figure_naive_latency_core()
+    gen_figure_naive_latency_ratio()
+    gen_figure_naive_latency_cardinality()
 
     # #ucb
     gen_figure_ucb_throughput_core()
-    # gen_figure_ucb_throughput_ratio()
-    # gen_figure_ucb_throughput_cardinality()
-#    gen_figure_ucb_latency_core()
-    # gen_figure_ucb_latency_ratio()
-    # gen_figure_ucb_latency_cardinality()
+    gen_figure_ucb_throughput_ratio()
+    gen_figure_ucb_throughput_cardinality()
+    gen_figure_ucb_latency_core()
+    gen_figure_ucb_latency_ratio()
+    gen_figure_ucb_latency_cardinality()
 
     # #ub
     gen_figure_ub_throughput_core()
-    # gen_figure_ub_throughput_ratio()
-    # gen_figure_ub_throughput_cardinality()
-#    gen_figure_ub_latency_core()
-    # gen_figure_ub_latency_ratio()
-    # gen_figure_ub_latency_cardinality()
+    gen_figure_ub_throughput_ratio()
+    gen_figure_ub_throughput_cardinality()
+    gen_figure_ub_latency_core()
+    gen_figure_ub_latency_ratio()
+    gen_figure_ub_latency_cardinality()
 
     # #cubit-lk
     gen_figure_cubit_lk_throughput_core()
-    # gen_figure_cubit_lk_throughput_ratio()
-    # gen_figure_cubit_lk_throughput_cardinality()
-#    gen_figure_cubit_lk_latency_core()
-    # gen_figure_cubit_lk_latency_ratio()
-    # gen_figure_cubit_lk_latency_cardinality()
+    gen_figure_cubit_lk_throughput_ratio()
+    gen_figure_cubit_lk_throughput_cardinality()
+    gen_figure_cubit_lk_latency_core()
+    gen_figure_cubit_lk_latency_ratio()
+    gen_figure_cubit_lk_latency_cardinality()
 
     # #cubit_lf
     gen_figure_cubit_lf_throughput_core()
-    # gen_figure_cubit_lf_throughput_ratio()
-    # gen_figure_cubit_lf_throughput_cardinality()
-#    gen_figure_cubit_lf_latency_core()
-    # gen_figure_cubit_lf_latency_ratio()
-    # gen_figure_cubit_lf_latency_cardinality()
+    gen_figure_cubit_lf_throughput_ratio()
+    gen_figure_cubit_lf_throughput_cardinality()
+    gen_figure_cubit_lf_latency_core()
+    gen_figure_cubit_lf_latency_ratio()
+    gen_figure_cubit_lf_latency_cardinality()
 
     #cdf
     #cdf()
@@ -721,7 +721,7 @@ def main():
         if (os.path.isfile("a_earth")):
             print("a_earth exists")
         else:
-            os.system("python3 gen_earth.py")
+            os.system("python3 eva-scripts/gen_earth.py")
             os.system("./build/nicolas -m build -d a_earth -c 114 -n 31648320 -i earth_new")
 
         datdir = 'dat'

@@ -17,9 +17,9 @@ for nThread in [2, 4, 8, 16, 32, 64]:
                 curt = ucb_cmd.format(curt_bind, appr, int(10000*(1-pUpdate)), int(10000*pUpdate), nThread-1, appr, pUpdate, nThread)
             else:
                 curt = naive_cmd.format(curt_bind, appr, int(10000*(1-pUpdate)), int(10000*pUpdate), nThread-1, appr, pUpdate, nThread)
-            print curt
+            print (curt)
             try:
                 os.system(curt)
             except KeyboardInterrupt:
-                print 'ctrl-c'
+                print ('ctrl-c')
                 exit(-1)

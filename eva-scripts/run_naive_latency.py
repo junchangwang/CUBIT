@@ -40,7 +40,7 @@ def build():
     os.system(cmd)
     
 def build_index():
-    cmd = 'python3 build_bitvector.py'
+    cmd = 'python3 eva-scripts/build_bitvector.py'
     os.system(cmd)
     
 ####################################

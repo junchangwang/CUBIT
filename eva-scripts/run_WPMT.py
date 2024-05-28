@@ -115,7 +115,7 @@ def latency_analysis(filename):
 #     print ('-' * 10)    
 #     f = open('dat/figure_cubit-lk_latency_WPMT.dat','w')
 #     for num in merge_threshold_num:
-#         cmd = gen_cmd_others_WPMT(core_for_WPMT, 'cubit-lk', 'yes', 1000, ratio_percentage, index_path, num)
+#         cmd = gen_cmd_cubit_WPMT(core_for_WPMT, 'cubit-lk', 'yes', 1000, ratio_percentage, index_path, num)
 #         print(cmd)
 #         os.system(cmd) 
 #         ret = latency_analysis('dat_tmp_WPMT/figure_cubit-lk_latency_raw_w_{}_ratio_{}_WPMT_{}.dat'.format(core_for_WPMT, ratio_percentage, num))  
@@ -133,7 +133,7 @@ def gen_figure_cubit_lf_latency_WPMT():
     for num in workers_num:
         temp_list = []
         temp_list.clear()
-        cmd = gen_cmd_others_WPMT(core_for_WPMT, 'cubit-lf', 'yes', 1000, ratio_percentage, index_path, num)
+        cmd = gen_cmd_cubit_WPMT(core_for_WPMT, 'cubit-lf', 'yes', 1000, ratio_percentage, index_path, num)
         print(cmd)
         os.system(cmd) 
         res = latency_analysis('dat_tmp_WPMT/figure_cubit-lf_latency_raw_w_{}_ratio_{}_WPMT_{}.dat'.format(core_for_WPMT, ratio_percentage, num))  

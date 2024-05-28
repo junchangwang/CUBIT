@@ -635,43 +635,43 @@ def gen_figure_cubit_lf_latency_cardinality():
 def run():
     # #naive
     gen_figure_naive_throughput_core()
-    # gen_figure_naive_throughput_ratio()
-    # gen_figure_naive_throughput_cardinality()
+    gen_figure_naive_throughput_ratio()
+    gen_figure_naive_throughput_cardinality()
     gen_figure_naive_latency_core()
-    # gen_figure_naive_latency_ratio()
-    # gen_figure_naive_latency_cardinality()
+    gen_figure_naive_latency_ratio()
+    gen_figure_naive_latency_cardinality()
 
     # #ucb
     gen_figure_ucb_throughput_core()
-    # gen_figure_ucb_throughput_ratio()
-    # gen_figure_ucb_throughput_cardinality()
+    gen_figure_ucb_throughput_ratio()
+    gen_figure_ucb_throughput_cardinality()
     gen_figure_ucb_latency_core()
-    # gen_figure_ucb_latency_ratio()
-    # gen_figure_ucb_latency_cardinality()
+    gen_figure_ucb_latency_ratio()
+    gen_figure_ucb_latency_cardinality()
 
     # #ub
     gen_figure_ub_throughput_core()
-    # gen_figure_ub_throughput_ratio()
-    # gen_figure_ub_throughput_cardinality()
+    gen_figure_ub_throughput_ratio()
+    gen_figure_ub_throughput_cardinality()
     gen_figure_ub_latency_core()
-    # gen_figure_ub_latency_ratio()
-    # gen_figure_ub_latency_cardinality()
+    gen_figure_ub_latency_ratio()
+    gen_figure_ub_latency_cardinality()
 
     # #cubit-lk
     gen_figure_cubit_lk_throughput_core()
-    # gen_figure_cubit_lk_throughput_ratio()
-    # gen_figure_cubit_lk_throughput_cardinality()
+    gen_figure_cubit_lk_throughput_ratio()
+    gen_figure_cubit_lk_throughput_cardinality()
     gen_figure_cubit_lk_latency_core()
-    # gen_figure_cubit_lk_latency_ratio()
-    # gen_figure_cubit_lk_latency_cardinality()
+    gen_figure_cubit_lk_latency_ratio()
+    gen_figure_cubit_lk_latency_cardinality()
 
     # #cubit_lf
     gen_figure_cubit_lf_throughput_core()
-    # gen_figure_cubit_lf_throughput_ratio()
-    # gen_figure_cubit_lf_throughput_cardinality()
+    gen_figure_cubit_lf_throughput_ratio()
+    gen_figure_cubit_lf_throughput_cardinality()
     gen_figure_cubit_lf_latency_core()
-    # gen_figure_cubit_lf_latency_ratio()
-    # gen_figure_cubit_lf_latency_cardinality()
+    gen_figure_cubit_lf_latency_ratio()
+    gen_figure_cubit_lf_latency_cardinality()
 
 def main():
     itr = 0
@@ -686,7 +686,7 @@ def main():
         if (os.path.isfile("zipf_15")):
             print("zipf_15 exists")
         else:
-            os.system("python3 gen_zipf.py")
+            os.system("python3 eva-scripts/gen_zipf.py")
             os.system("./build/nicolas -m build -d zipf_15 -c 100 -n 100000000 -i 100M_zipf15")
 
         datdir = 'dat'
