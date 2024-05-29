@@ -22,8 +22,6 @@ make figure_multiple_earth
 cd ../
 python3 eva-scripts/cdf_earth.py > graphs_earth/cdf_output.txt
 
-python3 eva-scripts/figure1.py
-
 mv graphs_earth $1
 rm -fr dat dat_tmp_earth
 
