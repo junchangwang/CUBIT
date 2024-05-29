@@ -12,7 +12,8 @@ rm -fr dat_tmp_Seg
 rm -fr graphs_Seg
 rm -fr $1/graphs_Seg
 
-cp -r $1/dat $1/dat_tmp_Seg ./
+cp -r $1/dat_Seg/ ./dat
+cp -r $1/dat_tmp_Seg ./
 
 cd gnuplot-scripts
 make make_dir_Seg

@@ -12,7 +12,8 @@ rm -fr dat_tmp
 rm -fr graphs
 rm -fr $1/graphs
 
-cp -r $1/dat $1/dat_tmp ./
+cp -r $1/dat/ ./dat
+cp -r $1/dat_tmp ./
 
 cd gnuplot-scripts
 make make_dir

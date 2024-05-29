@@ -21,7 +21,7 @@ make figure_multiple_1B
 # make figure_multiple_ub+cubit-lk+cubit-lf_1B
 
 cd ../
-python3 eva-scripts/cdf_1B.py > graphs_1B/cdf_output.txt
+# python3 eva-scripts/cdf_1B.py > graphs_1B/cdf_output.txt
 
 mv graphs_1B $1
 rm -fr dat dat_tmp_1B
