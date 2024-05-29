@@ -2,11 +2,11 @@
 
 if [ -z $1 ]
 then
-    echo "Please specify the correct expriment!"
+    python3 ./eva-scripts/run_core.py
     exit
 fi
 
-if [ $1 == "ALL" ]
+if [ $1 == "all" ]
 then
     python3 ./eva-scripts/run_core.py
     python3 ./eva-scripts/run_1B.py
