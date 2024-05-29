@@ -30,16 +30,18 @@ First, use the following command to compile the entire project.
 
 Then, reproduce the key results (Figures 2, 8, 9, and 10) by using the following command. 
 
-```
-python3 test.py -e core
+```sh
+./run.sh core
+./plot.sh core
 ```
 
 The above command writes the experimental results to a group of folders named graphs_x, where x is the ID of each trial. It then analyzes the results in graphs_x and draws figures.
 
 We can replicate other experiments by specifying different experiment types in {core, 1B, earth, MT, Para, Seg, WPMT, zipf}. The following command performs all experiments.
 
-```
-python3 test.py -e all
+```sh
+./run.sh ALL
+./plot.sh ALL
 ```
 
 Note that it may take dozens of hours to run the whole experimentation for the first time because it involves generating datasets, which is time-consuming. Therefore, it is better to execute only the experiments that are of most interest each time.
