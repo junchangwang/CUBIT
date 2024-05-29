@@ -12,8 +12,7 @@ rm -fr dat_tmp_Para
 rm -fr graphs_Para
 rm -fr $1/graphs_Para
 
-cp -r $1/dat_Para/ ./dat
-cp -r $1/dat_tmp_Para ./
+cp -r $1/dat $1/dat_tmp_Para ./
 
 cd gnuplot-scripts
 make make_dir_Para

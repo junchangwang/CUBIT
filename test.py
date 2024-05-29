@@ -30,40 +30,49 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     if "all" in args.exp:  # execute ALL experiments
-        # print("python3 eva-scripts/run_core.py")
-        os.system("python3 eva-scripts/run_core.py")
+        
+        # print("python3 ./eva-scripts/run_core.py")
+        os.system("python3 ./eva-scripts/run_core.py")
+        
         for trial in ("graphs_0", "graphs_1", "graphs_2"):
-            print("\033[32m " + "=" * 50 +
-                  f"Experiment core on {trial}" + "=" * 50 + "\033[0m")
-            # print(f"eva-scripts/gen_graphs_core.sh {trial}")
-            os.system(f"eva-scripts/gen_graphs_core.sh {trial}")
+            print("=" * 50 + f"Experiment core on {trial}" + "=" * 50)
+            
+            print(f"./eva-scripts/gen_graphs_core.sh {trial}")
+            # os.system(f"./eva-scripts/gen_graphs_core.sh {trial}")
+        
         for exp in ("1B", "earth", "MT", "Para", "Seg", "WPMT", "zipf"):
-            # print(f"python3 eva-scripts/run_{exp}.py")
-            os.system(f"python3 eva-scripts/run_{exp}.py")
+            
+            print(f"python3 ./eva-scripts/run_{exp}.py")
+            # os.system(f"python3 ./eva-scripts/run_{exp}.py")
+            
             for trial in os.listdir("./"):
                 if not trial.startswith(f"graphs_{exp}"):
                     continue
-                print("\033[32m " + "=" * 50 +
-                      f"Experiment {exp} on {trial}" + "=" * 50 + "\033[0m")
-                # print(f"eva-scripts/gen_graphs_{exp}.sh {trial}")
-                os.system(f"eva-scripts/gen_graphs_{exp}.sh {trial}")
+                print("=" * 50 + f"Experiment {exp} on {trial}" + "=" * 50)
+                
+                # print(f"./eva-scripts/gen_graphs_{exp}.sh {trial}")
+                os.system(f"./eva-scripts/gen_graphs_{exp}.sh {trial}")
+
     else:
         for exp in args.exp:
-            # print(f"python3 eva-scripts/run_{exp}.py")
-            os.system(f"python3 eva-scripts/run_{exp}.py")
+            
+            # print(f"python3 ./eva-scripts/run_{exp}.py")
+            os.system(f"python3 ./eva-scripts/run_{exp}.py")
+            
             if exp == "core":
                 for trial in ("graphs_0", "graphs_1", "graphs_2"):
-                    print("\033[32m " + "=" * 50 +
-                          f"Experiment core on {trial}" + "=" * 50 + "\033[0m")
-                    # print(f"eva-scripts/gen_graphs_core.sh {trial}")
-                    os.system(f"eva-scripts/gen_graphs_core.sh {trial}")
+                    print("=" * 50 + f"Experiment core on {trial}" + "=" * 50 )
+                    
+                    # print(f"./eva-scripts/gen_graphs_core.sh {trial}")
+                    os.system(f"./eva-scripts/gen_graphs_core.sh {trial}")
+                
                 continue
             for trial in os.listdir("./"):
                 if not trial.startswith(f"graphs_{exp}"):
                     continue
-                print("\033[32m " + "=" * 50 +
-                      f"Experiment {exp} on {trial}" + "=" * 50 + "\033[0m")
-                # print(f"eva-scripts/gen_graphs_{exp}.sh {trial}")
-                os.system(f"eva-scripts/gen_graphs_{exp}.sh {trial}")
+                print("=" * 50 + f"Experiment {exp} on {trial}" + "=" * 50)
+                
+                # print(f"./eva-scripts/gen_graphs_{exp}.sh {trial}")
+                os.system(f"./eva-scripts/gen_graphs_{exp}.sh {trial}")
 
     print("Done!")

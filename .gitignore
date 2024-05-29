@@ -25,4 +25,7 @@ earth_new/
 run_tmp.py
 ExperimentalData*
 .idea
-gen_graphs.sh
+remote.sh
+local.sh
+*.output
+zipf_15

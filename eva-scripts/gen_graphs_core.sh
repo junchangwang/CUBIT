@@ -12,8 +12,7 @@ rm -fr dat_tmp
 rm -fr graphs
 rm -fr $1/graphs
 
-cp -r $1/dat/ ./dat
-cp -r $1/dat_tmp ./
+cp -r $1/dat $1/dat_tmp ./
 
 cd gnuplot-scripts
 make make_dir
@@ -22,7 +21,6 @@ make figure_multiple
 
 cd ../
 python3 eva-scripts/cdf_core.py > graphs/cdf_output.txt
-
 python3 eva-scripts/figure1.py
 
 mv graphs $1

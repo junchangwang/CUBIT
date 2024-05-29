@@ -12,8 +12,7 @@ rm -fr dat_tmp_WPMT
 rm -fr graphs_WPMT
 rm -fr $1/graphs_WPMT
 
-cp -r $1/dat_WPMT/ ./dat
-cp -r $1/dat_tmp_WPMT ./
+cp -r $1/dat $1/dat_tmp_WPMT ./
 
 cd gnuplot-scripts
 make make_dir_WPMT

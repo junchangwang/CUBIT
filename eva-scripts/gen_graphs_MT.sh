@@ -12,8 +12,7 @@ rm -fr dat_tmp_MT
 rm -fr graphs_MT
 rm -fr $1/graphs_MT
 
-cp -r $1/dat_MT/ ./dat
-cp -r $1/dat_tmp_MT ./
+cp -r $1/dat $1/dat_tmp_MT ./
 
 cd gnuplot-scripts
 make make_dir_MT

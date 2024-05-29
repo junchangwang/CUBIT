@@ -12,8 +12,7 @@ rm -fr dat_tmp_zipf
 rm -fr graphs_zipf
 rm -fr $1/graphs_zipf
 
-cp -r $1/dat_zipf/ ./dat
-cp -r $1/dat_tmp_zipf ./
+cp -r $1/dat $1/dat_tmp_zipf ./
 
 cd gnuplot-scripts
 make make_dir_zipf
