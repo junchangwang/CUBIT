@@ -25,7 +25,7 @@ earth_new/
 run_tmp.py
 ExperimentalData*
 .idea
-remote.sh
 local.sh
+remote.sh
 *.output
 zipf_15
