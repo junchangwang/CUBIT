@@ -24,7 +24,7 @@ CUBIT v2 relies on c++17, python3, liburcu(-dev), and the Boost library.
 
 First, use the following command to compile the entire project. 
 
-```
+```sh
 ./build.sh 
 ```
 
@@ -40,8 +40,8 @@ The above command writes the experimental results to a group of folders named gr
 We can replicate other experiments by specifying different experiment types in {core, 1B, earth, MT, Para, Seg, WPMT, zipf}. The following command performs all experiments.
 
 ```sh
-./run.sh ALL
-./plot.sh ALL
+./run.sh all
+./plot.sh all
 ```
 
 Note that it may take dozens of hours to run the whole experimentation for the first time because it involves generating datasets, which is time-consuming. Therefore, it is better to execute only the experiments that are of most interest each time.
