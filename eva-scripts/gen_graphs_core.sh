@@ -7,10 +7,10 @@ else
 	exit
 fi
 
-rm -fr dat
-rm -fr dat_tmp
-rm -fr graphs
-rm -fr $1/graphs
+rm -rf dat
+rm -rf dat_tmp
+rm -rf graphs
+rm -rf $1/graphs
 
 cp -r $1/dat $1/dat_tmp ./
 
@@ -24,6 +24,6 @@ python3 eva-scripts/cdf_core.py > graphs/cdf_output.txt
 python3 eva-scripts/figure1.py
 
 mv graphs $1
-rm -fr dat dat_tmp
+rm -rf dat dat_tmp
 
 echo "Done!"

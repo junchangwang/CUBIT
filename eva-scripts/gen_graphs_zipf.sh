@@ -7,10 +7,10 @@ else
 	exit
 fi
 
-rm -fr dat
-rm -fr dat_tmp_zipf
-rm -fr graphs_zipf
-rm -fr $1/graphs_zipf
+rm -rf dat
+rm -rf dat_tmp_zipf
+rm -rf graphs_zipf
+rm -rf $1/graphs_zipf
 
 cp -r $1/dat $1/dat_tmp_zipf ./
 
@@ -23,6 +23,6 @@ cd ../
 python3 eva-scripts/cdf_zipf.py > graphs_zipf/cdf_output.txt
 
 mv graphs_zipf $1
-rm -fr dat dat_tmp_zipf
+rm -rf dat dat_tmp_zipf
 
 echo "Done!"

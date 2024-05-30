@@ -24,8 +24,8 @@ Land_and_Ocean_EqualArea.nc
 earth_new/
 run_tmp.py
 ExperimentalData*
+zipf_15
 .idea
 local.sh
 remote.sh
-zipf_15
-output/
+*.output

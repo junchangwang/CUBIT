@@ -7,10 +7,10 @@ else
 	exit
 fi
 
-rm -fr dat
-rm -fr dat_tmp_Seg
-rm -fr graphs_Seg
-rm -fr $1/graphs_Seg
+rm -rf dat
+rm -rf dat_tmp_Seg
+rm -rf graphs_Seg
+rm -rf $1/graphs_Seg
 
 cp -r $1/dat $1/dat_tmp_Seg ./
 
@@ -20,6 +20,6 @@ make figure_multiple_Seg
 
 cd ../
 mv graphs_Seg $1
-rm -fr dat dat_tmp_Seg
+rm -rf dat dat_tmp_Seg
 
 echo "Done!"

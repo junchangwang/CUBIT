@@ -7,10 +7,10 @@ else
 	exit
 fi
 
-rm -fr dat
-rm -fr dat_tmp_earth
-rm -fr graphs_earth
-rm -fr $1/graphs_earth
+rm -rf dat
+rm -rf dat_tmp_earth
+rm -rf graphs_earth
+rm -rf $1/graphs_earth
 
 cp -r $1/dat $1/dat_tmp_earth ./
 
@@ -23,6 +23,6 @@ cd ../
 python3 eva-scripts/cdf_earth.py > graphs_earth/cdf_output.txt
 
 mv graphs_earth $1
-rm -fr dat dat_tmp_earth
+rm -rf dat dat_tmp_earth
 
 echo "Done!"

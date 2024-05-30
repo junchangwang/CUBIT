@@ -145,7 +145,7 @@ def gen_figure_naive_throughput_core():
     print ('Figure naive_throughput_core')
     print ('-' * 10)
     core_number = [1, 2, 4, 8, 16, 24, 32]
-    f = open('dat_1B/figure_naive_throughput_core.dat','w')
+    f = open('dat/figure_naive_throughput_core.dat','w')
     for num in core_number:
         cmd = gen_cmd_naive(num, 'naive', 'no', 1000, ratio_percentage, index_path)
         print(cmd)
@@ -161,7 +161,7 @@ def gen_figure_naive_throughput_ratio():
     print ('Figure naive_throughput_ratio')
     print ('-' * 10)
     ratio_number = [0.01, 0.02, 0.05, 0.1, 0.2]
-    f = open('dat_1B/figure_naive_throughput_ratio.dat','w')
+    f = open('dat/figure_naive_throughput_ratio.dat','w')
     for num in ratio_number:
         cmd = gen_cmd_naive(16, 'naive', 'no', 1000, num, index_path)
         print(cmd)
@@ -177,7 +177,7 @@ def gen_figure_naive_throughput_cardinality():
     print ('Figure naive_throughput_cardinality')
     print ('-' * 10)
     cardinality_number = [16, 32, 64, 128, 256]
-    f = open('dat_1B/figure_naive_throughput_cardinality.dat','w')
+    f = open('dat/figure_naive_throughput_cardinality.dat','w')
     for num in cardinality_number:
         index_path = "100M_{}".format(num)
         cmd = gen_cmd_naive_cardinality(core_for_cardinality, 'naive', 'no', 1000, ratio_percentage, index_path, num, ONE_HUNDRED_MILLION)
@@ -194,7 +194,7 @@ def gen_figure_naive_latency_core(): # latency
     print ('Figure naive_latency_core')
     print ('-' * 10)
     core_number = [1, 2, 4, 8, 16, 24, 32]
-    f = open('dat_1B/figure_naive_latency_core.dat','w')
+    f = open('dat/figure_naive_latency_core.dat','w')
     for num in core_number:
         cmd = gen_cmd_naive(num, 'naive', 'yes', 1000, ratio_percentage, index_path)
         print(cmd)
@@ -211,7 +211,7 @@ def gen_figure_naive_latency_ratio():
     print ('Figure naive_latency_ratio')
     print ('-' * 10)
     ratio_number = [0.01, 0.02, 0.05, 0.1, 0.2]
-    f = open('dat_1B/figure_naive_latency_ratio.dat','w')
+    f = open('dat/figure_naive_latency_ratio.dat','w')
     for num in ratio_number:
         cmd = gen_cmd_naive(16, 'naive', 'yes', 1000, num, index_path)
         print(cmd)
@@ -228,7 +228,7 @@ def gen_figure_naive_latency_cardinality():
     print ('Figure naive_latency_cardinality')
     print ('-' * 10)
     cardinality_number = [16, 32, 64, 128, 256]
-    f = open('dat_1B/figure_naive_latency_cardinality.dat','w')
+    f = open('dat/figure_naive_latency_cardinality.dat','w')
     for num in cardinality_number:
         index_path = "100M_{}".format(num)
         cmd = gen_cmd_naive_cardinality(core_for_cardinality, 'naive', 'yes', 1000, ratio_percentage, index_path, num, ONE_HUNDRED_MILLION)
@@ -248,7 +248,7 @@ def gen_figure_ucb_throughput_core():
     print ('Figure ucb_throughput_core')
     print ('-' * 10)
     core_number = [1, 2, 4, 8, 16, 24, 32]
-    f = open('dat_1B/figure_ucb_throughput_core.dat','w')
+    f = open('dat/figure_ucb_throughput_core.dat','w')
     for num in core_number:
         cmd = gen_cmd_others(num, 'ucb', 'no', 1000, ratio_percentage, index_path)
         print(cmd)
@@ -264,7 +264,7 @@ def gen_figure_ucb_throughput_ratio():
     print ('Figure ucb_throughput_ratio')
     print ('-' * 10)
     ratio_number = [0.01, 0.02, 0.05, 0.1, 0.2]
-    f = open('dat_1B/figure_ucb_throughput_ratio.dat','w')
+    f = open('dat/figure_ucb_throughput_ratio.dat','w')
     for num in ratio_number:
         cmd = gen_cmd_others(16, 'ucb', 'no', 1000, num, index_path)
         print(cmd)
@@ -280,7 +280,7 @@ def gen_figure_ucb_throughput_cardinality():
     print ('Figure ucb_throughput_cardinality')
     print ('-' * 10)
     cardinality_number = [16, 32, 64, 128, 256]
-    f = open('dat_1B/figure_ucb_throughput_cardinality.dat','w')
+    f = open('dat/figure_ucb_throughput_cardinality.dat','w')
     for num in cardinality_number:
         index_path = "100M_{}".format(num)
         cmd = gen_cmd_others_cardinality(core_for_cardinality, 'ucb', 'no', 1000, ratio_percentage, index_path, num, ONE_HUNDRED_MILLION)
@@ -297,7 +297,7 @@ def gen_figure_ucb_latency_core(): # latency
     print ('Figure ucb_latency_core')
     print ('-' * 10)
     core_number = [1, 2, 4, 8, 16, 24, 32]
-    f = open('dat_1B/figure_ucb_latency_core.dat','w')
+    f = open('dat/figure_ucb_latency_core.dat','w')
     for num in core_number:
         cmd = gen_cmd_others(num, 'ucb', 'yes', 1000, ratio_percentage, index_path)
         print(cmd)
@@ -314,7 +314,7 @@ def gen_figure_ucb_latency_ratio():
     print ('Figure ucb_latency_ratio')
     print ('-' * 10)
     ratio_number = [0.01, 0.02, 0.05, 0.1, 0.2]
-    f = open('dat_1B/figure_ucb_latency_ratio.dat','w')
+    f = open('dat/figure_ucb_latency_ratio.dat','w')
     for num in ratio_number:
         cmd = gen_cmd_others(16, 'ucb', 'yes', 1000, num, index_path)
         print(cmd)
@@ -331,7 +331,7 @@ def gen_figure_ucb_latency_cardinality():
     print ('Figure ucb_latency_cardinality')
     print ('-' * 10)
     cardinality_number = [16, 32, 64, 128, 256]
-    f = open('dat_1B/figure_ucb_latency_cardinality.dat','w')
+    f = open('dat/figure_ucb_latency_cardinality.dat','w')
     for num in cardinality_number:
         index_path = "100M_{}".format(num)
         cmd = gen_cmd_others_cardinality(core_for_cardinality, 'ucb', 'yes', 1000, ratio_percentage, index_path, num, ONE_HUNDRED_MILLION)
@@ -350,7 +350,7 @@ def gen_figure_ub_throughput_core():
     print ('Figure ub_throughput_core')
     print ('-' * 10)
     core_number = [1, 2, 4, 8, 16, 24, 32]
-    f = open('dat_1B/figure_ub_throughput_core.dat','w')
+    f = open('dat/figure_ub_throughput_core.dat','w')
     for num in core_number:
         cmd = gen_cmd_others(num, 'ub', 'no', 1000, ratio_percentage, index_path)
         print(cmd)
@@ -366,7 +366,7 @@ def gen_figure_ub_throughput_ratio():
     print ('Figure ub_throughput_ratio')
     print ('-' * 10)
     ratio_number = [0.01, 0.02, 0.05, 0.1, 0.2]
-    f = open('dat_1B/figure_ub_throughput_ratio.dat','w')
+    f = open('dat/figure_ub_throughput_ratio.dat','w')
     for num in ratio_number:
         cmd = gen_cmd_others(16, 'ub', 'no', 1000, num, index_path)
         print(cmd)
@@ -382,7 +382,7 @@ def gen_figure_ub_throughput_cardinality():
     print ('Figure ub_throughput_cardinality')
     print ('-' * 10)
     cardinality_number = [16, 32, 64, 128, 256]
-    f = open('dat_1B/figure_ub_throughput_cardinality.dat','w')
+    f = open('dat/figure_ub_throughput_cardinality.dat','w')
     for num in cardinality_number:
         index_path = "100M_{}".format(num)
         cmd = gen_cmd_others_cardinality(core_for_cardinality, 'ub', 'no', 1000, ratio_percentage, index_path, num, ONE_HUNDRED_MILLION)
@@ -399,7 +399,7 @@ def gen_figure_ub_latency_core(): # latency
     print ('Figure ub_latency_core')
     print ('-' * 10)
     core_number = [1, 2, 4, 8, 16, 24, 32]
-    f = open('dat_1B/figure_ub_latency_core.dat','w')
+    f = open('dat/figure_ub_latency_core.dat','w')
     for num in core_number:
         cmd = gen_cmd_others(num, 'ub', 'yes', 1000, ratio_percentage, index_path)
         print(cmd)
@@ -416,7 +416,7 @@ def gen_figure_ub_latency_ratio():
     print ('Figure ub_latency_ratio')
     print ('-' * 10)
     ratio_number = [0.01, 0.02, 0.05, 0.1, 0.2]
-    f = open('dat_1B/figure_ub_latency_ratio.dat','w')
+    f = open('dat/figure_ub_latency_ratio.dat','w')
     for num in ratio_number:
         cmd = gen_cmd_others(16, 'ub', 'yes', 1000, num, index_path)
         print(cmd)
@@ -433,7 +433,7 @@ def gen_figure_ub_latency_cardinality():
     print ('Figure ub_latency_cardinality')
     print ('-' * 10)
     cardinality_number = [16, 32, 64, 128, 256]
-    f = open('dat_1B/figure_ub_latency_cardinality.dat','w')
+    f = open('dat/figure_ub_latency_cardinality.dat','w')
     for num in cardinality_number:
         index_path = "100M_{}".format(num)
         cmd = gen_cmd_others_cardinality(core_for_cardinality, 'ub', 'yes', 1000, ratio_percentage, index_path, num, ONE_HUNDRED_MILLION)
@@ -451,7 +451,7 @@ def gen_figure_cubit_lk_throughput_core():
     print ('Figure cubit-lk_throughput_core')
     print ('-' * 10)
     core_number = [1, 2, 4, 8, 16, 24, 32]
-    f = open('dat_1B/figure_cubit-lk_throughput_core.dat','w')
+    f = open('dat/figure_cubit-lk_throughput_core.dat','w')
     for num in core_number:
         cmd = gen_cmd_cubit(num, 'cubit-lk', 'no', 1000, ratio_percentage, index_path)
         print(cmd)
@@ -467,7 +467,7 @@ def gen_figure_cubit_lk_throughput_ratio():
     print ('Figure cubit-lk_throughput_ratio')
     print ('-' * 10)
     ratio_number = [0.01, 0.02, 0.05, 0.1, 0.2]
-    f = open('dat_1B/figure_cubit-lk_throughput_ratio.dat','w')
+    f = open('dat/figure_cubit-lk_throughput_ratio.dat','w')
     for num in ratio_number:
         cmd = gen_cmd_cubit(16, 'cubit-lk', 'no', 1000, num, index_path)
         print(cmd)
@@ -483,7 +483,7 @@ def gen_figure_cubit_lk_throughput_cardinality():
     print ('Figure cubit-lk_throughput_cardinality')
     print ('-' * 10)
     cardinality_number = [16, 32, 64, 128, 256]
-    f = open('dat_1B/figure_cubit-lk_throughput_cardinality.dat','w')
+    f = open('dat/figure_cubit-lk_throughput_cardinality.dat','w')
     for num in cardinality_number:
         index_path = "100M_{}".format(num)
         cmd = gen_cmd_cubit_cardinality(core_for_cardinality, 'cubit-lk', 'no', 1000, ratio_percentage, index_path, num, ONE_HUNDRED_MILLION)
@@ -500,7 +500,7 @@ def gen_figure_cubit_lk_latency_core(): # latency
     print ('Figure cubit-lk_latency_core')
     print ('-' * 10)
     core_number = [1, 2, 4, 8, 16, 24, 32]
-    f = open('dat_1B/figure_cubit-lk_latency_core.dat','w')
+    f = open('dat/figure_cubit-lk_latency_core.dat','w')
     for num in core_number:
         cmd = gen_cmd_cubit(num, 'cubit-lk', 'yes', 1000, ratio_percentage, index_path)
         print(cmd)
@@ -517,7 +517,7 @@ def gen_figure_cubit_lk_latency_ratio():
     print ('Figure cubit-lk_latency_ratio')
     print ('-' * 10)
     ratio_number = [0.01, 0.02, 0.05, 0.1, 0.2]
-    f = open('dat_1B/figure_cubit-lk_latency_ratio.dat','w')
+    f = open('dat/figure_cubit-lk_latency_ratio.dat','w')
     for num in ratio_number:
         cmd = gen_cmd_cubit(16, 'cubit-lk', 'yes', 1000, num, index_path)
         print(cmd)
@@ -534,7 +534,7 @@ def gen_figure_cubit_lk_latency_cardinality():
     print ('Figure cubit-lk_latency_cardinality')
     print ('-' * 10)
     cardinality_number = [16, 32, 64, 128, 256]
-    f = open('dat_1B/figure_cubit-lk_latency_cardinality.dat','w')
+    f = open('dat/figure_cubit-lk_latency_cardinality.dat','w')
     for num in cardinality_number:
         index_path = "100M_{}".format(num)
         cmd = gen_cmd_cubit_cardinality(core_for_cardinality, 'cubit-lk', 'yes', 1000, ratio_percentage, index_path, num, ONE_HUNDRED_MILLION)
@@ -552,7 +552,7 @@ def gen_figure_cubit_lf_throughput_core():
     print ('Figure cubit-lf_throughput_core')
     print ('-' * 10)
     core_number = [1, 2, 4, 8, 16, 24, 32]
-    f = open('dat_1B/figure_cubit-lf_throughput_core.dat','w')
+    f = open('dat/figure_cubit-lf_throughput_core.dat','w')
     for num in core_number:
         cmd = gen_cmd_cubit(num, 'cubit-lf', 'no', 1000, ratio_percentage, index_path)
         print(cmd)
@@ -568,7 +568,7 @@ def gen_figure_cubit_lf_throughput_ratio():
     print ('Figure cubit-lf_throughput_ratio')
     print ('-' * 10)
     ratio_number = [0.01, 0.02, 0.05, 0.1, 0.2]
-    f = open('dat_1B/figure_cubit-lf_throughput_ratio.dat','w')
+    f = open('dat/figure_cubit-lf_throughput_ratio.dat','w')
     for num in ratio_number:
         cmd = gen_cmd_cubit(16, 'cubit-lf', 'no', 1000, num, index_path)
         print(cmd)
@@ -584,7 +584,7 @@ def gen_figure_cubit_lf_throughput_cardinality():
     print ('Figure cubit-lf_throughput_cardinality')
     print ('-' * 10)
     cardinality_number = [16, 32, 64, 128, 256]
-    f = open('dat_1B/figure_cubit-lf_throughput_cardinality.dat','w')
+    f = open('dat/figure_cubit-lf_throughput_cardinality.dat','w')
     for num in cardinality_number:
         index_path = "100M_{}".format(num)
         cmd = gen_cmd_cubit_cardinality(core_for_cardinality, 'cubit-lf', 'no', 1000, ratio_percentage, index_path, num, ONE_HUNDRED_MILLION)
@@ -601,7 +601,7 @@ def gen_figure_cubit_lf_latency_core(): # latency
     print ('Figure cubit-lf_latency_core')
     print ('-' * 10)
     core_number = [1, 2, 4, 8, 16, 24, 32]
-    f = open('dat_1B/figure_cubit-lf_latency_core.dat','w')
+    f = open('dat/figure_cubit-lf_latency_core.dat','w')
     for num in core_number:
         cmd = gen_cmd_cubit(num, 'cubit-lf', 'yes', 1000, ratio_percentage, index_path)
         print(cmd)
@@ -618,7 +618,7 @@ def gen_figure_cubit_lf_latency_ratio():
     print ('Figure cubit-lf_latency_ratio')
     print ('-' * 10)
     ratio_number = [0.01, 0.02, 0.05, 0.1, 0.2]
-    f = open('dat_1B/figure_cubit-lf_latency_ratio.dat','w')
+    f = open('dat/figure_cubit-lf_latency_ratio.dat','w')
     for num in ratio_number:
         cmd = gen_cmd_cubit(16, 'cubit-lf', 'yes', 1000, num, index_path)
         print(cmd)
@@ -635,7 +635,7 @@ def gen_figure_cubit_lf_latency_cardinality():
     print ('Figure cubit-lf_latency_cardinality')
     print ('-' * 10)
     cardinality_number = [16, 32, 64, 128, 256]
-    f = open('dat_1B/figure_cubit-lf_latency_cardinality.dat','w')
+    f = open('dat/figure_cubit-lf_latency_cardinality.dat','w')
     for num in cardinality_number:
         index_path = "100M_{}".format(num)
         cmd = gen_cmd_cubit_cardinality(core_for_cardinality, 'cubit-lf', 'yes', 1000, ratio_percentage, index_path, num, ONE_HUNDRED_MILLION)
@@ -692,7 +692,7 @@ def run():
 def main():
     itr = 0
     cmd = 'mv graphs_1B graphs_1B_{}'
-    cmd2 = "mv dat_1B graphs_1B"
+    cmd2 = "mv dat graphs_1B"
     cmd4 = "mv dat_tmp_1B graphs_1B"
     while itr < 2:
         os.chdir(ROOT_PATH)
@@ -702,9 +702,9 @@ def main():
             print("1B_100 exists")
         else:
             help_gen_data_and_index(number_of_rows, cardinality, index_path)
-        datdir = 'dat_1B'
+        datdir = 'dat'
         if os.path.exists(datdir) and os.path.isdir(datdir):
-            print ('Deleting existing directory ./dat_1B')
+            print ('Deleting existing directory ./dat')
             shutil.rmtree(datdir)
         os.mkdir(datdir)
 

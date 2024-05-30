@@ -7,10 +7,10 @@ else
 	exit
 fi
 
-rm -fr dat
-rm -fr dat_tmp_WPMT
-rm -fr graphs_WPMT
-rm -fr $1/graphs_WPMT
+rm -rf dat
+rm -rf dat_tmp_WPMT
+rm -rf graphs_WPMT
+rm -rf $1/graphs_WPMT
 
 cp -r $1/dat $1/dat_tmp_WPMT ./
 
@@ -20,6 +20,6 @@ make figure_multiple_WPMT
 
 cd ../
 mv graphs_WPMT $1
-rm -fr dat dat_tmp_WPMT
+rm -rf dat dat_tmp_WPMT
 
 echo "Done!"
