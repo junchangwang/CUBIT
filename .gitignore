@@ -27,5 +27,6 @@ ExperimentalData*
 zipf_15
 .idea/
 output/
+clean.sh
 local.sh
 remote.sh
