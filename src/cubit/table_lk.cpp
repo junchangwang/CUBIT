@@ -153,6 +153,10 @@ int CubitLK::merge_bitmap(int tid, uint32_t val, TransDesc *trans,
         // trans_merge->l_commit_ts = bitmap_new->l_commit_ts = ts_tmp + 1;
         auto ts_tmp = db_control ? trans->l_start_ts : __atomic_load_n(&g_timestamp, MM_CST);
         trans_merge->l_commit_ts = bitmap_new->l_commit_ts = ts_tmp;
+        if(!db_control) {
+            trans_merge->l_commit_ts++;
+            bitmap_new->l_commit_ts++;
+        }
 
         __atomic_store_n(&bitmaps[val], bitmap_new, MM_RELEASE);
 
