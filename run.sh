@@ -21,7 +21,7 @@ then
 
 elif [ -a ./eva-scripts/run_"$1".py ]
 then
-    python3 ./eva-scripts/run_"$1".py
+    python3 ./eva-scripts/run_"$1".py  2> ./output/run_all.output
 
 else
     echo "Please specify the correct experiment!"
