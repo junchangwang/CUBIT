@@ -6,7 +6,6 @@ mkdir ./output
 if [ -z "$1" ]
 then
     python3 ./eva-scripts/run_core.py  &> ./output/run_core.output
-    exit
 fi
 
 if [ "$1" == "all" ]
@@ -26,6 +25,11 @@ then
 
 else
     echo "Please specify the correct experiment!"
+    exit
 fi
+
+mv ./graphs_0 ./graphs_core_0
+mv ./graphs_1 ./graphs_core_1
+mv ./graphs_2 ./graphs_core_2
 
 exit

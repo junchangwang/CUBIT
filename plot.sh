@@ -9,9 +9,15 @@ if [ -z "$1" ] || [ "$1" == "core" ]
 then
     rm -rf ./output/plot_core
     mkdir  ./output/plot_core
+    mv ./graphs_core_0 ./graphs_0
+    mv ./graphs_core_1 ./graphs_1
+    mv ./graphs_core_2 ./graphs_2
     ./eva-scripts/gen_graphs_core.sh graphs_0 &> ./output/plot_core/graphs_0.output
     ./eva-scripts/gen_graphs_core.sh graphs_1 &> ./output/plot_core/graphs_1.output
     ./eva-scripts/gen_graphs_core.sh graphs_2 &> ./output/plot_core/graphs_2.output
+    mv ./graphs_0 ./graphs_core_0
+    mv ./graphs_1 ./graphs_core_1
+    mv ./graphs_2 ./graphs_core_2
 
 # 1B
 elif [ "$1" == "1B" ]
@@ -126,6 +132,7 @@ then
 
 else
     echo "Please specify the correct experiment!"
+    exit
 fi
 
 exit
