@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# pip3 install numpy matplotlib netCDF4
+# echo 'export PATH="~/.local/bin:$PATH"' >> ~/.bashrc
+# source ~/.bashrc
+
 rm -rf ./output
 mkdir ./output
 
@@ -19,7 +23,7 @@ then
     python3 ./eva-scripts/run_WPMT.py  2> ./output/run_WPMT.output
     python3 ./eva-scripts/run_zipf.py  2> ./output/run_zipf.output
 
-elif [ -a ./eva-scripts/run_"$1".py ]
+elif [ -e ./eva-scripts/run_"$1".py ]
 then
     python3 ./eva-scripts/run_"$1".py  2> ./output/run_"$1".output
 
@@ -28,10 +32,18 @@ else
     exit
 fi
 
-mv ./graphs_0 ./graphs_core_0
-mv ./graphs_1 ./graphs_core_1
-mv ./graphs_2 ./graphs_core_2
+if [ -e "./graphs_0" ]; then
+    mv ./graphs_0 ./graphs_core_0
+fi
 
-echo "Done!"
+if [ -e "./graphs_1" ]; then
+    mv ./graphs_1 ./graphs_core_1
+fi
+
+if [ -e "./graphs_2" ]; then
+    mv ./graphs_2 ./graphs_core_2
+fi
+
+echo "Done!!!"
 
 exit
