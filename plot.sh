@@ -59,9 +59,6 @@ if [ "$1" == "zipf" ] || [ "$1" == "all" ]; then
     ./eva-scripts/gen_graphs_zipf.sh graphs_zipf_0 2>  ./output/plot_zipf.output
     ./eva-scripts/gen_graphs_zipf.sh graphs_zipf_1 2>> ./output/plot_zipf.output
     ./eva-scripts/gen_graphs_zipf.sh graphs_zipf_2 2>> ./output/plot_zipf.output
-else
-    echo "Please specify the correct experiment!"
-    exit
 fi
 
 echo "Done!!!"
