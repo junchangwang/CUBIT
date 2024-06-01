@@ -50,8 +50,8 @@ struct TransDesc
 namespace cubit {
 
 // It is not neccessary for CUBIT to play this trick to get good insertion performance.
-// const int NBUB_PAD_BITS = (1000000 / 310) * 31;
-const int NBUB_PAD_BITS = 0;  
+// const int CUBIT_PAD_BITS = (1000000 / 310) * 31;
+const int CUBIT_PAD_BITS = 0;
 
 #define TYPE_INV (0)
 #define TYPE_INSERT (1)                                            

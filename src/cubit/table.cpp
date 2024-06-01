@@ -45,7 +45,7 @@ Cubit::Cubit(Table_config *config) :
     assert(trans_dummy->l_commit_ts == TIMESTAMP_INIT_VAL);
     assert(trans_dummy->l_number_of_rows == config->n_rows);
 
-    total_rows = config->n_rows + NBUB_PAD_BITS;
+    total_rows = config->n_rows + CUBIT_PAD_BITS;
     
     int n_threads = (config->nThreads_for_getval > num_bitmaps) ? num_bitmaps : config->nThreads_for_getval;
     int n_btv_per_thread = num_bitmaps / n_threads;
