@@ -1,7 +1,3 @@
 [submodule "DBx1000"]
 	path = DBx1000
 	url = git@github.com:junchangwang/DBx1000-CUBIT.git
-[submodule "DuckDB"]
-	path = DuckDB
-	url = git@github.com:junchangwang/DuckDB-CUBIT.git
-	branch = CUBIT

@@ -50,7 +50,7 @@ Note that it may take dozens of hours to run the whole experimentation for the f
 How to replicate the DBx1000 and DuckDB experiments?
 ----------------------------------------------
 
-Our changes to DBx1000 and DuckDB are maintained as submodules of this repository. You can download the contents of both CUBIT-powered DBx1000 and DuckDB explicitly by using the command:
+Our changes to DBx1000 and DuckDB are maintained as submodules of this repository (The DuckDB submodule is currently under code reorganization and will be publicly available soon.) You can download the contents of CUBIT-powered DBx1000 explicitly by using the command:
 
 ```
 git submodule update --init --recursive
