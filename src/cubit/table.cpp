@@ -1190,7 +1190,7 @@ int Cubit::range(int tid, uint32_t start, uint32_t range) {
 
     auto t1 = std::chrono::high_resolution_clock::now();
 
-    for (uint32_t idx = start; idx <= (start + range); idx++) {
+    for (uint32_t idx = start; idx < (start + range); idx++) {
         Bitmap *bitmap = __atomic_load_n(&bitmaps[idx], MM_ACQUIRE);
         uint64_t tsp_begin = READ_ONCE(bitmap->l_commit_ts);
         uint64_t tsp_end = READ_ONCE(trans->l_start_ts);

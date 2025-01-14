@@ -87,7 +87,7 @@ po::variables_map get_options(const int argc, const char *argv[]) {
             ("on-disk", po::value<bool>()->default_value(false), "on disk")
             ("cache-misses", po::value<bool>()->default_value(false), "measure cache misses")
             ("time-out,t", po::value<unsigned int>()->default_value(0), "time out (s)")
-            ("range", po::value<uint32_t>()->default_value(0), "range length")
+            ("range", po::value<uint32_t>()->default_value(1), "range length")
             ("range-algorithm", po::value<string>()->default_value(std::string("pq")), "pq, naive, uncompress");          
 
     po::positional_options_description p;
@@ -135,6 +135,10 @@ void init_config(Table_config *config, po::variables_map options) {
     config->time_out = options["time-out"].as<unsigned int>();
     // We didn't use the following two parameters.
     config->n_range = options["range"].as<uint32_t>();
+    if (config->n_range <= 1) {
+        config->n_range = 1;
+        cout << "=== Range length must be greater than 1. Set to 1. ===" << endl;
+    }
     config->range_algo = options["range-algorithm"].as<string>();
 
     config->showEB = false;
