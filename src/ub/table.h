@@ -22,7 +22,7 @@ namespace ub {
         int evaluate(int tid, uint32_t val);
 
         int get_value(uint64_t rowid);
-        int range(uint32_t start, uint32_t range);
+        int range(int tid, uint32_t start, uint32_t range);
         void _read_btv(int begin, int range);
 
         void printMemory();

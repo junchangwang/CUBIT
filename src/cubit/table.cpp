@@ -1176,85 +1176,126 @@ void Cubit::printUncompMemorySeg() {
     std::cout << "Seg UncM BM " << bitmap << std::endl;
 }
 
-int Cubit::range(uint32_t start, uint32_t range) {
-    ibis::bitvector res;
-    res.set(0, total_rows);
-    /*
-    if (range_algo == "naive") {
-        for (uint32_t i = 0; i < range; ++i) {
-            res |= *(bitmaps[start + i]);
+int Cubit::range(int tid, uint32_t start, uint32_t range) {
+    uint64_t cnt = 0UL;
+    ThreadInfo *th = &g_ths_info[tid];
+    assert((start + range) < num_bitmaps);
+
+    rcu_read_lock();
+
+    TransDesc *trans = (TransDesc *)__atomic_load_n(&th->active_trans, MM_ACQUIRE);
+
+    if (!trans)
+        trans = trans_begin(tid);
+
+    auto t1 = std::chrono::high_resolution_clock::now();
+
+    for (uint32_t idx = start; idx <= (start + range); idx++) {
+        Bitmap *bitmap = __atomic_load_n(&bitmaps[idx], MM_ACQUIRE);
+        uint64_t tsp_begin = READ_ONCE(bitmap->l_commit_ts);
+        uint64_t tsp_end = READ_ONCE(trans->l_start_ts);
+        while (tsp_begin > tsp_end) {
+            #if defined(VERIFY_RESULTS)
+            assert(READ_ONCE(bitmap->next));
+            cout << "Note: MVCC range() moves from ts " << bitmap->l_commit_ts << 
+                    " to ts " << bitmap->next->l_commit_ts << endl;
+            #endif
+            bitmap = __atomic_load_n(&bitmap->next, MM_ACQUIRE);
+            tsp_begin = READ_ONCE(bitmap->l_commit_ts); 
         }
-    } else if (range_algo == "pq") {
-        typedef std::pair<ibis::bitvector*, bool> _elem;
-        // put all bitmaps in a priority queue
-        std::priority_queue<_elem> que;
-        _elem op1, op2, tmp;
-        tmp.first = 0;
 
-        // populate the priority queue with the original input
-        for (uint32_t i = 0; i < range; ++i) {
-            op1.first = bitmaps[start + i];
-            op1.second = false;
-            que.push(op1);
-        }
+        auto t2 = std::chrono::high_resolution_clock::now();
 
-        while (! que.empty()) {
-            op1 = que.top();
-            que.pop();
-            if (que.empty()) {
-                res.copy(*(op1.first));
-                if (op1.second) delete op1.first;
-                break;
-            }
+        #if defined(VERIFY_RESULTS)
+            uint64_t cnt_test = 0UL;
+        #endif
 
-            op2 = que.top();
-            que.pop();
-            tmp.second = true;
-            tmp.first = *(op1.first) | *(op2.first);
+        ibis::bitvector *old_btv = READ_ONCE(bitmap->btv);
+        SegBtv *old_seg_btv = READ_ONCE(bitmap->seg_btv);
 
-            if (op1.second)
-                delete op1.first;
-            if (op2.second)
-                delete op2.first;
-            if (! que.empty()) {
-                que.push(tmp);
-                tmp.first = 0;
-            }
-        }
-        if (tmp.first != 0) {
-            if (tmp.second) {
-                res |= *(tmp.first);
-                delete tmp.first;
-                tmp.first = 0;
+        if (config->segmented_btv) {
+            if (config->enable_parallel_cnt) {
+                cnt = old_seg_btv->do_cnt_parallel(config);
+                #if defined(VERIFY_RESULTS)
+                    cnt_test = old_seg_btv->do_cnt();
+                    assert(cnt == cnt_test);
+                #endif
             }
             else {
-                res |= *(tmp.first);
+                cnt = old_seg_btv->do_cnt();
             }
         }
-    } else {
-        auto end = start + range;
-        while (start < end && bitmaps[start] == 0)
-            ++ start;
-        if (start < end) {
-            res |= *(bitmaps[start]);
-            ++ start;
+        else {
+            cnt = old_btv->do_cnt();
         }
-        res.decompress();
-        for (uint32_t i = start; i < end; ++ i) {
-            res |= *(bitmaps[i]);
-        }
-    }
-    if (decode) {
-        std::vector<uint32_t> dummy;
-        res.decode(dummy);
-        return 0;
-    } else {
-        return res.do_cnt();
-    }
-    */
 
-   //// FIXME: remove this
-    return res.do_cnt();
+        auto t3 = std::chrono::high_resolution_clock::now();
+
+        map<uint64_t, RUB> rubs{};
+        if (tsp_begin < tsp_end) {
+            get_rubs_on_btv(tsp_begin, tsp_end, READ_ONCE(bitmap->l_start_trans), idx, rubs);
+        }
+
+        for (const auto & [row_id_t, rub_t] : rubs) {
+            assert(rub_t.pos.count(idx));
+            if (config->segmented_btv) {
+                cnt += old_seg_btv->getBit(row_id_t, config) ? (-1) : (1);
+            }
+            else {
+                cnt += old_btv->getBit(row_id_t, config) ? (-1) : (1);
+            }
+        }
+
+        auto t4 = std::chrono::high_resolution_clock::now();
+
+        // Prepare to merge
+        if (rubs.size() >= merge_threshold) {
+            ibis::bitvector *new_btv = nullptr;
+            SegBtv *new_seg_btv = nullptr;
+
+            if (config->segmented_btv) {
+                new_seg_btv = new SegBtv(*old_seg_btv);
+                new_seg_btv->adjustSize(0, old_seg_btv->get_rows());
+
+                for (const auto & [row_id_t, rub_t] : rubs) {
+                    assert(rub_t.pos.count(idx));
+                    new_seg_btv->setBit(row_id_t, 1, config);
+                }
+
+                *new_seg_btv ^= *old_seg_btv;
+            }
+            else {
+                new_btv = new ibis::bitvector{};
+                *new_btv ^= *old_btv;
+
+                for (const auto & [row_id_t, rub_t] : rubs) {
+                    assert(rub_t.pos.count(idx));
+                    new_btv->setBit(row_id_t, 1, config);
+                }
+            }
+
+            struct Bitmap *bitmap_new = new Bitmap{};
+            __atomic_store_n(&bitmap_new->btv, new_btv, MM_RELEASE);
+            __atomic_store_n(&bitmap_new->seg_btv, new_seg_btv, MM_RELEASE);
+
+            map<uint64_t, RUB> *rubs_t = new map<uint64_t, RUB>(rubs);
+            struct merge_req *req = new merge_req{tid, idx, trans, bitmap, bitmap_new, rubs_t};
+
+            {
+                lock_guard<mutex> lock(lk_merge_req_queues[tid]);
+                merge_req_queues[tid].push(req);
+            }
+        }
+
+    }
+
+    rcu_read_unlock();
+
+    if (autoCommit) {
+        assert(trans_commit(tid) == -ENOENT);
+    }
+
+    return cnt;
 }
 
 // This is a helper function

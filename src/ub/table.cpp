@@ -453,7 +453,7 @@ void Table::printUncompMemory() {
     std::cout << "UncM BM " << bitmap << std::endl;
 }
 
-int Table::range(uint32_t start, uint32_t range) {
+int Table::range(int tid, uint32_t start, uint32_t range) {
     ibis::bitvector res;
     res.set(0, total_rows);
     if (config->range_algo == "naive") {

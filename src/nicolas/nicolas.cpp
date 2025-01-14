@@ -163,7 +163,7 @@ void worker_func(int tid, const string& mode, Table_config *config)
         int val = val_distribution(generator);
         if (ratio_distribution(generator) < ratio) {
             uint32_t rid = rid_distribution(generator);
-            if (mode == "mix") {
+            if (mode == "mix" || mode == "range") {
                 int test = rid_distribution(generator);
                 switch (test % 3) {
                     case 0:
@@ -223,7 +223,13 @@ void worker_func(int tid, const string& mode, Table_config *config)
             }
         } else {
             t_before = read_timestamp();
-            table->evaluate(tid, val);
+            if (mode == "range" && config->approach == "cubit-lk") 
+            {
+                cubit::Cubit *table2 = dynamic_cast<cubit::Cubit*>(table);
+                table2->range(tid, 0, config->n_range);
+            } else {
+                table->evaluate(tid, val);
+            }
             l_n_query ++;
             t_after = read_timestamp();
             if (config->verbose)
@@ -415,7 +421,7 @@ void evaluateRange(Table_config *config) {
     for (int i = 0; i < config->n_queries; ++i) {
         auto r = distribution(generator);
         gettimeofday(&before, NULL);
-        table->range(r, config->n_range);
+        table->range(0, r, config->n_range);
         gettimeofday(&after, NULL);
 
         if (config->verbose)
@@ -568,9 +574,11 @@ int main(const int argc, const char *argv[])
             evaluateGetValue(config);
         } else if (mode == "impact") {
             evaluateImpact(config, 0);
-        } else if (mode == "range") {
-            evaluateRange(config);
-        } else {
+        } 
+        // else if (mode == "range") {
+        //     evaluateRange(config);
+        // } 
+        else {
             evaluate(config, mode);
         }
     }

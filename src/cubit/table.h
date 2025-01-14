@@ -157,7 +157,7 @@ public:
     void printUncompMemorySeg();
 
     int get_value_rcu(uint64_t, uint64_t, RUB &); 
-    int range(uint32_t, uint32_t);
+    int range(int, uint32_t, uint32_t);
     uint64_t get_g_timestamp() { return g_timestamp; }
     uint64_t get_g_number_of_rows() { return g_number_of_rows; }
 
