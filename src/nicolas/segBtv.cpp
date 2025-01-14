@@ -344,6 +344,21 @@ void SegBtv::operator^=(SegBtv &rhs)
     return;
 }
 
+void SegBtv::operator|=(SegBtv &rhs) 
+{
+    assert(this->encoded_word_len >= rhs.encoded_word_len);
+    assert(this->n_rows >= rhs.n_rows);
+
+    for (const auto & [id_t, seg_1] : rhs.seg_table) {
+        assert(seg_table.count(id_t));
+        ibis::bitvector *btv_1 = seg_table[id_t].btv;
+        ibis::bitvector *btv_2 = seg_1.btv;
+        (*btv_1).operator|= (*btv_2);
+    }
+
+    return;
+}
+
 SegBtv * SegBtv::operator^(SegBtv &rhs)
 {
     assert(this->encoded_word_len == rhs.encoded_word_len);

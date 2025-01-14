@@ -1190,6 +1190,14 @@ int Cubit::range(int tid, uint32_t start, uint32_t range) {
 
     auto t1 = std::chrono::high_resolution_clock::now();
 
+    ibis::bitvector *btv_ret;
+    SegBtv *seg_btv_ret;
+
+    btv_ret = new ibis::bitvector{};
+    btv_ret->adjustSize(0, g_number_of_rows);
+    seg_btv_ret = new SegBtv(config, btv_ret);
+    seg_btv_ret->adjustSize(0, g_number_of_rows);
+
     for (uint32_t idx = start; idx < (start + range); idx++) {
         Bitmap *bitmap = __atomic_load_n(&bitmaps[idx], MM_ACQUIRE);
         uint64_t tsp_begin = READ_ONCE(bitmap->l_commit_ts);
@@ -1214,19 +1222,10 @@ int Cubit::range(int tid, uint32_t start, uint32_t range) {
         SegBtv *old_seg_btv = READ_ONCE(bitmap->seg_btv);
 
         if (config->segmented_btv) {
-            if (config->enable_parallel_cnt) {
-                cnt = old_seg_btv->do_cnt_parallel(config);
-                #if defined(VERIFY_RESULTS)
-                    cnt_test = old_seg_btv->do_cnt();
-                    assert(cnt == cnt_test);
-                #endif
-            }
-            else {
-                cnt = old_seg_btv->do_cnt();
-            }
+            *seg_btv_ret ^= *old_seg_btv;
         }
         else {
-            cnt = old_btv->do_cnt();
+            *btv_ret ^= *old_btv;
         }
 
         auto t3 = std::chrono::high_resolution_clock::now();
@@ -1239,10 +1238,10 @@ int Cubit::range(int tid, uint32_t start, uint32_t range) {
         for (const auto & [row_id_t, rub_t] : rubs) {
             assert(rub_t.pos.count(idx));
             if (config->segmented_btv) {
-                cnt += old_seg_btv->getBit(row_id_t, config) ? (-1) : (1);
+                seg_btv_ret->setBit(row_id_t, !old_seg_btv->getBit(row_id_t, config), config);
             }
             else {
-                cnt += old_btv->getBit(row_id_t, config) ? (-1) : (1);
+                old_btv->setBit(row_id_t, !old_btv->getBit(row_id_t, config), config);
             }
         }
 
@@ -1287,6 +1286,13 @@ int Cubit::range(int tid, uint32_t start, uint32_t range) {
             }
         }
 
+    }
+    
+    if (config->segmented_btv) {
+        cnt = seg_btv_ret->do_cnt();
+    }
+    else {
+        cnt = btv_ret->do_cnt();
     }
 
     rcu_read_unlock();

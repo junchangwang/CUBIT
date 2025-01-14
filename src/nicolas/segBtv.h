@@ -55,6 +55,7 @@ class SegBtv {
         void _and_in_thread(SegBtv&, int, int);
         ///Perform bitwise exclusive or (XOR).
         void operator^=(SegBtv &rhs);
+        void operator|=(SegBtv &rhs);
 
         ///Perform bitwise XOR and return the result as a new bitvector.
         SegBtv *operator^(SegBtv &rhs);
