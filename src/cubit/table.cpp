@@ -1290,12 +1290,14 @@ int Cubit::range(int tid, uint32_t start, uint32_t range) {
 
     }
     
-    // if (config->segmented_btv) {
-    //     cnt = seg_btv_ret->do_cnt();
-    // }
-    // else {
-    //     cnt = btv_ret->do_cnt();
-    // }
+    if (config->segmented_btv) {
+        cnt = seg_btv_ret->do_cnt();
+    }
+    else {
+        cnt = btv_ret->do_cnt();
+    }
+
+    std::cout << "Value of range query cnt: " << cnt << std::endl;
 
     rcu_read_unlock();
 
