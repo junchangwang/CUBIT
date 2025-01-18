@@ -1195,8 +1195,10 @@ int Cubit::range(int tid, uint32_t start, uint32_t range) {
 
     btv_ret = new ibis::bitvector{};
     btv_ret->adjustSize(0, g_number_of_rows);
-    seg_btv_ret = new SegBtv(config, btv_ret);
-    seg_btv_ret->adjustSize(0, g_number_of_rows);
+    if (config->segmented_btv) {
+        seg_btv_ret = new SegBtv(config, btv_ret);
+        seg_btv_ret->adjustSize(0, g_number_of_rows);
+    }
 
     for (uint32_t idx = start; idx < (start + range); idx++) {
         Bitmap *bitmap = __atomic_load_n(&bitmaps[idx], MM_ACQUIRE);
