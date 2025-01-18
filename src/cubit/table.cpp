@@ -1227,7 +1227,14 @@ int Cubit::range(int tid, uint32_t start, uint32_t range) {
             *seg_btv_ret ^= *old_seg_btv;
         }
         else {
-            *btv_ret ^= *old_btv;
+            if(btv_ret->size() > old_btv->size()) {
+                ibis::bitvector btv_copy;
+                btv_copy.copy(*old_btv);
+                (*btv_ret).operator^= (btv_copy);
+            }
+            else {
+                (*btv_ret).operator^= (*old_btv);
+            }
         }
 
         auto t3 = std::chrono::high_resolution_clock::now();
@@ -1240,10 +1247,10 @@ int Cubit::range(int tid, uint32_t start, uint32_t range) {
         for (const auto & [row_id_t, rub_t] : rubs) {
             assert(rub_t.pos.count(idx));
             if (config->segmented_btv) {
-                seg_btv_ret->setBit(row_id_t, !old_seg_btv->getBit(row_id_t, config), config);
+                seg_btv_ret->setBit(row_id_t, !seg_btv_ret->getBit(row_id_t, config), config);
             }
             else {
-                old_btv->setBit(row_id_t, !old_btv->getBit(row_id_t, config), config);
+                btv_ret->setBit(row_id_t, !btv_ret->getBit(row_id_t, config), config);
             }
         }
 
