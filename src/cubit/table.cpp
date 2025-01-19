@@ -126,7 +126,7 @@ void Cubit::_read_btv(int begin, int end, TransDesc* trans_dummy, Table_config *
             // uint64_t bitmap_t = 0;
             // for (const auto &[id_t, seg_t] : bitmaps[i]->seg_btv->seg_table)
             //     bitmap_t += seg_t.btv->getSerialSize();
-            // std::cout << "Seg M BM " << btv_t->getSerialSize() << endl << endl;
+            // std::cout << "Seg M BM " << bitmap_t << endl;
 
             delete btv_t;
         }
@@ -1196,8 +1196,11 @@ int Cubit::range(int tid, uint32_t start, uint32_t range) {
     btv_ret = new ibis::bitvector{};
     btv_ret->adjustSize(0, g_number_of_rows);
     if (config->segmented_btv) {
-        seg_btv_ret = new SegBtv(config, btv_ret);
-        seg_btv_ret->adjustSize(0, g_number_of_rows);
+        Bitmap *bitmap = __atomic_load_n(&bitmaps[start], MM_ACQUIRE);
+        SegBtv *old_seg_btv = READ_ONCE(bitmap->seg_btv);
+        seg_btv_ret = new SegBtv(*old_seg_btv);
+        // seg_btv_ret->adjustSize(0, g_number_of_rows);
+        seg_btv_ret->decompress();
     }
 
     for (uint32_t idx = start; idx < (start + range); idx++) {
@@ -1304,13 +1307,18 @@ int Cubit::range(int tid, uint32_t start, uint32_t range) {
         cnt = btv_ret->do_cnt();
     }
 
-    std::cout << "Value of range query cnt: " << cnt << std::endl;
+    // std::cout << "Value of range query cnt: " << cnt << std::endl;
 
     rcu_read_unlock();
 
     if (autoCommit) {
         assert(trans_commit(tid) == -ENOENT);
     }
+
+    if(config->segmented_btv) {
+        delete seg_btv_ret;
+    }
+    delete btv_ret;
 
     return cnt;
 }

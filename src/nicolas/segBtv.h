@@ -48,6 +48,7 @@ class SegBtv {
         void _cnt_in_thread(uint64_t* , int , int);
         uint64_t get_rows() {return n_rows;};
         int adjustSize(uint64_t, uint64_t);
+        void decompress();
 
         int buildIndex(uint64_t);
         int buildAllIndex();

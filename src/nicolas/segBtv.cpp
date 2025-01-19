@@ -198,6 +198,13 @@ int SegBtv::adjustSize(uint64_t first, uint64_t second)
     return 0;
 }
 
+void SegBtv::decompress()
+{
+    for (const auto & [id_t, seg_t] : seg_table) {
+        seg_t.btv->decompress();
+    }
+}
+
 uint64_t SegBtv::do_cnt()
 {
     uint64_t cnt = 0UL;
@@ -338,7 +345,15 @@ void SegBtv::operator^=(SegBtv &rhs)
         assert(seg_table.count(id_t));
         ibis::bitvector *btv_1 = seg_table[id_t].btv;
         ibis::bitvector *btv_2 = seg_1.btv;
-        (*btv_1).operator^= (*btv_2);
+        if(btv_1->size() > btv_2->size()) {
+            ibis::bitvector btv_copy;
+            btv_copy.copy(*btv_2);
+            (*btv_1).operator^= (btv_copy);
+        }
+        else {
+            (*btv_1).operator^= (*btv_2);
+        }
+        btv_1->decompress();
     }
 
     return;

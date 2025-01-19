@@ -1743,34 +1743,34 @@ void ibis::bitvector::operator^=(const ibis::bitvector &rhs) {
         adjustSize(0, rhs.size());
     }
 
-//
-//    const bool ca = (m_vec.size()*MAXBITS == nbits && nbits > 0);
-//    const bool cb = (rhs.m_vec.size()*MAXBITS == rhs.nbits && rhs.nbits > 0);
-//    if (ca) {
-//        if (cb)
-//            xor_c0(rhs);
-//        else
-//            xor_d1(rhs);
-//    }
-//    else if (cb) {
-//        bitvector res;
-//        xor_c1(rhs, res);
-//        swap(res);
-//    }
-//    else if ((m_vec.size()+rhs.m_vec.size())*MAXBITS >= rhs.nbits) {
-//        // if the total size of the two operands are large, generate an
-//        // uncompressed result
-//        // std::cout << "xor_d2" << std::endl;
-//        bitvector res;
-//        xor_d2(rhs, res);
-//        swap(res);
-//    }
-//    else {
+
+   const bool ca = (m_vec.size()*MAXBITS == nbits && nbits > 0);
+   const bool cb = (rhs.m_vec.size()*MAXBITS == rhs.nbits && rhs.nbits > 0);
+   if (ca) {
+       if (cb)
+           xor_c0(rhs);
+       else
+           xor_d1(rhs);
+   }
+   else if (cb) {
+       bitvector res;
+       xor_c1(rhs, res);
+       swap(res);
+   }
+   else if ((m_vec.size()+rhs.m_vec.size())*MAXBITS >= rhs.nbits) {
+       // if the total size of the two operands are large, generate an
+       // uncompressed result
+       // std::cout << "xor_d2" << std::endl;
+       bitvector res;
+       xor_d2(rhs, res);
+       swap(res);
+   }
+   else {
     // std::cout << "xor_c2" << std::endl;
     bitvector res;
     xor_c2(rhs, res);
     swap(res);
-    // }
+    }
 } // ibis::bitvector::operator^=
 
 /// This bitvector is not modified, instead a new bitvector object is
