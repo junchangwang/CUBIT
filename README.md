@@ -1,3 +1,18 @@
+# Cite CUBIT
+
+```
+@article{DBLP:journals/pvldb/WangA24,
+  author       = {Junchang Wang and Manos Athanassoulis},
+  title        = {{CUBIT:} Concurrent Updatable Bitmap Indexing},
+  journal      = {Proc. {VLDB} Endow.},
+  volume       = {18},
+  number       = {2},
+  pages        = {399--412},
+  year         = {2024},
+  url          = {https://www.vldb.org/pvldb/vol18/p399-athanassoulis.pdf},
+}
+```
+
 
 # Brief history of CUBIT
 
