@@ -3,5 +3,5 @@
 	url = git@github.com:junchangwang/DBx1000-CUBIT.git
 
 [submodule "DuckDB"]
-    path = DuckDB
-    url = git@github.com:junchangwang/DuckDB-CUBIT.git
+	path = DuckDB
+	url = git@github.com:junchangwang/DuckDB-CUBIT.git
